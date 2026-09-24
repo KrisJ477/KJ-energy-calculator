@@ -59,7 +59,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage, cold attic). No room-type rule.
 - setpoint temperature: input for heated rooms (project default, overridable per room or in bulk); solved output for unheated rooms (5.2)
 - ventilation flow (rule table by room type, overridable)
-- infiltration, air changes per hour: derived with the EN 12831 method from an air-tightness value n50 (air changes per hour at 50 Pa) set per age category (3.14), overridable. n50 values per age category: open (9.6).
+- infiltration, air changes per hour: derived with the EN 12831 method from an air-tightness value n50 (air changes per hour at 50 Pa) set per age category (3.14), overridable.
 - comments (free text)
 - origin/edit tag (3.10)
 
@@ -127,7 +127,13 @@ A user-drawn line with no thickness and no U-value. It splits an open space into
 A floor may be drawn across several PDF sheets (two, three or more). Each sheet object has: floor, part-of-floor, crop rectangle (excludes title block and frame), its own scale, and its position relative to the floor composite (4.3). All downstream objects belong to the floor, never to a sheet.
 
 ### 3.14 Building configuration
-- age category, one of: before 1940 / 1940–1960 / 1961–1975 / 1976–1990 / after 1990. Used only to set the default infiltration (3.2, 4.8). There is no building type setting.
+- age category, used only to set the default air-tightness n50 for infiltration (3.2, 4.8, 5.1). There is no building type setting. Categories follow Swedish building code eras. n50 values are starting values (engineering estimates bounded by Swedish/Nordic measurements and code requirements, multi-family values used for all buildings), to be verified (9.6):
+  - before 1941: n50 = 4.0 /h
+  - 1941–1960: n50 = 3.0 /h
+  - 1961–1975: n50 = 2.0 /h
+  - 1976–1990: n50 = 1.5 /h
+  - 1991–2005: n50 = 1.2 /h
+  - 2006 and later: n50 = 0.8 /h
 - outdoor design temperature: a single value typed by the user in the wizard, no table
 - default indoor setpoint: one project value
 - soil temperature for walls below grade (default 8 °C), slab band and inner zone temperatures (3.5)
@@ -316,7 +322,7 @@ Iteration:
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
 - Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), slab zone temperature, or an annotated zone. Multiplied by (1 + thermal bridge surcharge).
 - Ventilation: flow × air heat capacity × (T_room − T_supply).
-- Infiltration: room volume × ach × air heat capacity × (T_room − T_outside).
+- Infiltration: room volume × ach × air heat capacity × (T_room − T_outside), with ach = 2 × n50 × e × ε per EN 12831:2003 (e = shielding coefficient, ε = height correction factor).
 Air density, heat capacity, default ach by age, surface resistances: from EN 12831 / EN ISO 6946, not invented.
 
 ### 5.2 Unheated rooms
@@ -367,7 +373,7 @@ Air density, heat capacity, default ach by age, surface resistances: from EN 128
 9.3 Rendering resolution for pages sent to the API, and tiling of large pages into overlapping crops: open until real drawings have been tried.
 9.4 Command window (4.11): which model, and the exact ask-back protocol.
 9.5 Slab zone temperatures: starting values 5 °C / 12 °C are the user's guesses, to be tuned against the ISO 13370 total.
-9.6 Infiltration: n50 default per age category, final age intervals, and which EN 12831 edition's conversion formula to use. Research in progress.
+9.6 Infiltration: n50 starting values (3.14) to be verified against EN 12831:2003 Table D.5 and SBN 1980 section 33:3. How e and ε are set (derived per room from the model: number of exposed façades with openings, room height above ground; or fixed project values): open.
 
 ---
 
