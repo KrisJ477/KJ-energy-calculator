@@ -343,6 +343,13 @@ Iteration:
 - Rule: on any ambiguity the model must ask back before touching anything, and the UI is built around that exchange. "Change ground temperature to 5 °C" returns "for the wall soil temperature, the slab band, the inner zone, or all three?" and nothing changes until the user answers.
 - Every change it makes is listed afterwards, object by object, and tagged on the objects (3.10), so the user can see exactly what was touched.
 - This is separate from the regional comment corrections in 4.5, which are scoped to one object or region on one floor.
+- Model: Opus by default; the user can switch to another model on the settings page.
+- Protocol:
+  1. The user types a command.
+  2. The AI never changes anything itself. It returns one of two structured responses:
+     - a question back, with clickable answer options where possible ("wall soil / slab band / inner zone / all three") and free text as fallback; or
+     - a proposed change list, object by object ("room 3-7: ventilation 12 → 25 l/s").
+  3. The user reviews the list and clicks Apply or Cancel. Only on Apply does the app make the changes, tag each object (3.10) and record them as one undo step.
 
 ---
 
@@ -380,7 +387,7 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 ## 6. Model usage summary
 - Opus: per-sheet reads, the combined pass, and any full-floor re-read.
 - Haiku: regional re-reads driven by user comments, batched per floor.
-- Command window (4.11): model choice open (9.4).
+- Command window (4.11): Opus by default, switchable by the user in settings.
 
 ---
 
@@ -408,7 +415,7 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 9.1 Snap tolerance: default 100 mm, VERY MUCH OPEN until real read output has been seen.
 9.2 Sliver threshold for floor/ceiling overlap pieces (3.4): value not set.
 9.3 Rendering resolution for pages sent to the API, and tiling of large pages into overlapping crops: open until real drawings have been tried.
-9.4 Command window (4.11): which model, and the exact ask-back protocol.
+9.4 Closed: command window model and protocol decided (4.11).
 9.5 Slab zone temperatures: starting values 5 °C / 12 °C are the user's guesses, to be tuned against the ISO 13370 total.
 9.6 Infiltration: n50 starting values (3.14) to be verified against EN 12831:2003 Table D.5 and SBN 1980 section 33:3. Also verify the e and ε table values (5.1) against the standard.
 
