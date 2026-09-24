@@ -151,11 +151,11 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
   - 2006 and later: n50 = 0.8 /h
 - infiltration shielding class (EN 12831:2003): none / moderate / heavy, project-wide, default moderate
 - fake floor U-value (3.4): default 100 W/m²K
-- base ventilation flow: default 0.35 l/s per m² floor area, project-wide, overridable per room. Deliberately not called a minimum: the user may set it lower, including zero, project-wide or per room (5.1).
+- base ventilation flow: the default for every room's ventilation flow (3.2), 0.35 l/s per m² floor area, project-wide, overridable per room or in bulk. Deliberately not called a minimum: the user may set it lower, including zero, project-wide or per room (5.1).
 - outdoor design temperature: a single value typed by the user in the wizard, no table
 - default indoor setpoint: one project value
 - soil temperature for walls below grade (default 8 °C), slab band and inner zone temperatures (3.5)
-- ventilation system: FTX with heat recovery / mechanical exhaust / natural. Determines supply air temperature (FTX default 18 °C; exhaust or natural: outdoor air).
+- ventilation system: FTX with heat recovery / mechanical exhaust / natural. Determines supply air temperature (FTX default 18 °C; exhaust or natural: outdoor air), with the per-room exceptions in 5.1.
 - thermal bridge surcharge: project-wide percentage on transmission through envelope surfaces only (5.1), default 15 %
 - snap tolerance for geometry cleanup, default 100 mm (9.1)
 - ground slab band width, default 3 m
@@ -178,7 +178,7 @@ All configuration values live on one settings page.
 
 ### 4.1 Setup wizard
 User answers: age category, outdoor design temperature, default indoor setpoint, ventilation system type, supply air temperature if FTX. These prime the read (ventilation defaults, infiltration defaults).
-- Age category: the wizard explains what the choice is used for (the default infiltration, air leakage through the building envelope) and shows the infiltration value used for each interval next to it, so the user sees the consequence of the choice before picking.
+- Age category: the wizard explains what the choice is used for (the default infiltration, air leakage through the building envelope) and shows the n50 value used for each interval next to it, so the user sees the consequence of the choice before picking.
 
 ### 4.2 Upload and full read
 - User uploads all drawings (plans, sections, elevations, any mix). Sections and elevations are one category, "vertical drawings", and follow the same rules throughout: scaled the same way, mined for heights the same way. Elevations are usually the better source for window heights (whole facades); sections for floor heights and ground datum.
@@ -277,7 +277,7 @@ Room mapping:
 - User resolves flagged uncertain gaps.
 
 Corrections (primary method):
-- The user clicks a wall/opening/region and leaves a plain-language comment, in Swedish ("det här är inte en vägg", "detta är två väggar").
+- The user clicks a wall/opening/region and leaves a plain-language comment, in Swedish or English ("det här är inte en vägg", "detta är två väggar").
 - Comments are batched per floor, not sent one by one.
 - On request, the app sends the region image plus comments to Haiku, which re-reads that region only and updates it. Changes are highlighted and recorded on the object (3.10).
 
@@ -311,9 +311,9 @@ Nothing else. Unheated rooms are a flag in the room panel, not a gap.
 
 ### 4.8 Constructions and ventilation assignment
 Sits before 3D generation, so the first 3D view already shows watts.
-- Wall types, roof, slab, window/door types are assigned constructions (3.8).
+- Wall types, floor types, roof, slab, window/door types are assigned constructions (3.8).
 - Ventilation: one default for all rooms, 0.35 l/s per m² floor area. There is no built-in rule table by room type; flows vary by project. Instead, the read attempts to classify every room's type (3.2), and after the initial read the user sets flows in bulk by room type (e.g. all kitchens, all bathrooms) or per room (4.10). Supply air temperature from the system type.
-- Infiltration per room from EN 12831 defaults by building age, overridable per room.
+- Infiltration per room from the age category's n50 via the EN 12831:2003 formula (5.1), overridable per room.
 All of it remains changeable later in audit mode.
 
 ### 4.9 3D model
@@ -325,7 +325,7 @@ All of it remains changeable later in audit mode.
 ### 4.10 Audit mode: 3D review and list view
 Room panel (click a room orb):
 - Shows: room number, total heat loss in watts at design conditions, split into ventilation, infiltration, and transmission per surface, with the thermal bridge surcharge shown as its own row.
-- Editable here: name, room type, heated/unheated, setpoint, ventilation flow, infiltration ach, comment.
+- Editable here: name, room type, heated/unheated, setpoint, ventilation flow, supply air temperature (5.1), infiltration ach, comment.
 - Not editable here: geometry, wall types, U-values (those go through 2D and constructions).
 - Bulk edit: select several rooms by freehand selection in 3D or by room type from a list, and change any of the editable fields for all of them at once.
 
@@ -349,7 +349,7 @@ Iteration:
 
 ### 5.1 Method
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
-- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), or slab zone temperature. Envelope surfaces only are multiplied by (1 + thermal bridge surcharge): exterior walls and the windows/doors in them, roof, top-floor ceiling to outdoor air, ground slab, walls to soil, and walls to adjoining buildings. Surfaces between two rooms get no surcharge. Heat flow between heated rooms at different setpoints is counted in both directions: the warmer room gets a loss, the colder room an equal negative contribution (a gain). Rooms are sized for the design temperatures of all spaces; no room is sized for a neighbour with its heating turned off. At building level these flows cancel, so the building total is the true net loss.
+- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), slab zone temperature, or an adjoining building (3.3). Envelope surfaces only are multiplied by (1 + thermal bridge surcharge): exterior walls and the windows/doors in them, roof, top-floor ceiling to outdoor air, ground slab, walls to soil, and walls to adjoining buildings. Surfaces between two rooms get no surcharge. Heat flow between heated rooms at different setpoints is counted in both directions: the warmer room gets a loss, the colder room an equal negative contribution (a gain). Rooms are sized for the design temperatures of all spaces; no room is sized for a neighbour with its heating turned off. At building level these flows cancel, so the building total is the true net loss.
 - Ventilation: flow × air heat capacity × (T_room − T_supply). Each room carries its own flow (4.8); air moving between rooms (transfer air) is not modelled separately. T_supply per system type, from these rules (overridable per room):
   - FTX: T_supply = the configured supply air temperature (e.g. 18 °C). Exception: kitchens, bathrooms and WCs get T_supply = room temperature (they are extract rooms receiving transfer air), i.e. no ventilation loss.
   - Exhaust only and natural: T_supply = outdoor temperature. Exception: rooms with no walls to outdoor air get T_supply = room temperature (air arrives as transfer air from neighbouring rooms), i.e. no ventilation loss.
@@ -359,7 +359,7 @@ Room-by-room, EN 12831 style, steady state, three buckets per heated room:
 - Combining ventilation and infiltration:
   - FTX: ventilation loss plus infiltration loss.
   - Exhaust only and natural: the larger of the infiltration flow and the ventilation flow (default the base ventilation flow, 0.35 l/s per m², 3.14), not the sum, calculated against outdoor temperature. In rooms with no walls to outdoor air both are zero (e = 0, T_supply = room temperature). This replaces EN 12831's 0.5 /h hygiene minimum with the Swedish 0.35 l/s per m² floor area.
-Air density, heat capacity, default ach by age, surface resistances: from EN 12831 / EN ISO 6946, not invented.
+Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 6946:2017 (via open sources, section 0). The n50 values per age category are starting values (3.14, 9.6).
 
 ### 5.2 Unheated rooms
 - Temperature is solved, not input: the U×A-weighted average of the surrounding temperatures, with the room's own infiltration and ventilation counted as a path to outdoor air.
