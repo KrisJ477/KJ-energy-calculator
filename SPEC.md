@@ -35,6 +35,9 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 - Geometry is read by vision only in v1. No extraction of vector line work from the PDF.
 - Models: Claude Opus for the full initial read and the combined pass (4.2). Claude Haiku for regional re-reads during 2D correction. Cost is not a factor at this scale (well under one dollar per building); accuracy is.
 - The 3D model is always generated from the approved 2D data plus stacking data. It is never edited as its own thing. Properties and overrides live on objects and survive regeneration (3.11).
+- Project persistence, both of:
+  - Autosave in the browser: the current project (drawings, geometry, edits, constructions, settings) is saved continuously in browser storage and restored when the app is reopened. Protects against refresh, closed tab or crash. Lives only in that browser on that computer; lost if browser data is cleared.
+  - Project file: "Save" downloads the whole project as one file; "Open" loads it back. For backup and for moving a project between computers. Nothing is stored on a server.
 
 ---
 
