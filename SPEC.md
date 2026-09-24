@@ -152,7 +152,7 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
 - default indoor setpoint: one project value
 - soil temperature for walls below grade (default 8 °C), slab band and inner zone temperatures (3.5)
 - ventilation system: FTX with heat recovery / mechanical exhaust / natural. Determines supply air temperature (FTX default 18 °C; exhaust or natural: outdoor air).
-- thermal bridge surcharge: project-wide percentage on transmission, default 15 %
+- thermal bridge surcharge: project-wide percentage on transmission through envelope surfaces only (5.1), default 15 %
 - snap tolerance for geometry cleanup, default 100 mm (9.1)
 - ground slab band width, default 3 m
 - vertical-drawing sanity range: door height 2.0–2.2 m. Door height is the only sanity check (no ceiling height check).
@@ -345,7 +345,7 @@ Iteration:
 
 ### 5.1 Method
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
-- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), or slab zone temperature. Multiplied by (1 + thermal bridge surcharge).
+- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), or slab zone temperature. Envelope surfaces only are multiplied by (1 + thermal bridge surcharge): exterior walls and the windows/doors in them, roof, top-floor ceiling to outdoor air, ground slab, walls to soil, and walls to adjoining buildings. Surfaces between two rooms get no surcharge.
 - Ventilation: flow × air heat capacity × (T_room − T_supply). Each room carries its own flow (4.8); air moving between rooms (transfer air) is not modelled separately. T_supply per system type, from these rules (overridable per room):
   - FTX: T_supply = the configured supply air temperature (e.g. 18 °C). Exception: kitchens, bathrooms and WCs get T_supply = room temperature (they are extract rooms receiving transfer air), i.e. no ventilation loss.
   - Exhaust only and natural: T_supply = outdoor temperature. Exception: rooms with no walls to outdoor air get T_supply = room temperature (air arrives as transfer air from neighbouring rooms), i.e. no ventilation loss.
