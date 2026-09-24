@@ -276,6 +276,8 @@ Corrections (primary method):
 
 Manual tools: delete only. Click a line or wall and delete it (junk, hatching, scan artifacts). No merge, no snap, no move. Everything else goes through comments; further tools are added only if the comment method proves too slow or unreliable.
 
+Undo/redo: ordinary undo/redo (Ctrl+Z / Ctrl+Y) for all edits within a session: deletes, separators, annotations, renames, type assignments, manual alignment, value changes. Each AI re-read (regional or full floor) is one undo step, so a whole re-read can be undone.
+
 Re-read / new underlay dialog (one dialog, two triggers: the user orders a machine re-read of a floor, or imports a new underlay for a floor):
 - Swap underlay only: the new image replaces the backdrop and is auto-rescaled to the existing geometry using the reference features. Layout and walls untouched.
 - Re-read, keep my edits: the re-read runs, then every object with a human or AI-corrected tag is restored over the new result. The app lists objects it could not match to a new object.
