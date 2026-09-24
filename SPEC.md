@@ -59,7 +59,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage, cold attic). No room-type rule.
 - setpoint temperature: input for heated rooms (project default, overridable per room or in bulk); solved output for unheated rooms (5.2)
 - ventilation flow (rule table by room type, overridable)
-- infiltration, air changes per hour (EN 12831 default by building age, overridable)
+- infiltration, air changes per hour: derived with the EN 12831 method from an air-tightness value n50 (air changes per hour at 50 Pa) set per age category (3.14), overridable. n50 values per age category: open (9.6).
 - comments (free text)
 - origin/edit tag (3.10)
 
@@ -135,7 +135,7 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
 - thermal bridge surcharge: project-wide percentage on transmission, default 15 %
 - snap tolerance for geometry cleanup, default 100 mm (9.1)
 - ground slab band width, default 3 m
-- vertical-drawing sanity ranges: door height 2.0–2.2 m; floor-to-ceiling (usable) height ≤ 2.8 m, applied for residential only, no check for commercial
+- vertical-drawing sanity range: door height 2.0–2.2 m. Door height is the only sanity check (no ceiling height check).
 - scale truth: reference features (north wall, west wall lengths) established on the reference floor (4.4)
 
 All configuration values live on one settings page.
@@ -201,7 +201,7 @@ All other floors:
 
 Vertical drawings:
 - Scaled to the same truth via one reference feature shared with the plans (e.g. the north wall). Only one vector is available because of the viewing angle, so no cross-check.
-- Sanity checks instead, using the configured ranges (3.14): door heights 2.0–2.2 m; floor-to-ceiling height ≤ 2.8 m for residential; any printed scale bar must agree. Failed checks flag the drawing, which can then be corrected in manual alignment mode (below).
+- Sanity checks instead, using the configured ranges (3.14): door heights 2.0–2.2 m; any printed scale bar must agree. Failed checks flag the drawing, which can then be corrected in manual alignment mode (below).
 
 Manual alignment mode:
 One tool for every case where the machine cannot match scale, stacking or sheet assembly: a floor against the reference floor or the floor below, a sheet against its neighbouring sheet of the same floor (4.3), a vertical drawing against the plans.
@@ -367,6 +367,7 @@ Air density, heat capacity, default ach by age, surface resistances: from EN 128
 9.3 Rendering resolution for pages sent to the API, and tiling of large pages into overlapping crops: open until real drawings have been tried.
 9.4 Command window (4.11): which model, and the exact ask-back protocol.
 9.5 Slab zone temperatures: starting values 5 °C / 12 °C are the user's guesses, to be tuned against the ISO 13370 total.
+9.6 Infiltration: n50 default per age category, final age intervals, and which EN 12831 edition's conversion formula to use. Research in progress.
 
 ---
 
