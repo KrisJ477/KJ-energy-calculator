@@ -51,6 +51,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 
 ### 3.2 Room
 - id: room number in the form `level-index`, no zero padding (1-9, 11-21). Index is a running number per floor. When a floor is copied to other floors (4.4), indexes carry over, so 3-7 and 8-7 are the same room in different apartments. When a room is split by a separator, the largest resulting room keeps the number and the others take the next free indexes on that floor. Nothing is ever renumbered.
+- Level numbers: taken from the drawings where the drawings number the floors ("Plan 1", "Plan 2"). A floor that only has a name is numbered from its neighbour: a basement ("Källare") gets the number one below the floor above it (below Plan 1 → 0, the next basement down → −1); an attic ("Vind") gets the number one above the floor below it. The user confirms the floor list.
 - floor
 - name (from drawing text or user)
 - room_type, with confidence flag and short reasoning ("kitchen: sink and stove symbols present"). Low confidence is flagged.
@@ -135,7 +136,7 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
 - snap tolerance for geometry cleanup, default 100 mm (9.1)
 - ground slab band width, default 3 m
 - vertical-drawing sanity ranges: door height 2.0–2.2 m; floor-to-ceiling (usable) height ≤ 2.8 m, applied for residential only, no check for commercial
-- scale truth: reference features (north wall, west wall lengths) established on floor 1
+- scale truth: reference features (north wall, west wall lengths) established on the reference floor (4.4)
 
 All configuration values live on one settings page.
 
@@ -184,14 +185,15 @@ Reading:
 ### 4.4 Scale
 Scale is the most critical step. From experience, AI gets it wrong often, and every downstream area scales with it squared.
 
-Floor 1 (truth):
+Reference floor (truth):
+- The reference floor is the floor with the best drawing for the job (clearest, most complete, scale stamp or dimension text present), not necessarily floor 1. The app proposes one; the user confirms or picks another.
 - The app makes an initial guess: from a scale stamp if present; otherwise it finds a door and assumes 1 m width.
 - The guess is shown as a red reference bar with two draggable end anchors and a label with its assumed real length ("this line is assumed to be 1 m") and the method that produced it.
-- The user drags the anchors to two known points and types the real distance. This sets floor 1 scale.
+- The user drags the anchors to two known points and types the real distance. This sets the reference floor scale.
 - The app identifies two reference features at an angle to each other, typically the north wall and the west wall, and stores their lengths.
 
-Floors 2–N:
-- The app finds the same two reference features on each floor and computes the correction that makes them match floor 1.
+All other floors:
+- The app finds the same two reference features on each floor and computes the correction that makes them match the reference floor.
 - If both features need approximately the same correction, it is applied automatically so all floors share one truth. A stripe of "exterior" ceiling in the middle of the building from a misaligned floor is exactly the bug this prevents.
 - If the two features need clearly different corrections (north +2 %, west +20 %), the floor is flagged: skewed drawing, or a different section of the building. The user decides.
 - Two references at an angle also catch rotational skew.
