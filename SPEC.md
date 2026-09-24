@@ -109,6 +109,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 
 ### 3.8 Constructions and materials
 - Material library: name, lambda (W/mK). Shared across projects: stored as its own library file that every project loads, not inside a project. Starting content: a list of common Swedish materials, old and new, with Swedish names, lambda values and other values relevant to the U-value calculation, compiled from openly published sources (EN ISO 10456 values as quoted in open sources, Boverket, manufacturer data sheets), each value with its source, and reviewed by the user before it is used. The same applies to default window and door U-values. Manufacturer data added by the user for specific products. The builder does not type values from memory.
+- Temporary test library: `data/materialbibliotek-TEMP.md` is a first draft compiled from search excerpts only (source documents could not be opened). It may be used for testing only and must be redone from the actual sources before real use.
 - Construction: an ordered list of layers (material, thickness). U-value calculated from the layers (surface resistances per EN ISO 6946). A U-value may alternatively be entered directly (e.g. a known window type).
 - Wall types (W1, W2, …), floor types (F1, F2, …), roof types, slab, window/door types each reference a construction.
 - Floor types apply to the floor/ceiling pieces between storeys (3.4). Default assignment: all pieces between storeys get one floor type, except the top-floor ceiling below a cold attic, which gets its own, separate floor type. The user can reassign individual pieces to other floor types (e.g. timber joist floor in the main building, concrete over the basement). Fake floors (3.4) are not floor types.
@@ -249,17 +250,17 @@ Display:
 - Backdrop: the sheet layers (4.3). Overlay: the vector interpretation. The user can switch and fade layers.
 
 Geometry cleanup (mechanical, before rooms are formed):
-- Wall endpoints within the snap tolerance of another wall are snapped onto it. Overshoots shorter than the tolerance are trimmed. Near-collinear consecutive segments of the same thickness are merged.
+- Wall endpoints within the snap tolerance of another wall are snapped onto it. Overshoots shorter than the tolerance are trimmed. Near-collinear consecutive segments of the same thickness are merged: angle within 2°, and thicknesses in the same wall-type cluster.
 - The snap tolerance is for numeric jitter only. Anything larger is a gap and is handled by the read's gap classification (4.2), never auto-closed.
 - Default 100 mm, very much open (9.1).
 
 Wall type mapping:
-- All measured wall thicknesses are listed. An adjustable tolerance band clusters similar values; clusters are colour-coded on the plan across all floors.
+- All measured wall thicknesses are listed. An adjustable tolerance band (default ±15 mm, slider 0–50 mm) clusters similar values; clusters are colour-coded on the plan across all floors.
 - The user assigns clusters to wall types (300 and 310 → W1, 250 → W2). Better to discover too many groups than too few.
 - Each wall keeps its raw measured thickness. The band is UI only; changing it regroups instantly with no re-read.
 
 Opening mapping:
-- Same method for windows and doors, grouped by (width, estimated height) with the confidence score visible. User assigns groups to window/door types.
+- Same method for windows and doors, grouped by (width, estimated height) with the confidence score visible. Tolerance band default ±50 mm, slider 0–200 mm. User assigns groups to window/door types.
 - Each opening has a button to jump to its linked vertical drawing with the opening framed.
 
 Room mapping:
