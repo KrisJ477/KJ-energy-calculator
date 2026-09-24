@@ -108,7 +108,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 - origin/edit tag
 
 ### 3.8 Constructions and materials
-- Material library: name, lambda (W/mK). Populated from EN ISO 10456 design values; manufacturer data added by the user for specific products. The builder does not type values from memory.
+- Material library: name, lambda (W/mK). Shared across projects: stored as its own library file that every project loads, not inside a project. Starting content: a list of common Swedish materials, old and new, with Swedish names, lambda values and other values relevant to the U-value calculation, compiled from openly published sources (EN ISO 10456 values as quoted in open sources, Boverket, manufacturer data sheets), each value with its source, and reviewed by the user before it is used. The same applies to default window and door U-values. Manufacturer data added by the user for specific products. The builder does not type values from memory.
 - Construction: an ordered list of layers (material, thickness). U-value calculated from the layers (surface resistances per EN ISO 6946). A U-value may alternatively be entered directly (e.g. a known window type).
 - Wall types (W1, W2, …), floor types (F1, F2, …), roof types, slab, window/door types each reference a construction.
 - Floor types apply to the floor/ceiling pieces between storeys (3.4). Default assignment: all pieces between storeys get one floor type, except the top-floor ceiling below a cold attic, which gets its own, separate floor type. The user can reassign individual pieces to other floor types (e.g. timber joist floor in the main building, concrete over the basement). Fake floors (3.4) are not floor types.
