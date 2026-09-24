@@ -346,11 +346,15 @@ Iteration:
 ### 5.1 Method
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
 - Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), or slab zone temperature. Multiplied by (1 + thermal bridge surcharge).
-- Ventilation: flow × air heat capacity × (T_room − T_supply).
+- Ventilation: flow × air heat capacity × (T_room − T_supply). Each room carries its own flow (4.8); air moving between rooms (transfer air) is not modelled separately. T_supply per system type, from these rules (overridable per room):
+  - FTX: T_supply = the configured supply air temperature (e.g. 18 °C). Exception: kitchens, bathrooms and WCs get T_supply = room temperature (they are extract rooms receiving transfer air), i.e. no ventilation loss.
+  - Exhaust only and natural: T_supply = outdoor temperature. Exception: rooms with no walls to outdoor air get T_supply = room temperature (air arrives as transfer air from neighbouring rooms), i.e. no ventilation loss.
 - Infiltration: room volume × ach × air heat capacity × (T_room − T_outside), with ach = 2 × n50 × e × ε per EN 12831:2003. Both factors are derived per room from the model:
   - e (shielding coefficient) from the number of the room's exterior walls that contain openings, using the project shielding class (3.14): 0 such walls → e = 0; 1 → none 0.03 / moderate 0.02 / heavy 0.01; more than 1 → none 0.05 / moderate 0.03 / heavy 0.02.
   - ε (height correction) from the room's height above ground level: 0–10 m → 1.0; >10–30 m → 1.2; >30 m → 1.5.
-- Base ventilation flow: in rooms without mechanical ventilation, the air flow used is the larger of the infiltration flow and the base ventilation flow (3.14), with the loss calculated against outdoor temperature. This replaces EN 12831's 0.5 /h hygiene minimum with the Swedish 0.35 l/s per m² floor area.
+- Combining ventilation and infiltration:
+  - FTX: ventilation loss plus infiltration loss.
+  - Exhaust only and natural: the larger of the infiltration flow and the ventilation flow (default the base ventilation flow, 0.35 l/s per m², 3.14), not the sum, calculated against outdoor temperature. In rooms with no walls to outdoor air both are zero (e = 0, T_supply = room temperature). This replaces EN 12831's 0.5 /h hygiene minimum with the Swedish 0.35 l/s per m² floor area.
 Air density, heat capacity, default ach by age, surface resistances: from EN 12831 / EN ISO 6946, not invented.
 
 ### 5.2 Unheated rooms
