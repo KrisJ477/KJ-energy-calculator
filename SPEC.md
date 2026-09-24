@@ -152,7 +152,8 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
 - snap tolerance for geometry cleanup, default 100 mm (9.1)
 - ground slab band width, default 3 m
 - vertical-drawing sanity range: door height 2.0–2.2 m. Door height is the only sanity check (no ceiling height check).
-- scale truth: reference features (north wall, west wall lengths) established on the reference floor (4.4)
+- scale truth: the two reference walls and their lengths, established on the reference floor (4.4)
+- scale correction thresholds (4.4): no-correction band 1 %; auto-correction agreement band 2 %
 
 All configuration values live on one settings page.
 
@@ -214,16 +215,17 @@ Reference floor (truth):
 - The app makes an initial guess: from a scale stamp if present; otherwise it finds a door and assumes 1 m width.
 - The guess is shown as a red reference bar with two draggable end anchors and a label with its assumed real length ("this line is assumed to be 1 m") and the method that produced it.
 - The user drags the anchors to two known points and types the real distance. This sets the reference floor scale.
-- The app identifies two reference features at an angle to each other, typically the north wall and the west wall, and stores their lengths.
+- The app identifies two reference walls and stores their lengths. Selection criteria: the two walls are at an angle to each other (usually, but not necessarily, 90°); they are found on all or most drawings; the longer the better; the cleaner the drawing/scan of them the better. The app shows which two walls it chose and why; the user can pick others.
 
 All other floors:
 - The app finds the same two reference features on each floor and computes the correction that makes them match the reference floor.
-- If both features need approximately the same correction, it is applied automatically so all floors share one truth. A stripe of "exterior" ceiling in the middle of the building from a misaligned floor is exactly the bug this prevents.
-- If the two features need clearly different corrections (north +2 %, west +20 %), the floor is flagged: skewed drawing, or a different section of the building. The user decides, using manual alignment mode (below).
+- If both reference walls are within 1 % of the reference floor, the drawings already agree: no correction, nothing shown.
+- If both need approximately the same correction (the two corrections within 2 % of each other), their average is applied automatically and shown ("Floor 3: +1.8 % applied"), so all floors share one truth. A stripe of "exterior" ceiling in the middle of the building from a misaligned floor is exactly the bug this prevents.
+- If the two corrections are more than 2 % apart (e.g. wall A +2 %, wall B +20 %), the floor is flagged: skewed drawing, or a different section of the building. The user decides, using manual alignment mode (below).
 - Two references at an angle also catch rotational skew.
 
 Vertical drawings:
-- Scaled to the same truth via one reference feature shared with the plans (e.g. the north wall). Only one vector is available because of the viewing angle, so no cross-check.
+- Scaled to the same truth via one reference feature shared with the plans (one of the two reference walls). Only one vector is available because of the viewing angle, so no cross-check.
 - Sanity checks instead, using the configured ranges (3.14): door heights 2.0–2.2 m; any printed scale bar must agree. Failed checks flag the drawing, which can then be corrected in manual alignment mode (below).
 
 Manual alignment mode:
@@ -234,7 +236,7 @@ One tool for every case where the machine cannot match scale, stacking or sheet 
 - Fine adjustment: drag to move, rotate handle, scale field/slider, arrow-key nudging.
 - Non-uniform scale: separate horizontal and vertical scale factors are allowed, for drawings stretched in one direction (typically bad scans). Available only in this manual tool, never applied automatically, and shown with a clear warning on the layer.
 - Vertical drawings: same tool, constrained to what the view allows: one point pair along the shared horizontal dimension plus a height reference (e.g. a floor level line).
-- Live feedback: the reference feature lengths (north wall, west wall) and their deviation in % against the reference floor are shown while aligning.
+- Live feedback: the two reference wall lengths and their deviation in % against the reference floor are shown while aligning.
 - No re-read: alignment changes only the layer's placement transform. Geometry already read from that layer moves with it; no AI calls are made.
 - Audit: the resulting scale/placement records its method as "manual alignment" together with the point pairs used (7).
 - This places whole layers only. It is not a geometry editing tool; the "manual geometry tools beyond delete" exclusion (8) is unaffected.
