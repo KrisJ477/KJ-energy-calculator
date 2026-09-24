@@ -48,7 +48,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 Design principle: the model is built around what the calculation needs, not around perfect geometry. Per room the calculation needs: area, height/volume, the bounding surfaces with type/area/U-value, what is on the other side of each surface, and ventilation/infiltration data.
 
 ### 3.1 Golden rule
-Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly two spaces. A space is a room, outside air, or soil. If a wall runs along three rooms it is split at the junctions. If a room's ceiling has two rooms above it, the ceiling is split into two pieces. A surface bordering three spaces is a bug, not a case to handle.
+Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly two spaces. A space is a room, outside air, soil, or an adjoining building (3.3). If a wall runs along three rooms it is split at the junctions. If a room's ceiling has two rooms above it, the ceiling is split into two pieces. A surface bordering three spaces is a bug, not a case to handle.
 
 ### 3.2 Room
 - id: room number in the form `level-index`, no zero padding (1-9, 11-21). Index is a running number per floor. When a floor is copied to other floors (4.4), indexes carry over, so 3-7 and 8-7 are the same room in different apartments. When a room is split by a separator, the largest resulting room keeps the number and the others take the next free indexes on that floor. Nothing is ever renumbered.
@@ -68,11 +68,13 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - id, floor
 - centerline geometry, measured thickness (raw value from the read, kept as read)
 - wall_type reference (W1, W2, …) → construction → U-value
-- side_a, side_b: space ids (room, "outside", "soil")
+- side_a, side_b: space ids (room, "outside", "soil", adjoining building)
 - percent_underground (exterior walls only, default 0)
 - origin/edit tag
 
-Temperatures are never stored on walls. The calculation pulls each side's temperature from the room or the building configuration (outdoor, soil).
+Temperatures are never stored on walls. The calculation pulls each side's temperature from the room, the building configuration (outdoor, soil) or the adjoining-building space.
+
+Adjoining building: when the user marks an exterior-looking wall as "wall to adjoining building" (4.6), its outer side becomes an adjoining-building space belonging to that wall, with a temperature set per wall (default: the project indoor setpoint, i.e. normally zero loss; can be set lower, e.g. 15 °C for a neighbouring stairwell or shop). The temperature lives on that space, not on the wall.
 
 A wall with percent_underground > 0 is split horizontally into two segments, one "to soil" and one "to outside air", same U-value. Changing the percentage re-splits.
 
@@ -244,7 +246,7 @@ One tool for every case where the machine cannot match scale, stacking or sheet 
 - This places whole layers only. It is not a geometry editing tool; the "manual geometry tools beyond delete" exclusion (8) is unaffected.
 
 Copying floors:
-- After a floor is approved (4.5), the user can apply it to a range of floors ("apply to floors 3–9"). The app copies geometry, wall types, openings, room names and numbers, then diffs against each target floor's own read and flags every difference for the user. Room numbers carry over with the floor level changed (3.2).
+- After a floor is approved (4.5), the user can apply it to a range of floors ("apply to floors 3–9"). The app copies geometry, wall types, openings, room names and numbers, adjoining-building markings with their temperatures, then diffs against each target floor's own read and flags every difference for the user. Room numbers carry over with the floor level changed (3.2).
 
 ### 4.5 2D approve and adjust, floor by floor
 Display:
@@ -291,7 +293,7 @@ Separators and annotations survive in all cases.
 - Room height = floor-to-floor height. Slab thickness is ignored in all calculations (wall area and volume come out slightly high, which is the conservative side). Slabs get a fixed display thickness in 3D that is used nowhere in the calculation.
 - Floor/ceiling pieces from polygon overlap (3.4). Bottom floor sits on the ground slab (3.5); top floor gets the roof, or the top-floor ceiling to outdoor air when there is a cold attic (3.6).
 - Spaces spanning floors (stairwells, shafts, double-height rooms): one room per floor, connected vertically by fake floors (3.4), typically marked unheated by the user.
-- Anything that looks like an exterior wall is treated as exterior with outdoor temperature outside it, unless the user overrides (shared wall with an adjoining building).
+- Anything that looks like an exterior wall is treated as exterior with outdoor temperature outside it, unless the user marks it as a wall to an adjoining building (3.3), with its own temperature per wall.
 - Floor heights come from vertical drawings where found; otherwise they appear in the gap list.
 
 ### 4.7 Gap dialog
