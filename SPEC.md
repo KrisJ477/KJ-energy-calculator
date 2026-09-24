@@ -12,7 +12,9 @@ Build this application strictly according to this specification.
 - Every feature must be traceable to this document. Do not add features, tests, tooling, documentation or "nice to haves" that are not specified here.
 - Do not make assumptions about unclear or ambiguous requirements. If you find a gap, a conflict, or something undefined, STOP and raise it for discussion. Do not resolve it yourself, and do not proceed on "he probably meant this".
 - Section 9 lists questions already known to be open. Raise them before building the affected part.
-- Where this document points to a standard (EN 12831, EN ISO 13370, EN ISO 10456, EN ISO 6946) for values or methods, do not invent numbers; ask which edition/source to use if unclear.
+- Standards and editions: EN 12831:2003 (throughout, including infiltration and air properties), EN ISO 6946:2017, EN ISO 13370:2017, EN ISO 10456:2007.
+- The standards are paywalled and the user does not have access. Values and formulas may therefore be taken from open secondary sources (Boverket, manufacturer data, textbooks, other countries' published guidance that reproduces the standard). Every such value carries its source, visible in the app. Values that could not be checked against the standard itself are marked "unverified". If the standards become available later, the unverified values are checked against them.
+- Never invent numbers: every value must have a named source, or be explicitly marked as the user's own starting value.
 - Where a default value is given and marked "starting value", it is the user's own guess to be tuned, not a sourced figure.
 
 ---
