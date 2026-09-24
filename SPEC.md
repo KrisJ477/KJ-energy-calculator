@@ -108,7 +108,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 - Material library: name, lambda (W/mK). Populated from EN ISO 10456 design values; manufacturer data added by the user for specific products. The builder does not type values from memory.
 - Construction: an ordered list of layers (material, thickness). U-value calculated from the layers (surface resistances per EN ISO 6946). A U-value may alternatively be entered directly (e.g. a known window type).
 - Wall types (W1, W2, …), floor types (F1, F2, …), roof types, slab, window/door types each reference a construction.
-- Floor types apply to the floor/ceiling pieces between storeys (3.4). Default assignment: all pieces between two heated storeys get one floor type; the top-floor ceiling below a cold attic gets its own, separate floor type. The user can reassign individual pieces to other floor types (e.g. timber joist floor in the main building, concrete over the basement). Fake floors (3.4) are not floor types.
+- Floor types apply to the floor/ceiling pieces between storeys (3.4). Default assignment: all pieces between storeys get one floor type, except the top-floor ceiling below a cold attic, which gets its own, separate floor type. The user can reassign individual pieces to other floor types (e.g. timber joist floor in the main building, concrete over the basement). Fake floors (3.4) are not floor types.
 - Full traceability chain: room loss ← surface ← wall type ← construction ← layers ← material. Changing a material's lambda or a layer's thickness recalculates everything downstream immediately, visible in the chain.
 - A material or construction in use cannot be deleted, only changed.
 
