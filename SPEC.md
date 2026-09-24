@@ -47,7 +47,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 Design principle: the model is built around what the calculation needs, not around perfect geometry. Per room the calculation needs: area, height/volume, the bounding surfaces with type/area/U-value, what is on the other side of each surface, and ventilation/infiltration data.
 
 ### 3.1 Golden rule
-Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly two spaces. A space is a room, outside air, soil, or an annotated zone. If a wall runs along three rooms it is split at the junctions. If a room's ceiling has two rooms above it, the ceiling is split into two pieces. A surface bordering three spaces is a bug, not a case to handle.
+Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly two spaces. A space is a room, outside air, or soil. If a wall runs along three rooms it is split at the junctions. If a room's ceiling has two rooms above it, the ceiling is split into two pieces. A surface bordering three spaces is a bug, not a case to handle.
 
 ### 3.2 Room
 - id: room number in the form `level-index`, no zero padding (1-9, 11-21). Index is a running number per floor. When a floor is copied to other floors (4.4), indexes carry over, so 3-7 and 8-7 are the same room in different apartments. When a room is split by a separator, the largest resulting room keeps the number and the others take the next free indexes on that floor. Nothing is ever renumbered.
@@ -67,11 +67,11 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - id, floor
 - centerline geometry, measured thickness (raw value from the read, kept as read)
 - wall_type reference (W1, W2, …) → construction → U-value
-- side_a, side_b: space ids (room, "outside", "soil", zone)
+- side_a, side_b: space ids (room, "outside", "soil")
 - percent_underground (exterior walls only, default 0)
 - origin/edit tag
 
-Temperatures are never stored on walls. The calculation pulls each side's temperature from the room, the building configuration (outdoor, soil) or the annotated zone.
+Temperatures are never stored on walls. The calculation pulls each side's temperature from the room or the building configuration (outdoor, soil).
 
 A wall with percent_underground > 0 is split horizontally into two segments, one "to soil" and one "to outside air", same U-value. Changing the percentage re-splits.
 
@@ -90,7 +90,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 ### 3.6 Roof and attic
 - Roof treated as a flat surface for calculation. User assigns roof construction / U-value.
 - Cold attic: not modelled and not calculated. An unheated attic is simply outdoor air: the top-floor ceiling (its own floor type, 3.8) goes straight to outdoor temperature. No attic room, no attic volume, no gable walls, no solved attic temperature.
-- Partly heated attic (very unusual): the user annotates the heated area on the plan (zone annotation, 3.9) and sends it back to the AI to be read in as a room.
+- Partly heated attic (very unusual): the user marks the heated area on the plan with an annotation (3.9) and sends it back to the AI to be read in as a room.
 - When no attic appears in the drawings: the top ceiling is the roof (roof construction), straight to outdoor air.
 
 ### 3.7 Window / Door
@@ -115,8 +115,11 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 - Full traceability chain: room loss ← surface ← wall type ← construction ← layers ← material. Changing a material's lambda or a layer's thickness recalculates everything downstream immediately, visible in the chain.
 - A material or construction in use cannot be deleted, only changed.
 
-### 3.9 Zone annotation
-For partly heated attics and similar: the user draws a rectangle and writes a comment ("this part heated to 12 °C, rest is outside temperature"). The app treats the rectangle edge as a boundary with the given temperature on that side.
+### 3.9 Annotations (experimental)
+A general drawing-markup tool for talking to the AI, clearly labelled experimental. There is no deterministic "zone" object: annotations never enter the calculation directly.
+- The user draws lines (freehand or straight) and places free-text notes anywhere on a drawing.
+- Annotations are sent back to the AI together with the drawing region they cover, for a re-read. The AI interprets them and changes the model through ordinary objects (rooms, walls, openings), e.g. "this part of the attic is heated, read it as a room".
+- Sent in the same per-floor batch as the comment corrections (4.5). Every change is recorded on the affected objects (3.10).
 
 ### 3.10 Origin / edit tag
 Every object records whether it came from the machine read, was changed by an AI regional re-read on a user comment, was changed by the experimental command window (4.11), or was edited by the user. Required so that a later re-read can flag human edits before overwriting them.
@@ -125,7 +128,7 @@ Every object records whether it came from the machine read, was changed by an AI
 Overrides and assignments live on objects. When a 2D edit or a re-read splits or merges an object (a separator through a room with a ventilation override, a re-read splitting a wall with a construction assignment), the override is carried to all resulting objects and flagged for review. It is never silently dropped.
 
 ### 3.12 Virtual separators
-A user-drawn line with no thickness and no U-value. It splits an open space into separate rooms (open kitchen / hallway / living room, or zoning a large office). Room detection treats it as a boundary; the calculation sees no transmission across it. Ventilation is applied per resulting room. Separators and zone annotations survive every kind of re-read (4.5).
+A user-drawn line with no thickness and no U-value. It splits an open space into separate rooms (open kitchen / hallway / living room, or zoning a large office). Room detection treats it as a boundary; the calculation sees no transmission across it. Ventilation is applied per resulting room. Separators and annotations survive every kind of re-read (4.5).
 
 ### 3.13 Sheets
 A floor may be drawn across several PDF sheets (two, three or more). Each sheet object has: floor, part-of-floor, crop rectangle (excludes title block and frame), its own scale, and its position relative to the floor composite (4.3). All downstream objects belong to the floor, never to a sheet.
@@ -259,7 +262,7 @@ Opening mapping:
 
 Room mapping:
 - Room type guesses shown with confidence and reasoning. User corrects names/types.
-- User draws virtual separators and zone annotations where needed.
+- User draws virtual separators and annotations (3.9) where needed.
 - User sets percent_underground per exterior wall, or accepts the machine guess from the ground datum found in vertical drawings.
 - User resolves flagged uncertain gaps.
 
@@ -275,7 +278,7 @@ Re-read / new underlay dialog (one dialog, two triggers: the user orders a machi
 - Re-read, keep my edits: the re-read runs, then every object with a human or AI-corrected tag is restored over the new result. The app lists objects it could not match to a new object.
 - Re-read, discard my edits: clean re-read; everything on that floor returns to machine origin.
 - Cancel.
-Separators and zone annotations survive in all cases.
+Separators and annotations survive in all cases.
 
 ### 4.6 Stacking
 - Assumption: floors are of equal footprint and stack directly. Deviations are special cases and are flagged; a floor that is misplaced over the one below is corrected in manual alignment mode (4.4).
@@ -334,7 +337,7 @@ Iteration:
 
 ### 5.1 Method
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
-- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), slab zone temperature, or an annotated zone. Multiplied by (1 + thermal bridge surcharge).
+- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), or slab zone temperature. Multiplied by (1 + thermal bridge surcharge).
 - Ventilation: flow × air heat capacity × (T_room − T_supply).
 - Infiltration: room volume × ach × air heat capacity × (T_room − T_outside), with ach = 2 × n50 × e × ε per EN 12831:2003. Both factors are derived per room from the model:
   - e (shielding coefficient) from the number of the room's exterior walls that contain openings, using the project shielding class (3.14): 0 such walls → e = 0; 1 → none 0.03 / moderate 0.02 / heavy 0.01; more than 1 → none 0.05 / moderate 0.03 / heavy 0.02.
