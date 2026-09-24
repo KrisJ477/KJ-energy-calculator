@@ -148,6 +148,13 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
 
 All configuration values live on one settings page.
 
+### 3.15 Measurement basis
+- Room floor area and volume: to the inside faces of the bounding walls (the actual heated space, Swedish room area convention). Volume = inside area × room height (4.6).
+- Exterior walls, roof and ground slab: outside dimensions (conservative; permitted by EN 12831, roughly covers corner losses).
+- Interior walls between spaces: centreline dimensions.
+- Floor/ceiling pieces between floors (3.4): from the overlap of the rooms' inside-face polygons.
+- Openings: wall areas are net. Window and door areas are subtracted from the wall they sit in and counted as separate surfaces with their own U-value.
+
 ---
 
 ## 4. Workflow
