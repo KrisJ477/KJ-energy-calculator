@@ -85,7 +85,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 - Split into a perimeter band and an inner area. Band width user-set, default 3 m.
 - Band goes to a "soil near facade" temperature, inner area to a warmer "deep soil" temperature. Both are project configuration values, shown as separate rows in the room breakdown. Starting values: band 5 °C, inner 12 °C, to be tuned against the ISO 13370 total below.
 - One slab construction, same U-value for both zones. Rooms straddling the band boundary get two floor surfaces (3.1).
-- Verification: the building's total slab loss is computed once with EN ISO 13370 (building-level B′ = A/(½P), equivalent thickness, soil conductivity default per the standard) and shown next to the summed per-room slab loss. Large disagreement is a signal to adjust the zone temperatures. ISO 13370 is NOT applied per room; per-room application breaks down (interior rooms → zero, corner rooms → inflated).
+- Verification: the building's total slab loss is computed once with EN ISO 13370 (building-level B′ = A/(½P), equivalent thickness, soil conductivity default per the standard) and shown next to the summed per-room slab loss. Both numbers are shown side by side, with no automatic warning or threshold; the user judges any disagreement and adjusts the zone temperatures if needed. The app never adjusts them itself. ISO 13370 is NOT applied per room; per-room application breaks down (interior rooms → zero, corner rooms → inflated).
 
 ### 3.6 Roof and attic
 - Roof treated as a flat surface for calculation. User assigns roof construction / U-value.
