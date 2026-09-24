@@ -30,6 +30,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 - Web app, no desktop install. The 3D models are small and simple.
 - Frontend: static files, 3D viewer built with Three.js.
 - Backend: a Cloudflare Worker that holds the Anthropic API key and forwards requests. The key never lives in the browser.
+- Language: the app UI is Swedish by default, with English selectable via a language switch. All UI text exists in both languages. Terminology follows Swedish practice (U-värde, rumsarea, FTX, oms/h). AI-written reasoning and explanations are produced in the UI language active at the time of the read. User comments to the AI may be written in Swedish or English. This specification, the code, code comments and all development documentation are always in English.
 - Access: simple password protection. The password is stored as a secret in the Worker. The app asks for it once and remembers it in that browser. The Worker rejects any request without the correct password.
 - Deployment: GitHub → Cloudflare, same pattern as the user's existing static sites.
 - PDF handling: pages are rendered to images in the browser with PDF.js and sent to the API. Where the PDF has a text layer, text (room names, dimension strings, labels) is extracted directly instead of being read visually. Scanned PDFs fall back to vision for everything.
