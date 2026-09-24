@@ -127,7 +127,7 @@ A user-drawn line with no thickness and no U-value. It splits an open space into
 A floor may be drawn across several PDF sheets (two, three or more). Each sheet object has: floor, part-of-floor, crop rectangle (excludes title block and frame), its own scale, and its position relative to the floor composite (4.3). All downstream objects belong to the floor, never to a sheet.
 
 ### 3.14 Building configuration
-- building type, age category
+- age category, one of: before 1940 / 1940–1960 / 1961–1975 / 1976–1990 / after 1990. Used only to set the default infiltration (3.2, 4.8). There is no building type setting.
 - outdoor design temperature: a single value typed by the user in the wizard, no table
 - default indoor setpoint: one project value
 - soil temperature for walls below grade (default 8 °C), slab band and inner zone temperatures (3.5)
@@ -145,7 +145,8 @@ All configuration values live on one settings page.
 ## 4. Workflow
 
 ### 4.1 Setup wizard
-User answers: building type, age category, outdoor design temperature, default indoor setpoint, ventilation system type, supply air temperature if FTX. These prime the read (expected room types, ventilation defaults, infiltration defaults).
+User answers: age category, outdoor design temperature, default indoor setpoint, ventilation system type, supply air temperature if FTX. These prime the read (ventilation defaults, infiltration defaults).
+- Age category: the wizard explains what the choice is used for (the default infiltration, air leakage through the building envelope) and shows the infiltration value used for each interval next to it, so the user sees the consequence of the choice before picking.
 
 ### 4.2 Upload and full read
 - User uploads all drawings (plans, sections, elevations, any mix). Sections and elevations are one category, "vertical drawings", and follow the same rules throughout: scaled the same way, mined for heights the same way. Elevations are usually the better source for window heights (whole facades); sections for floor heights and ground datum.
