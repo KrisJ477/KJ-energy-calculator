@@ -39,7 +39,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 - Deployment: GitHub → Cloudflare, same pattern as the user's existing static sites.
 - PDF handling: pages are rendered to images in the browser with PDF.js and sent to the API. Where the PDF has a text layer, text (room names, dimension strings, labels) is extracted directly instead of being read visually. Scanned PDFs fall back to vision for everything.
 - Geometry is read by vision only in v1. No extraction of vector line work from the PDF.
-- Models: Claude Opus for the full initial read and the combined pass (4.2). Claude Haiku for regional re-reads during 2D correction. Cost is not a factor at this scale (well under one dollar per building); accuracy is.
+- Models: Claude Opus for the full initial read and the combined pass (4.2). Claude Haiku for regional re-reads during 2D correction. These are defaults: the model for every AI job (initial read and combined pass, full-floor re-read, regional re-reads and annotations, command window) can be switched by the user on the settings page (6). Cost is not a factor at this scale (well under one dollar per building); accuracy is.
 - The 3D model is always generated from the approved 2D data plus stacking data. It is never edited as its own thing. Properties and overrides live on objects and survive regeneration (3.11).
 - Project persistence, both of:
   - Autosave in the browser: the current project (drawings, geometry, edits, constructions, settings) is saved continuously in browser storage and restored when the app is reopened. Protects against refresh, closed tab or crash. Lives only in that browser on that computer; lost if browser data is cleared.
@@ -343,7 +343,7 @@ Iteration:
 - Rule: on any ambiguity the model must ask back before touching anything, and the UI is built around that exchange. "Change ground temperature to 5 °C" returns "for the wall soil temperature, the slab band, the inner zone, or all three?" and nothing changes until the user answers.
 - Every change it makes is listed afterwards, object by object, and tagged on the objects (3.10), so the user can see exactly what was touched.
 - This is separate from the regional comment corrections in 4.5, which are scoped to one object or region on one floor.
-- Model: Opus by default; the user can switch to another model on the settings page.
+- Model: Opus by default; switchable on the settings page (6).
 - Protocol:
   1. The user types a command.
   2. The AI never changes anything itself. It returns one of two structured responses:
@@ -387,7 +387,8 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 ## 6. Model usage summary
 - Opus: per-sheet reads, the combined pass, and any full-floor re-read.
 - Haiku: regional re-reads driven by user comments, batched per floor.
-- Command window (4.11): Opus by default, switchable by the user in settings.
+- Command window (4.11): Opus by default.
+- Every job's model is switchable by the user on the settings page (one dropdown per job); the defaults above apply until changed. The model used is recorded with each read (together with the prompt version, 4.2).
 
 ---
 
