@@ -59,7 +59,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - area, height (= floor-to-floor, 4.6), volume
 - heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage). No room-type rule.
 - setpoint temperature: input for heated rooms (project default, overridable per room or in bulk); solved output for unheated rooms (5.2)
-- ventilation flow (rule table by room type, overridable)
+- ventilation flow (default 0.35 l/s per m² floor area, overridable per room or in bulk by room type)
 - infiltration, air changes per hour: derived with the EN 12831 method from an air-tightness value n50 (air changes per hour at 50 Pa) set per age category (3.14), overridable.
 - comments (free text)
 - origin/edit tag (3.10)
@@ -308,7 +308,7 @@ Nothing else. Unheated rooms are a flag in the room panel, not a gap.
 ### 4.8 Constructions and ventilation assignment
 Sits before 3D generation, so the first 3D view already shows watts.
 - Wall types, roof, slab, window/door types are assigned constructions (3.8).
-- Ventilation rules by room type (0.35 l/s per m² for general rooms, a fixed 20–30 l/s for kitchens), applied via the room type classification, overridable per room. Supply air temperature from the system type.
+- Ventilation: one default for all rooms, 0.35 l/s per m² floor area. There is no built-in rule table by room type; flows vary by project. Instead, the read attempts to classify every room's type (3.2), and after the initial read the user sets flows in bulk by room type (e.g. all kitchens, all bathrooms) or per room (4.10). Supply air temperature from the system type.
 - Infiltration per room from EN 12831 defaults by building age, overridable per room.
 All of it remains changeable later in audit mode.
 
