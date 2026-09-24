@@ -30,6 +30,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 ## 2. Architecture (decided)
 
 - Web app, no desktop install. The 3D models are small and simple.
+- Multiple windows: any view (2D editor, drawing layers, 3D, room panel, list view, settings, etc.) can be popped out into its own browser window, to be moved to another screen, resized and maximised. Any number of windows at the same time. All windows share one project and one undo history and stay live-synced: selecting or changing something in one window updates all others immediately. The main window owns the project state (autosave, save/open); closing it closes the pop-outs. In Chrome/Edge the app may also offer to place a pop-out directly on a chosen screen (browser permission asked once); in other browsers the user drags the window. On a single-screen tablet everything stays in one window.
 - Target device: desktop/laptop first, with mouse and keyboard; all serious work is done on a PC. Also usable on an iPad-sized tablet with touch, but not optimised for it. Not designed for phones.
 - Frontend: static files, 3D viewer built with Three.js.
 - Backend: a Cloudflare Worker that holds the Anthropic API key and forwards requests. The key never lives in the browser.
