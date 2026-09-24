@@ -134,6 +134,8 @@ A floor may be drawn across several PDF sheets (two, three or more). Each sheet 
   - 1976–1990: n50 = 1.5 /h
   - 1991–2005: n50 = 1.2 /h
   - 2006 and later: n50 = 0.8 /h
+- infiltration shielding class (EN 12831:2003): none / moderate / heavy, project-wide, default moderate
+- base ventilation flow: default 0.35 l/s per m² floor area, project-wide, overridable per room. Deliberately not called a minimum: the user may set it lower, including zero, project-wide or per room (5.1).
 - outdoor design temperature: a single value typed by the user in the wizard, no table
 - default indoor setpoint: one project value
 - soil temperature for walls below grade (default 8 °C), slab band and inner zone temperatures (3.5)
@@ -322,7 +324,10 @@ Iteration:
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
 - Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), slab zone temperature, or an annotated zone. Multiplied by (1 + thermal bridge surcharge).
 - Ventilation: flow × air heat capacity × (T_room − T_supply).
-- Infiltration: room volume × ach × air heat capacity × (T_room − T_outside), with ach = 2 × n50 × e × ε per EN 12831:2003 (e = shielding coefficient, ε = height correction factor).
+- Infiltration: room volume × ach × air heat capacity × (T_room − T_outside), with ach = 2 × n50 × e × ε per EN 12831:2003. Both factors are derived per room from the model:
+  - e (shielding coefficient) from the number of the room's exterior walls that contain openings, using the project shielding class (3.14): 0 such walls → e = 0; 1 → none 0.03 / moderate 0.02 / heavy 0.01; more than 1 → none 0.05 / moderate 0.03 / heavy 0.02.
+  - ε (height correction) from the room's height above ground level: 0–10 m → 1.0; >10–30 m → 1.2; >30 m → 1.5.
+- Base ventilation flow: in rooms without mechanical ventilation, the air flow used is the larger of the infiltration flow and the base ventilation flow (3.14), with the loss calculated against outdoor temperature. This replaces EN 12831's 0.5 /h hygiene minimum with the Swedish 0.35 l/s per m² floor area.
 Air density, heat capacity, default ach by age, surface resistances: from EN 12831 / EN ISO 6946, not invented.
 
 ### 5.2 Unheated rooms
@@ -373,7 +378,7 @@ Air density, heat capacity, default ach by age, surface resistances: from EN 128
 9.3 Rendering resolution for pages sent to the API, and tiling of large pages into overlapping crops: open until real drawings have been tried.
 9.4 Command window (4.11): which model, and the exact ask-back protocol.
 9.5 Slab zone temperatures: starting values 5 °C / 12 °C are the user's guesses, to be tuned against the ISO 13370 total.
-9.6 Infiltration: n50 starting values (3.14) to be verified against EN 12831:2003 Table D.5 and SBN 1980 section 33:3. How e and ε are set (derived per room from the model: number of exposed façades with openings, room height above ground; or fixed project values): open.
+9.6 Infiltration: n50 starting values (3.14) to be verified against EN 12831:2003 Table D.5 and SBN 1980 section 33:3. Also verify the e and ε table values (5.1) against the standard.
 
 ---
 
