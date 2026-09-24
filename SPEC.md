@@ -95,6 +95,8 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 
 ### 3.7 Window / Door
 - id, parent wall id, type (window/door)
+- All doors are modelled, interior doors (in walls between two spaces) as well as exterior doors. Doors between rooms at the same temperature contribute nothing; doors to colder spaces (e.g. a flat's front door to an unheated stairwell) do.
+- Default door types: one for exterior doors and one for interior doors, each with its own construction and U-value (3.8). The user can add further door types.
 - width (from plan, reliable)
 - height: null, or an estimated value with confidence:
   - HIGH: found in a vertical drawing (section or elevation) that this opening maps to. ±50 mm is acceptable.
