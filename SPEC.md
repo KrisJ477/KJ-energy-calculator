@@ -173,7 +173,7 @@ What is read:
 Assembling:
 - Each sheet gets a crop rectangle so its title block and frame do not overlap the neighbour's content.
 - Each sheet is scaled on its own (4.4 method), or via a wall it shares with an already-scaled sheet of the same floor.
-- Position: the user clicks the same point on two overlapping sheets (a wall corner near the match line) and the app aligns them. The app may propose the match from shared walls in the overlap strip; the user confirms or drags.
+- Position: the user clicks the same point on two overlapping sheets (a wall corner near the match line) and the app aligns them. The app may propose the match from shared walls in the overlap strip; the user confirms, or corrects it in manual alignment mode (4.4).
 - The floor's reference features for scale correction (4.4) are measured on the assembled composite, not on one sheet.
 
 Showing:
@@ -195,12 +195,25 @@ Reference floor (truth):
 All other floors:
 - The app finds the same two reference features on each floor and computes the correction that makes them match the reference floor.
 - If both features need approximately the same correction, it is applied automatically so all floors share one truth. A stripe of "exterior" ceiling in the middle of the building from a misaligned floor is exactly the bug this prevents.
-- If the two features need clearly different corrections (north +2 %, west +20 %), the floor is flagged: skewed drawing, or a different section of the building. The user decides.
+- If the two features need clearly different corrections (north +2 %, west +20 %), the floor is flagged: skewed drawing, or a different section of the building. The user decides, using manual alignment mode (below).
 - Two references at an angle also catch rotational skew.
 
 Vertical drawings:
 - Scaled to the same truth via one reference feature shared with the plans (e.g. the north wall). Only one vector is available because of the viewing angle, so no cross-check.
-- Sanity checks instead, using the configured ranges (3.14): door heights 2.0–2.2 m; floor-to-ceiling height ≤ 2.8 m for residential; any printed scale bar must agree. Failed checks flag the drawing.
+- Sanity checks instead, using the configured ranges (3.14): door heights 2.0–2.2 m; floor-to-ceiling height ≤ 2.8 m for residential; any printed scale bar must agree. Failed checks flag the drawing, which can then be corrected in manual alignment mode (below).
+
+Manual alignment mode:
+One tool for every case where the machine cannot match scale, stacking or sheet assembly: a floor against the reference floor or the floor below, a sheet against its neighbouring sheet of the same floor (4.3), a vertical drawing against the plans.
+- Opens automatically on any flagged mismatch (scale correction disagreement, stacking deviation (4.6), unresolved sheet seam, failed vertical-drawing sanity check), and from a button at any time.
+- Display: the layer being aligned is overlaid on the reference layer. Each layer has its own opacity slider and colour tint (e.g. reference blue, moving layer red), so matches and mismatches are visible.
+- Primary method, point pairs: the user clicks a point on the reference, then the same point on the moving layer (stair corner, exterior wall corner), twice. From the two pairs the app computes move, rotation and uniform scale exactly.
+- Fine adjustment: drag to move, rotate handle, scale field/slider, arrow-key nudging.
+- Non-uniform scale: separate horizontal and vertical scale factors are allowed, for drawings stretched in one direction (typically bad scans). Available only in this manual tool, never applied automatically, and shown with a clear warning on the layer.
+- Vertical drawings: same tool, constrained to what the view allows: one point pair along the shared horizontal dimension plus a height reference (e.g. a floor level line).
+- Live feedback: the reference feature lengths (north wall, west wall) and their deviation in % against the reference floor are shown while aligning.
+- No re-read: alignment changes only the layer's placement transform. Geometry already read from that layer moves with it; no AI calls are made.
+- Audit: the resulting scale/placement records its method as "manual alignment" together with the point pairs used (7).
+- This places whole layers only. It is not a geometry editing tool; the "manual geometry tools beyond delete" exclusion (8) is unaffected.
 
 Copying floors:
 - After a floor is approved (4.5), the user can apply it to a range of floors ("apply to floors 3–9"). The app copies geometry, wall types, openings, room names and numbers, then diffs against each target floor's own read and flags every difference for the user. Room numbers carry over with the floor level changed (3.2).
@@ -244,7 +257,7 @@ Re-read / new underlay dialog (one dialog, two triggers: the user orders a machi
 Separators and zone annotations survive in all cases.
 
 ### 4.6 Stacking
-- Assumption: floors are of equal footprint and stack directly. Deviations are special cases and are flagged.
+- Assumption: floors are of equal footprint and stack directly. Deviations are special cases and are flagged; a floor that is misplaced over the one below is corrected in manual alignment mode (4.4).
 - Room height = floor-to-floor height. Slab thickness is ignored in all calculations (wall area and volume come out slightly high, which is the conservative side). Slabs get a fixed display thickness in 3D that is used nowhere in the calculation.
 - Floor/ceiling pieces from polygon overlap (3.4). Bottom floor sits on the ground slab (3.5); top floor gets the roof or the cold attic (3.6).
 - Spaces spanning floors (stairwells, shafts, double-height rooms): one room per floor, connected vertically by fake floors (3.4), typically marked unheated by the user.
