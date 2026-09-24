@@ -56,6 +56,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 
 ### 3.2 Room
 - id: room number in the form `level-index`, no zero padding (1-9, 11-21). Index is a running number per floor. When a floor is copied to other floors (4.4), indexes carry over, so 3-7 and 8-7 are the same room in different apartments. When a room is split by a separator, the largest resulting room keeps the number and the others take the next free indexes on that floor. Nothing is ever renumbered.
+- Negative level numbers (extremely rare; basements are normally level 0, and buildings with several basement levels usually number the entrance level e.g. 10) are written in parentheses: (-1)-3.
 - Level numbers: taken from the drawings where the drawings number the floors ("Plan 1", "Plan 2"). A floor that only has a name is numbered from its neighbour: a basement ("Källare") gets the number one below the floor above it (below Plan 1 → 0, the next basement down → −1); an attic ("Vind") gets the number one above the floor below it. The user confirms the floor list.
 - floor
 - name (from drawing text or user)
