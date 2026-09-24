@@ -30,6 +30,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 ## 2. Architecture (decided)
 
 - Web app, no desktop install. The 3D models are small and simple.
+- Target device: desktop/laptop first, with mouse and keyboard; all serious work is done on a PC. Also usable on an iPad-sized tablet with touch, but not optimised for it. Not designed for phones.
 - Frontend: static files, 3D viewer built with Three.js.
 - Backend: a Cloudflare Worker that holds the Anthropic API key and forwards requests. The key never lives in the browser.
 - Language: the app UI is Swedish by default, with English selectable via a language switch. All UI text exists in both languages. Terminology follows Swedish practice (U-värde, rumsarea, FTX, oms/h). AI-written reasoning and explanations are produced in the UI language active at the time of the read. User comments to the AI may be written in Swedish or English. This specification, the code, code comments and all development documentation are always in English.
