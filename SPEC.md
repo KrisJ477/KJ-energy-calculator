@@ -56,7 +56,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - name (from drawing text or user)
 - room_type, with confidence flag and short reasoning ("kitchen: sink and stove symbols present"). Low confidence is flagged.
 - area, height (= floor-to-floor, 4.6), volume
-- heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage, cold attic). No room-type rule.
+- heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage). No room-type rule.
 - setpoint temperature: input for heated rooms (project default, overridable per room or in bulk); solved output for unheated rooms (5.2)
 - ventilation flow (rule table by room type, overridable)
 - infiltration, air changes per hour: derived with the EN 12831 method from an air-tightness value n50 (air changes per hour at 50 Pa) set per age category (3.14), overridable.
@@ -89,8 +89,9 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 
 ### 3.6 Roof and attic
 - Roof treated as a flat surface for calculation. User assigns roof construction / U-value.
-- Cold attic: an unheated room on its own level, ceiling of the top floor below it, roof above it, temperature solved. A partly heated attic uses the zone annotation (3.9) to split that room.
-- When no attic appears in the drawings: the top ceiling is the roof, straight to outdoor air.
+- Cold attic: not modelled and not calculated. An unheated attic is simply outdoor air: the top-floor ceiling (its own floor type, 3.8) goes straight to outdoor temperature. No attic room, no attic volume, no gable walls, no solved attic temperature.
+- Partly heated attic (very unusual): the user annotates the heated area on the plan (zone annotation, 3.9) and sends it back to the AI to be read in as a room.
+- When no attic appears in the drawings: the top ceiling is the roof (roof construction), straight to outdoor air.
 
 ### 3.7 Window / Door
 - id, parent wall id, type (window/door)
@@ -277,7 +278,7 @@ Separators and zone annotations survive in all cases.
 ### 4.6 Stacking
 - Assumption: floors are of equal footprint and stack directly. Deviations are special cases and are flagged; a floor that is misplaced over the one below is corrected in manual alignment mode (4.4).
 - Room height = floor-to-floor height. Slab thickness is ignored in all calculations (wall area and volume come out slightly high, which is the conservative side). Slabs get a fixed display thickness in 3D that is used nowhere in the calculation.
-- Floor/ceiling pieces from polygon overlap (3.4). Bottom floor sits on the ground slab (3.5); top floor gets the roof or the cold attic (3.6).
+- Floor/ceiling pieces from polygon overlap (3.4). Bottom floor sits on the ground slab (3.5); top floor gets the roof, or the top-floor ceiling to outdoor air when there is a cold attic (3.6).
 - Spaces spanning floors (stairwells, shafts, double-height rooms): one room per floor, connected vertically by fake floors (3.4), typically marked unheated by the user.
 - Anything that looks like an exterior wall is treated as exterior with outdoor temperature outside it, unless the user overrides (shared wall with an adjoining building).
 - Floor heights come from vertical drawings where found; otherwise they appear in the gap list.
@@ -287,7 +288,7 @@ Asked once, after all reads, only for what blocks 3D or the calculation:
 - Floor heights, when no vertical drawing gave them.
 - Floor order, only if the drawing labels leave it unclear which is bottom and top.
 - Underground percentage, only where no ground datum was found to guess from.
-- Attic: is there a cold attic above the top floor, only when no vertical drawing shows it.
+- Attic: is there a cold attic above the top floor (decides whether the top ceiling uses the roof construction or the top-floor ceiling type), only when no vertical drawing shows it.
 - Opening heights: when a group of windows or doors has no height from any source, asked once per group.
 Nothing else. Unheated rooms are a flag in the room panel, not a gap.
 
