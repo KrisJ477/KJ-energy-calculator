@@ -53,12 +53,13 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 Design principle: the model is built around what the calculation needs, not around perfect geometry. Per room the calculation needs: area, height/volume, the bounding surfaces with type/area/U-value, what is on the other side of each surface, and ventilation/infiltration data.
 
 ### 3.1 Golden rule
-Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly two spaces. A space is a room, outside air, soil, or an adjoining building (3.3). If a wall runs along three rooms it is split at the junctions. If a room's ceiling has two rooms above it, the ceiling is split into two pieces. A surface bordering three spaces is a bug, not a case to handle.
+Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly two spaces. A space is a room, outside air, soil, or a space outside the project (3.3). If a wall runs along three rooms it is split at the junctions. If a room's ceiling has two rooms above it, the ceiling is split into two pieces. A surface bordering three spaces is a bug, not a case to handle.
 
 ### 3.2 Room
 - id: room number in the form `level-index`, no zero padding (1-9, 11-21). Index is a running number per floor. When a floor is copied to other floors (4.4), indexes carry over, so 3-7 and 8-7 are the same room in different apartments. When a room is split by a separator, the largest resulting room keeps the number and the others take the next free indexes on that floor. Nothing is ever renumbered.
 - Negative level numbers (extremely rare; basements are normally level 0, and buildings with several basement levels usually number the entrance level e.g. 10) are written in parentheses: (-1)-3.
 - Level numbers: taken from the drawings where the drawings number the floors ("Plan 1", "Plan 2"). A floor that only has a name is numbered from its neighbour: a basement ("Källare") gets the number one below the floor above it (below Plan 1 → 0, the next basement down → −1); an attic ("Vind") gets the number one above the floor below it. The user confirms the floor list.
+- Floor name aliases: drawing sets from different dates and disciplines often name the same floor differently (e.g. "första våningen" = "Plan 1 vån" = "BV"). Each level holds a list of aliases; the reader maps every drawing to a level through them, and the user confirms the mapping.
 - floor
 - name (from drawing text or user)
 - room_type, with confidence flag and short reasoning ("kitchen: sink and stove symbols present"). Low confidence is flagged.
@@ -74,13 +75,13 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - id, floor
 - centerline geometry, measured thickness (raw value from the read, kept as read)
 - wall_type reference (W1, W2, …) → construction → U-value
-- side_a, side_b: space ids (room, "outside", "soil", adjoining building)
+- side_a, side_b: space ids (room, "outside", "soil", space outside the project)
 - percent_underground (exterior walls only, default 0)
 - origin/edit tag
 
-Temperatures are never stored on walls. The calculation pulls each side's temperature from the room, the building configuration (outdoor, soil) or the adjoining-building space.
+Temperatures are never stored on walls. The calculation pulls each side's temperature from the room, the building configuration (outdoor, soil) or the space outside the project.
 
-Adjoining building: when the user marks an exterior-looking wall as "wall to adjoining building" (4.6), its outer side becomes an adjoining-building space belonging to that wall, with a temperature set per wall (default: the project indoor setpoint, i.e. normally zero loss; can be set lower, e.g. 15 °C for a neighbouring stairwell or shop). The temperature lives on that space, not on the wall.
+Space outside the project: a neighbouring building, a garage, a shop or any other space that borders the project but is not calculated. The user marks a surface (wall, floor or ceiling piece) as bordering a space outside the project; its other side then becomes such a space, belonging to that surface, with a fixed temperature set per surface (default: the project indoor setpoint, i.e. normally zero loss; can be set lower, e.g. 15 °C for a neighbouring stairwell or shop, 0 °C for an unheated garage kept above freezing). The temperature lives on that space, not on the surface. The space is a boundary only: never modelled, never calculated, not in any total.
 
 A wall with percent_underground > 0 is split horizontally into two segments, one "to soil" and one "to outside air", same U-value. Changing the percentage re-splits.
 
@@ -143,6 +144,14 @@ A user-drawn line with no thickness and no U-value. It splits an open space into
 
 ### 3.13 Sheets
 A floor may be drawn across several sheets (PDF pages or image files) (two, three or more). Each sheet object has: floor, part-of-floor, crop rectangle (excludes title block and frame), its own scale, and its position relative to the floor composite (4.3). All downstream objects belong to the floor, never to a sheet.
+
+A floor may also have several drawings of the same area, from different dates or disciplines. Each such drawing gets a role, proposed by the reader (guided by the project brief, 4.1) and confirmed by the user:
+- base: the drawing the layout and room names are read from.
+- scale reference: a drawing of the same floor with written dimensions, used to set or check the scale of the base (4.4).
+- change patch: a later drawing covering part of the floor; within its marked region it replaces the base.
+- cross-check: used only to verify (e.g. room names on a ventilation plan).
+- ignore.
+All roles are aligned to the base with manual alignment mode (4.4).
 
 ### 3.14 Building configuration
 - age category, used only to set the default air-tightness n50 for infiltration (3.2, 4.8, 5.1). There is no building type setting. Categories follow Swedish building code eras. n50 values are starting values (engineering estimates bounded by Swedish/Nordic measurements and code requirements, multi-family values used for all buildings), to be verified (9.6):
@@ -223,10 +232,10 @@ Reading:
 Scale is the most critical step. From experience, AI gets it wrong often, and every downstream area scales with it squared.
 
 Reference floor (truth):
-- The reference floor is the floor with the best drawing for the job (clearest, most complete, scale stamp or dimension text present), not necessarily floor 1. The app proposes one; the user confirms or picks another.
-- The app makes an initial guess: from a scale stamp if present; otherwise it finds a door and assumes 1 m width.
-- The guess is shown as a red reference bar with two draggable end anchors and a label with its assumed real length ("this line is assumed to be 1 m") and the method that produced it.
-- The user drags the anchors to two known points and types the real distance. This sets the reference floor scale.
+- The reference floor is the floor with the best drawing for the job (clearest, most complete, written dimensions or a scale bar present), not necessarily floor 1. The app proposes one; the user confirms or picks another.
+- Scale is always set from at least one known real measurement. Sources, in order of preference: a written dimension (a dimension chain value such as 4.05, read from the drawing text or visually), a printed scale bar, or a distance the user knows and types in. If none exists on the drawing, the user must supply one; there is no scale without a known measurement.
+- The app proposes a measurement: a red reference bar placed on it, with two draggable end anchors and a label showing its real length and where that came from ("dimension 4.05 m", "scale bar 0–10 m"). The user confirms, or drags the anchors to two known points and types the real distance. This sets the reference floor scale.
+- Sanity checks only, never used to set the scale: the scale stamp (e.g. "1:100", since scans may have been resized), typical door widths, the archive film ruler, and other dimensions on the same drawing. Disagreement is flagged.
 - The app identifies two reference walls and stores their lengths. Selection criteria: the two walls are at an angle to each other (usually, but not necessarily, 90°); they are found on all or most drawings; the longer the better; the cleaner the drawing/scan of them the better. The app shows which two walls it chose and why; the user can pick others.
 
 All other floors:
@@ -254,7 +263,7 @@ One tool for every case where the machine cannot match scale, stacking or sheet 
 - This places whole layers only. It is not a geometry editing tool; the "manual geometry tools beyond delete" exclusion (8) is unaffected.
 
 Copying floors:
-- After a floor is approved (4.5), the user can apply it to a range of floors ("apply to floors 3–9"). The app copies geometry, wall types, openings, room names and numbers, adjoining-building markings with their temperatures, then diffs against each target floor's own read and flags every difference for the user. Room numbers carry over with the floor level changed (3.2).
+- After a floor is approved (4.5), the user can apply it to a range of floors ("apply to floors 3–9"). The app copies geometry, wall types, openings, room names and numbers, space-outside-the-project markings with their temperatures, then diffs against each target floor's own read and flags every difference for the user. Room numbers carry over with the floor level changed (3.2).
 
 ### 4.5 2D approve and adjust, floor by floor
 Display:
@@ -301,7 +310,7 @@ Separators and annotations survive in all cases.
 - Room height = floor-to-floor height. Slab thickness is ignored in all calculations (wall area and volume come out slightly high, which is the conservative side). Slabs get a fixed display thickness in 3D that is used nowhere in the calculation.
 - Floor/ceiling pieces from polygon overlap (3.4). Bottom floor sits on the ground slab (3.5); top floor gets the roof, or the top-floor ceiling to outdoor air when there is a cold attic (3.6).
 - Spaces spanning floors (stairwells, shafts, double-height rooms): one room per floor, connected vertically by fake floors (3.4), typically marked unheated by the user.
-- Anything that looks like an exterior wall is treated as exterior with outdoor temperature outside it, unless the user marks it as a wall to an adjoining building (3.3), with its own temperature per wall.
+- Anything that looks like an exterior wall is treated as exterior with outdoor temperature outside it, unless the user marks it as bordering a space outside the project (3.3), with its own temperature per surface. The same applies to floors and ceilings (e.g. the floor of the lowest project storey over a garage that is not part of the project).
 - Floor heights come from vertical drawings where found; otherwise they appear in the gap list.
 
 ### 4.7 Gap dialog
@@ -360,7 +369,7 @@ Iteration:
 
 ### 5.1 Method
 Room-by-room, EN 12831 style, steady state, three buckets per heated room:
-- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), slab zone temperature, or an adjoining building (3.3). Envelope surfaces only are multiplied by (1 + thermal bridge surcharge): exterior walls and the windows/doors in them, roof, top-floor ceiling to outdoor air, ground slab, walls to soil, and walls to adjoining buildings. Surfaces between two rooms get no surcharge. Heat flow between heated rooms at different setpoints is counted in both directions: the warmer room gets a loss, the colder room an equal negative contribution (a gain). Rooms are sized for the design temperatures of all spaces; no room is sized for a neighbour with its heating turned off. At building level these flows cancel, so the building total is the true net loss.
+- Transmission through every bounding surface: U × A × (T_room − T_other_side), where the other side is a room (heated or solved unheated), outside air, soil (walls), slab zone temperature, or a space outside the project (3.3). Envelope surfaces only are multiplied by (1 + thermal bridge surcharge): exterior walls and the windows/doors in them, roof, top-floor ceiling to outdoor air, ground slab, walls to soil, and surfaces to spaces outside the project. Surfaces between two rooms get no surcharge. Heat flow between heated rooms at different setpoints is counted in both directions: the warmer room gets a loss, the colder room an equal negative contribution (a gain). Rooms are sized for the design temperatures of all spaces; no room is sized for a neighbour with its heating turned off. At building level these flows cancel, so the building total is the true net loss.
 - Ventilation: flow × air heat capacity × (T_room − T_supply). Each room carries its own flow (4.8); air moving between rooms (transfer air) is not modelled separately. T_supply per system type, from these rules (overridable per room):
   - FTX: T_supply = the configured supply air temperature (e.g. 18 °C). Exception: kitchens, bathrooms and WCs get T_supply = room temperature (they are extract rooms receiving transfer air), i.e. no ventilation loss.
   - Exhaust only and natural: T_supply = outdoor temperature. Exception: rooms with no walls to outdoor air get T_supply = room temperature (air arrives as transfer air from neighbouring rooms), i.e. no ventilation loss.
