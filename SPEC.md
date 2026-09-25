@@ -40,7 +40,7 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 - Input files: PDF and image files (TIFF, PNG, JPG). Archive drawings of old buildings typically arrive as TIFF scans (often 1-bit black/white, ~200 dpi, A0), not PDF.
 - PDF handling: pages are rendered to images in the browser with PDF.js and sent to the API. Where the PDF has a text layer, text (room names, dimension strings, labels) is extracted directly instead of being read visually. Scanned PDFs and image files use vision for everything.
 - Geometry is read by vision only in v1. Extraction of vector line work from CAD PDFs is planned for v2 (10).
-- Models: Claude Opus for the full initial read and the combined pass (4.2). Claude Haiku for regional re-reads during 2D correction. These are defaults: the model for every AI job (initial read and combined pass, full-floor re-read, regional re-reads and annotations, command window) can be switched by the user on the settings page (6). Cost is not a factor at this scale (well under one dollar per building); accuracy is.
+- Models: Claude Opus for the full initial read and the combined pass (4.2). Claude Haiku for regional re-reads during 2D correction. These are defaults: the model for every AI job (initial read and combined pass, full-floor re-read, regional re-reads and annotations, command window) can be switched by the user on the settings page (6). Accuracy comes first, but cost is real: see the estimate in section 6.
 - The 3D model is always generated from the approved 2D data plus stacking data. It is never edited as its own thing. Properties and overrides live on objects and survive regeneration (3.11).
 - Project persistence, both of:
   - Autosave in the browser: the current project (drawings, geometry, edits, constructions, settings) is saved continuously in browser storage and restored when the app is reopened. Protects against refresh, closed tab or crash. Lives only in that browser on that computer; lost if browser data is cleared.
@@ -206,7 +206,12 @@ How the read runs (decided):
 - Coordinates are in image pixels; scaling to millimetres is the app's job, not the model's.
 - The read may not invent geometry to close a room. Uncertain stays uncertain.
 - Not walls, and the reader is told so explicitly: match lines, sheet frame edges, title block borders, revision clouds, fire compartment lines (e.g. red dash-dot EI60 boundaries), dimension and leader lines, ducts and pipes on HVAC drawings, archive film frames, rulers and frame numbers, stamps and handwritten notes.
-- Rendering resolution and tiling of large pages into overlapping crops: still open (9.3), but first test reads give guidance:
+- Rendering resolution and tiling (decided, 9.3; all values adjustable on the settings page):
+  - Resolution is set in real-world terms: target about 8 mm per pixel (≈125 px per metre of building), the level where wall thickness was reliable in the test reads. CAD PDFs are rendered at the dpi that gives this (≈160 dpi at 1:50, ≈320 dpi at 1:100). Scans are never enlarged beyond native resolution; if a scan is coarser than the target it is read at native resolution and thickness is flagged as less precise.
+  - Tile size follows from the model's image limit: as large as the model accepts without downscaling (at the time of writing 2576 px on the long edge and about 3.75 megapixels on current Opus models, i.e. roughly 15 × 15 m of building per tile at 8 mm/px). Check the current limit in Anthropic's documentation at build time.
+  - Tiles overlap by about 2 m; the combined pass removes duplicates by position, as for sheet seams (4.3).
+  - Two passes per floor: an overview (whole floor, one low-resolution image: outline, rough rooms, label positions, guides the tiling) and detail tiles (walls, thicknesses, openings, gaps). Tiles with no building in them are skipped.
+  Test-read evidence behind these values:
   - CAD PDF, 1:50, very large sheet (Forsåker Kv 39, 3.4 × 2.4 m): viewed whole, nothing is readable. At 150 dpi a tile covers about 16 × 12 m and everything is sharp, 1 px ≈ 8 mm (enough for wall thickness). At 75 dpi a tile covers about 32 × 24 m; layout, doors and labels are readable, but 1 px ≈ 17 mm is too coarse for thickness.
   - Archive scan, 1:100, 1-bit (Blodnävan 1988): at native resolution (about 156 px/m) a tile of about 12 × 11 m was readable, at the edge of reliable for a single pass; slightly smaller tiles or a second pass on uncertain areas are advisable.
   - Never derive scale from file DPI or paper size: on Blodnävan the scan metadata implied half the true resolution.
@@ -410,6 +415,15 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 - Command window (4.11): Opus by default.
 - Every job's model is switchable by the user on the settings page (one dropdown per job); the defaults above apply until changed. The model used is recorded with each read (together with the prompt version, 4.2).
 
+- Cost estimate (rough, list prices at the time of writing: Opus 5 $5 / $25 per million input / output tokens, Opus 5.5 $4 / $20, Sonnet 5 $2 / $10, Haiku 4.5 $1 / $5; check current prices at build time):
+  - Per detail tile on Opus 5: about 8,000 input tokens (image ≈4,800 + instructions, schema and project brief) and about 10,000 output tokens (structured JSON plus model reasoning), ≈ $0.30. Output dominates and is the least certain figure (range roughly $0.15–0.55 per tile).
+  - Combined pass per floor: the extracted data of all tiles as input, plus a structured result.
+  - Forsåker Kv 39 (7 residential floors, ~25 tiles each, plus sections and elevations): roughly $60–80 for a full first read on Opus 5; plausible range $40–150.
+  - Brf Blodnävan (5 levels, base plus scale-reference drawings, patches, sections and elevations; ~80 tiles): roughly $25; plausible range $15–60.
+  - Regional corrections on Haiku: about $0.02 each; a few dollars per project. Full-floor re-reads cost as much as the first read of that floor.
+  - An earlier estimate of "well under one dollar per building" was wrong by one to two orders of magnitude.
+  - Levers if needed: Opus 5.5 (−20 %), Sonnet 5 (−60 %, quality to be tested), lower effort, reading only the floors that differ when floors are copied (4.4), and prompt caching of the fixed instructions. Measure real token use on a few tiles before relying on these numbers.
+
 ---
 
 ## 7. What the app must always show
@@ -435,7 +449,7 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 ## 9. Open questions (raise before building the affected part)
 9.1 Snap tolerance: drawing-based rule decided (4.5). The values remain a starting point until real read output shows how much jitter the AI read adds.
 9.2 Closed: sliver threshold decided (3.4).
-9.3 Rendering resolution for pages sent to the API, and tiling of large pages into overlapping crops: open until real drawings have been tried.
+9.3 Closed: resolution and tiling decided (4.2). Values remain adjustable once real API output has been measured.
 9.4 Closed: command window model and protocol decided (4.11).
 9.5 Slab zone temperatures: starting values 5 °C / 12 °C are the user's guesses, to be tuned against the ISO 13370 total.
 9.6 Infiltration: n50 starting values (3.14) to be verified against EN 12831:2003 Table D.5 and SBN 1980 section 33:3. Also verify the e and ε table values (5.1) against the standard.
