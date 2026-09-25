@@ -21,7 +21,7 @@ Build this application strictly according to this specification.
 
 ## 1. Purpose
 
-A web app that reads architectural drawings (PDF plans, sections, elevations) of existing buildings, typically older ones, builds a simplified building model, and performs room-by-room heat loss calculations of the kind the user currently produces in MagiCAD Room. The result does not need to be perfect, but it must be good and auditable.
+A web app that reads building drawings (PDF or scanned image files: plans, sections, elevations) of existing buildings, typically older ones, builds a simplified building model, and performs room-by-room heat loss calculations of the kind the user currently produces in MagiCAD Room. The result does not need to be perfect, but it must be good and auditable.
 
 The core of the app is: drawing reading + the simplified transmission/ventilation/infiltration calculation. IFC export is not part of v1.
 
@@ -37,8 +37,9 @@ The core of the app is: drawing reading + the simplified transmission/ventilatio
 - Language: the app UI is Swedish by default, with English selectable via a language switch. All UI text exists in both languages. Terminology follows Swedish practice (U-värde, rumsarea, FTX, oms/h). AI-written reasoning and explanations are produced in the UI language active at the time of the read. User comments to the AI may be written in Swedish or English. This specification, the code, code comments and all development documentation are always in English.
 - Access: simple password protection. The password is stored as a secret in the Worker. The app asks for it once and remembers it in that browser. The Worker rejects any request without the correct password.
 - Deployment: GitHub → Cloudflare, same pattern as the user's existing static sites.
-- PDF handling: pages are rendered to images in the browser with PDF.js and sent to the API. Where the PDF has a text layer, text (room names, dimension strings, labels) is extracted directly instead of being read visually. Scanned PDFs fall back to vision for everything.
-- Geometry is read by vision only in v1. No extraction of vector line work from the PDF.
+- Input files: PDF and image files (TIFF, PNG, JPG). Archive drawings of old buildings typically arrive as TIFF scans (often 1-bit black/white, ~200 dpi, A0), not PDF.
+- PDF handling: pages are rendered to images in the browser with PDF.js and sent to the API. Where the PDF has a text layer, text (room names, dimension strings, labels) is extracted directly instead of being read visually. Scanned PDFs and image files use vision for everything.
+- Geometry is read by vision only in v1. Extraction of vector line work from CAD PDFs is planned for v2 (10).
 - Models: Claude Opus for the full initial read and the combined pass (4.2). Claude Haiku for regional re-reads during 2D correction. These are defaults: the model for every AI job (initial read and combined pass, full-floor re-read, regional re-reads and annotations, command window) can be switched by the user on the settings page (6). Cost is not a factor at this scale (well under one dollar per building); accuracy is.
 - The 3D model is always generated from the approved 2D data plus stacking data. It is never edited as its own thing. Properties and overrides live on objects and survive regeneration (3.11).
 - Project persistence, both of:
@@ -110,6 +111,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
   - HIGH: found in a vertical drawing (section or elevation) that this opening maps to. ±50 mm is acceptable.
   - MEDIUM: not found, but same room type and same width as openings whose height is known (other kitchen windows).
   - LOW: not found, not same room type, but same width and same look (opening symbol etc.) as a known opening.
+- sill height: not needed for the calculation (only width × height counts). Used only to place the opening in the 3D model. If a vertical drawing gives it clearly, use it. Otherwise default 900 mm; if that makes the window reach the ceiling, lower the sill until it does not.
 - source and reasoning string, shown on inspection
 - vertical-drawing link: if found, the object also carries its coordinates in that drawing so the user can jump there with the opening framed
 - construction type → U-value
@@ -140,7 +142,7 @@ Overrides and assignments live on objects. When a 2D edit or a re-read splits or
 A user-drawn line with no thickness and no U-value. It splits an open space into separate rooms (open kitchen / hallway / living room, or zoning a large office). Room detection treats it as a boundary; the calculation sees no transmission across it. Ventilation is applied per resulting room. Separators and annotations survive every kind of re-read (4.5).
 
 ### 3.13 Sheets
-A floor may be drawn across several PDF sheets (two, three or more). Each sheet object has: floor, part-of-floor, crop rectangle (excludes title block and frame), its own scale, and its position relative to the floor composite (4.3). All downstream objects belong to the floor, never to a sheet.
+A floor may be drawn across several sheets (PDF pages or image files) (two, three or more). Each sheet object has: floor, part-of-floor, crop rectangle (excludes title block and frame), its own scale, and its position relative to the floor composite (4.3). All downstream objects belong to the floor, never to a sheet.
 
 ### 3.14 Building configuration
 - age category, used only to set the default air-tightness n50 for infiltration (3.2, 4.8, 5.1). There is no building type setting. Categories follow Swedish building code eras. n50 values are starting values (engineering estimates bounded by Swedish/Nordic measurements and code requirements, multi-family values used for all buildings), to be verified (9.6):
@@ -179,6 +181,7 @@ All configuration values live on one settings page.
 
 ### 4.1 Setup wizard
 User answers: age category, outdoor design temperature, default indoor setpoint, ventilation system type, supply air temperature if FTX. These prime the read (ventilation defaults, infiltration defaults).
+- Project brief: a free-text field where the user pastes a concise brief describing this project's drawings: which drawings to use and for what, which to ignore, known quirks (e.g. "1986 plans are ventilation drawings, use them for room layout and names only", "use KFU versions where they exist"). Each old building is unique, so a project normally starts with a conversation with Claude (outside the app) about which drawings exist and how to use them; the brief is extracted from that conversation. The brief is stored with the project, editable at any time, and included in the prompt context of every AI read (4.2).
 - Age category: the wizard explains what the choice is used for (the default infiltration, air leakage through the building envelope) and shows the n50 value used for each interval next to it, so the user sees the consequence of the choice before picking.
 
 ### 4.2 Upload and full read
@@ -189,15 +192,15 @@ How the read runs (decided):
 - One call per sheet, run in parallel, each at full resolution. The stitched composite of a multi-sheet floor is never sent as one image.
 - Then one combined pass over the extracted data of all sheets (plus crops where needed) for cross-drawing work: matching openings between plans and vertical drawings, comparing the same wall in neighbouring apartments and on the floor above, gap classification, and seam handling for multi-sheet floors (4.3).
 - Structured output: every read returns a fixed JSON schema (drawing classification, walls, rooms, openings, gaps, text labels), each item with confidence and reasoning. The builder defines the schema. The model never returns prose.
-- Prompt context: the wizard answers, the floor list so far, and for the combined pass the extracted data from all drawings.
+- Prompt context: the project brief (4.1), the wizard answers, the floor list so far, and for the combined pass the extracted data from all drawings.
 - Coordinates are in image pixels; scaling to millimetres is the app's job, not the model's.
 - The read may not invent geometry to close a room. Uncertain stays uncertain.
-- Match lines, sheet frame edges and title block borders are not walls. The reader is told this explicitly.
+- Not walls, and the reader is told so explicitly: match lines, sheet frame edges, title block borders, revision clouds, fire compartment lines (e.g. red dash-dot EI60 boundaries), dimension and leader lines, ducts and pipes on HVAC drawings, archive film frames, rulers and frame numbers, stamps and handwritten notes.
 - Rendering resolution and tiling of large pages into overlapping crops: open until real drawings have been tried (9.3).
 - Prompts are versioned and stored with the project, so a later re-read can state which prompt version produced the model.
 
 What is read:
-- Per sheet: classify type (plan / vertical) and which floor(s), and which part of the floor, it shows.
+- Per sheet: classify type (plan / vertical), discipline (architectural, structural, ventilation, plumbing, electrical, other) and which floor(s), and which part of the floor, it shows. Drawings from other disciplines are usable (e.g. ventilation plans often label rooms clearly) but cluttered; foundation and similar structural drawings are usually not usable as floor plans. Plans may be partial (e.g. only the renovated part of a floor) and a floor may have to be assembled from drawings of different dates and disciplines; coverage gaps go to the gap list (4.7).
 - Per plan: walls as centerlines with measured thickness, enclosed rooms, openings with width, text labels.
 - Per vertical drawing: floor-to-floor heights, opening heights, ground level, roof/attic.
 - Gaps in walls: every gap is a question, not a fact. The reader classifies each as opening, artifact (faded line, closed), or uncertain, using context: door symbols, the same wall in the neighbouring apartment, the floor above, whether the room would otherwise be unbounded. Each gap is an object with classification and reasoning. Uncertain gaps are flagged for 2D review. Nothing is silently closed.
@@ -402,7 +405,7 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 
 ## 8. Out of scope for v1 (decided)
 - IFC export (a real IFC export is a v2 nice-to-have).
-- Vector line extraction from PDFs.
+- Vector line extraction from PDFs (planned for v2, 10).
 - Per-wall or corner-adjusted infiltration.
 - Per-junction thermal bridges.
 - Room area sanity checks after scaling (dropped; scale is already cross-checked and odd rooms are visible in 2D).
@@ -425,3 +428,4 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 ## 10. Noted for later (not v1)
 - Sensitivity analysis: flag which rooms' heat loss is most affected by uncertain U-value guesses, so site investigation can be prioritised; combined with the room-type confidence flag (low confidence + high sensitivity = go look). Not available in MagiCAD Room today. The per-element audit view is designed to support this.
 - Real IFC export.
+- Vector extraction from CAD PDFs as an accelerator next to the vision read: where a PDF comes from CAD with named layers, walls (with exact thickness), windows, doors, text and levels are taken directly from the vectors; vision fills in the rest (room types, unlayered or ambiguous elements, gaps). Finding from test project Forsåker Kv 39 (ArchiCAD PDF, 24 BSAB-coded layers): exterior walls with windows, load-bearing walls and doors came out cleanly from their layers; thin interior partitions were not found in the wall layers. Each CAD export differs, so layer mapping needs user confirmation per drawing set.
