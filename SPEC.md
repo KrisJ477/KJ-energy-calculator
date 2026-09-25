@@ -107,7 +107,7 @@ A wall with percent_underground > 0 is split horizontally into two segments, one
 - id, parent wall id, type (window/door)
 - All doors are modelled, interior doors (in walls between two spaces) as well as exterior doors. Doors between rooms at the same temperature contribute nothing; doors to colder spaces (e.g. a flat's front door to an unheated stairwell) do.
 - Default door types: one for exterior doors and one for interior doors, each with its own construction and U-value (3.8). The user can add further door types.
-- width (from plan, reliable)
+- width (from plan). On old scans a window is often drawn inside a wall recess that is wider than the window itself: the recess width is an upper bound, flagged, and replaced by a written dimension or an elevation measurement where available.
 - height: null, or an estimated value with confidence:
   - HIGH: found in a vertical drawing (section or elevation) that this opening maps to. ±50 mm is acceptable.
   - MEDIUM: not found, but same room type and same width as openings whose height is known (other kitchen windows).
@@ -190,7 +190,7 @@ All configuration values live on one settings page.
 
 ### 4.1 Setup wizard
 User answers: age category, outdoor design temperature, default indoor setpoint, ventilation system type, supply air temperature if FTX. These prime the read (ventilation defaults, infiltration defaults).
-- Project brief: a free-text field where the user pastes a concise brief describing this project's drawings: which drawings to use and for what, which to ignore, known quirks (e.g. "1986 plans are ventilation drawings, use them for room layout and names only", "use KFU versions where they exist"). Each old building is unique, so a project normally starts with a conversation with Claude (outside the app) about which drawings exist and how to use them; the brief is extracted from that conversation. The brief is stored with the project, editable at any time, and included in the prompt context of every AI read (4.2).
+- Project brief (see docs/PROJECT-PREPARATION.md for how it is produced): a free-text field where the user pastes a concise brief describing this project's drawings: which drawings to use and for what, which to ignore, known quirks (e.g. "1986 plans are ventilation drawings, use them for room layout and names only", "use KFU versions where they exist"). Each old building is unique, so a project normally starts with a conversation with Claude (outside the app) about which drawings exist and how to use them; the brief is extracted from that conversation. The brief is stored with the project, editable at any time, and included in the prompt context of every AI read (4.2).
 - Age category: the wizard explains what the choice is used for (the default infiltration, air leakage through the building envelope) and shows the n50 value used for each interval next to it, so the user sees the consequence of the choice before picking.
 
 ### 4.2 Upload and full read
@@ -205,14 +205,17 @@ How the read runs (decided):
 - Coordinates are in image pixels; scaling to millimetres is the app's job, not the model's.
 - The read may not invent geometry to close a room. Uncertain stays uncertain.
 - Not walls, and the reader is told so explicitly: match lines, sheet frame edges, title block borders, revision clouds, fire compartment lines (e.g. red dash-dot EI60 boundaries), dimension and leader lines, ducts and pipes on HVAC drawings, archive film frames, rulers and frame numbers, stamps and handwritten notes.
-- Rendering resolution and tiling of large pages into overlapping crops: open until real drawings have been tried (9.3).
+- Rendering resolution and tiling of large pages into overlapping crops: still open (9.3), but first test reads give guidance:
+  - CAD PDF, 1:50, very large sheet (Forsåker Kv 39, 3.4 × 2.4 m): viewed whole, nothing is readable. At 150 dpi a tile covers about 16 × 12 m and everything is sharp, 1 px ≈ 8 mm (enough for wall thickness). At 75 dpi a tile covers about 32 × 24 m; layout, doors and labels are readable, but 1 px ≈ 17 mm is too coarse for thickness.
+  - Archive scan, 1:100, 1-bit (Blodnävan 1988): at native resolution (about 156 px/m) a tile of about 12 × 11 m was readable, at the edge of reliable for a single pass; slightly smaller tiles or a second pass on uncertain areas are advisable.
+  - Never derive scale from file DPI or paper size: on Blodnävan the scan metadata implied half the true resolution.
 - Prompts are versioned and stored with the project, so a later re-read can state which prompt version produced the model.
 
 What is read:
 - Per sheet: classify type (plan / vertical), discipline (architectural, structural, ventilation, plumbing, electrical, other) and which floor(s), and which part of the floor, it shows. Drawings from other disciplines are usable (e.g. ventilation plans often label rooms clearly) but cluttered; foundation and similar structural drawings are usually not usable as floor plans. Plans may be partial (e.g. only the renovated part of a floor) and a floor may have to be assembled from drawings of different dates and disciplines; coverage gaps go to the gap list (4.7).
 - Per plan: walls as centerlines with measured thickness, enclosed rooms, openings with width, text labels.
 - Per vertical drawing: floor-to-floor heights, opening heights, ground level, roof/attic.
-- Gaps in walls: every gap is a question, not a fact. The reader classifies each as opening, artifact (faded line, closed), or uncertain, using context: door symbols, the same wall in the neighbouring apartment, the floor above, whether the room would otherwise be unbounded. Each gap is an object with classification and reasoning. Uncertain gaps are flagged for 2D review. Nothing is silently closed.
+- Gaps in walls: every gap is a question, not a fact. On 1-bit scans doors often have no swing arc, only a gap and a short diagonal line, so gap classification is the normal case there, not the exception. The reader classifies each as opening, artifact (faded line, closed), or uncertain, using context: door symbols, the same wall in the neighbouring apartment, the floor above, whether the room would otherwise be unbounded. Each gap is an object with classification and reasoning. Uncertain gaps are flagged for 2D review. Nothing is silently closed.
 - Output: everything found, plus a single consolidated gap list (4.7).
 
 ### 4.3 Multi-sheet floors
@@ -236,7 +239,8 @@ Reference floor (truth):
 - Scale is always set from at least one known real measurement. Sources, in order of preference: a written dimension (a dimension chain value such as 4.05, read from the drawing text or visually), a printed scale bar, or a distance the user knows and types in. If none exists on the drawing, the user must supply one; there is no scale without a known measurement.
 - The app proposes a measurement: a red reference bar placed on it, with two draggable end anchors and a label showing its real length and where that came from ("dimension 4.05 m", "scale bar 0–10 m"). The user confirms, or drags the anchors to two known points and types the real distance. This sets the reference floor scale.
 - Sanity checks only, never used to set the scale: the scale stamp (e.g. "1:100", since scans may have been resized), typical door widths, the archive film ruler, and other dimensions on the same drawing. Disagreement is flagged.
-- The app identifies two reference walls and stores their lengths. Selection criteria: the two walls are at an angle to each other (usually, but not necessarily, 90°); they are found on all or most drawings; the longer the better; the cleaner the drawing/scan of them the better. The app shows which two walls it chose and why; the user can pick others.
+- The app identifies two reference walls and stores their lengths. Selection criteria: the two walls are at an angle to each other (usually, but not necessarily, 90°); they are found on all or most drawings; the longer the better; the cleaner the drawing/scan of them the better. Prefer walls that also carry written dimensions on a scale-reference drawing (3.13), so the check compares measured against written values, not only floor against floor. Long, straight walls that appear on every drawing (facades, gables, fire walls) are good candidates. The app shows which two walls it chose and why; the user can pick others.
+- Test result (Blodnävan, 1988 plan vs 1924 written dimensions): with scale from the scale bar, the shell agreed within 1–1.5 % (length +0.5 %, depth +1.5 %). The two directions differed by 1 %, typical of film copies; under the 2 % rule the average correction is applied automatically. Interior partitions did not match 1924, because the 1988 renovation moved them: a scale-reference drawing is valid for the shell only.
 
 All other floors:
 - The app finds the same two reference features on each floor and computes the correction that makes them match the reference floor.
@@ -285,6 +289,9 @@ Opening mapping:
 
 Room mapping:
 - Room type guesses shown with confidence and reasoning. User corrects names/types.
+- Room naming conventions vary: old drawings usually print room types (KÖK, RUM, WC, TAMB) with room numbers; modern CAD drawings often label only the apartment ("2 RoK C1402 34,0 m²") and room types must be inferred from fixture codes (DM, K/F, KM, TM, G, ST). Printed apartment areas are used as a check: the sum of the read room areas should come close.
+- Not rooms: wardrobes and cupboards drawn as boxes inside rooms ("L.", "G."), chimney blocks and shafts (solid, excluded from room area).
+- Projecting stair towers, bays and oriels are part of the envelope and must be read as such, not flattened into the facade line.
 - User draws virtual separators and annotations (3.9) where needed.
 - User sets percent_underground per exterior wall, or accepts the machine guess from the ground datum found in vertical drawings.
 - User resolves flagged uncertain gaps.
