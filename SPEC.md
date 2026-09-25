@@ -169,7 +169,7 @@ All roles are aligned to the base with manual alignment mode (4.4).
 - soil temperature for walls below grade (default 8 °C), slab band and inner zone temperatures (3.5)
 - ventilation system: FTX with heat recovery / mechanical exhaust / natural. Determines supply air temperature (FTX default 18 °C; exhaust or natural: outdoor air), with the per-room exceptions in 5.1.
 - thermal bridge surcharge: project-wide percentage on transmission through envelope surfaces only (5.1), default 15 %
-- snap tolerance for geometry cleanup, default 100 mm (9.1)
+- snap tolerance for geometry cleanup: drawing-based rule (4.5), overridable (9.1)
 - ground slab band width, default 3 m
 - vertical-drawing sanity range: door height 2.0–2.2 m. Door height is the only sanity check (no ceiling height check).
 - scale truth: the two reference walls and their lengths, established on the reference floor (4.4)
@@ -276,7 +276,7 @@ Display:
 Geometry cleanup (mechanical, before rooms are formed):
 - Wall endpoints within the snap tolerance of another wall are snapped onto it. Overshoots shorter than the tolerance are trimmed. Near-collinear consecutive segments of the same thickness are merged: angle within 2°, and thicknesses in the same wall-type cluster.
 - The snap tolerance is for numeric jitter only. Anything larger is a gap and is handled by the read's gap classification (4.2), never auto-closed.
-- Default 100 mm, very much open (9.1).
+- Tolerance, drawing-based, per floor: 3 pixels' worth at the drawing's scale, clamped to 20–50 mm, and never more than half the thinnest wall type found on that floor. Examples: about 20 mm on a 1:100 archive scan at 156 px/m; 25–50 mm on a 1:50 CAD sheet rendered at 150–75 dpi. Overridable on the settings page. Starting rule; the jitter the AI read itself adds is not known yet (9.1).
 
 Wall type mapping:
 - All measured wall thicknesses are listed. An adjustable tolerance band (default ±15 mm, slider 0–50 mm) clusters similar values; clusters are colour-coded on the plan across all floors.
@@ -432,7 +432,7 @@ Air density, heat capacity and surface resistances: from EN 12831:2003 / EN ISO 
 ---
 
 ## 9. Open questions (raise before building the affected part)
-9.1 Snap tolerance: default 100 mm, VERY MUCH OPEN until real read output has been seen.
+9.1 Snap tolerance: drawing-based rule decided (4.5). The values remain a starting point until real read output shows how much jitter the AI read adds.
 9.2 Sliver threshold for floor/ceiling overlap pieces (3.4): value not set.
 9.3 Rendering resolution for pages sent to the API, and tiling of large pages into overlapping crops: open until real drawings have been tried.
 9.4 Closed: command window model and protocol decided (4.11).
