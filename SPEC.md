@@ -62,7 +62,7 @@ Every surface (wall segment, floor/ceiling piece, slab piece) separates exactly 
 - name (from drawing text or user)
 - room_type, with confidence flag and short reasoning ("kitchen: sink and stove symbols present"). Low confidence is flagged.
 - area, height (= floor-to-floor, 4.6), volume
-- heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage). No room-type rule.
+- heated: true/false. Default true. The user turns it off for unheated spaces (stairwells, storage, garage). No room-type rule. When in doubt whether a room is heated (e.g. glazed loggias), the read assumes heated; the user corrects later.
 - setpoint temperature: input for heated rooms (project default, overridable per room or in bulk); solved output for unheated rooms (5.2)
 - ventilation flow (default 0.35 l/s per m² floor area, overridable per room or in bulk by room type)
 - infiltration, air changes per hour: derived with the EN 12831 method from an air-tightness value n50 (air changes per hour at 50 Pa) set per age category (3.14), overridable.
