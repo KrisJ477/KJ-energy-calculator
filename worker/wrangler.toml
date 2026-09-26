@@ -1,0 +1,10 @@
+name = "kj-energy-calculator-api"
+main = "index.js"
+compatibility_date = "2026-09-01"
+
+# Secrets (set with `wrangler secret put <NAME>`):
+#   ANTHROPIC_API_KEY  – the Anthropic API key (never lives in the browser)
+#   APP_PASSWORD       – the app password the browser sends as x-app-password
+# Optional variable ALLOWED_ORIGIN restricts CORS to the app's origin.
+[vars]
+# ALLOWED_ORIGIN = "https://app.example.com"
