@@ -107,6 +107,23 @@ async function build(host, ctx) {
       scene.add(mesh);
       allPts.push(a, b);
     }
+    // walls that bound no room (loose ends, unclosed regions): drawn too, in red, so the gaps in the read are visible in 3D
+    for (const e of pl.dangling || []) {
+      const a = toB.apply(e.a);
+      const b = toB.apply(e.b);
+      const L = mm(dist(a, b));
+      if (L < 0.01) continue;
+      const wall = pl.walls.find((w) => w.id === e.wallId);
+      const th = Math.max(0.05, mm(wall ? wall.thicknessMm : 100));
+      const shape = new T.Shape([new T.Vector2(0, 0), new T.Vector2(L, 0), new T.Vector2(L, H), new T.Vector2(0, H)]);
+      const geom = new T.ExtrudeGeometry(shape, { depth: th, bevelEnabled: false });
+      geom.translate(0, 0, -th / 2);
+      const mesh = new T.Mesh(geom, new T.MeshLambertMaterial({ color: 0xd06060, transparent: true, opacity: selectedRoom ? 0.08 : 0.45 }));
+      mesh.userData = { wallId: e.wallId, dangling: true };
+      placeWallObject(mesh, a, b, z0, 0, 0, T, true);
+      scene.add(mesh);
+      allPts.push(a, b);
+    }
     // rooms: translucent box + orb
     for (const rm of pl.roomList) {
       if (rm.sliver) continue;

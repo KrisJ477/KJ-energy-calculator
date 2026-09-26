@@ -365,6 +365,11 @@ export function derive(project, libraryMaterials) {
     }
   }
 
+  for (const l of levels) {
+    const pl = perLevel[l.level];
+    const loose = (pl.dangling || []).reduce((s, e) => s + dist(e.a, e.b), 0);
+    if (loose > 500) warnings.push({ level: l.level, type: 'walls-bounding-no-room', message: `${(loose / 1000).toFixed(0)} m of wall (${pl.dangling.length} segments) bound no room and carry no heat loss` });
+  }
   for (const [level, mm] of unreadByLevel) warnings.push({ level, type: 'walls-to-unread-space', message: `${(mm / 1000).toFixed(0)} m of wall face an unread part of the floor, assumed heated (SPEC 3.2)` });
   // openings that sit on a wall outside the room graph never become a surface: say so (SPEC 4.7 gap list)
   const openingIdsWithSurface = new Set(surfaces.filter((s) => s.openingId).map((s) => s.openingId));
