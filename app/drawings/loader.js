@@ -29,7 +29,22 @@ export async function openPdf(drawingId) {
 }
 
 // Inspect a PDF page: size in points, embedded image dimensions (scans), text presence, scale stamp text.
-export async function inspectPdfPage(doc, pageIndex) {
+// Largest image XObject dimensions declared in the PDF bytes (fallback when PDF.js does not expose the
+// image object before rendering; scans are one big image per page).
+export function largestImageDims(bytes) {
+  const text = new TextDecoder('latin1').decode(bytes.subarray(0, Math.min(bytes.length, 4e6)));
+  let best = null;
+  const re = /\/Subtype\s*\/Image[^>]*?\/Width\s+(\d+)[^>]*?\/Height\s+(\d+)|\/Width\s+(\d+)[^>]*?\/Height\s+(\d+)[^>]*?\/Subtype\s*\/Image|\/Height\s+(\d+)[^>]*?\/Width\s+(\d+)[^>]*?\/Subtype\s*\/Image/g;
+  let m;
+  while ((m = re.exec(text))) {
+    const w = parseInt(m[1] || m[3] || m[6], 10);
+    const h = parseInt(m[2] || m[4] || m[5], 10);
+    if (w > 0 && h > 0 && (!best || w * h > best.width * best.height)) best = { width: w, height: h };
+  }
+  return best;
+}
+
+export async function inspectPdfPage(doc, pageIndex, rawBytes = null) {
   const page = await doc.getPage(pageIndex + 1);
   const vp = page.getViewport({ scale: 1 });
   const text = await page.getTextContent();
@@ -56,9 +71,10 @@ export async function inspectPdfPage(doc, pageIndex) {
   } catch (e) {
     console.warn('operator list failed', e);
   }
+  if ((!biggestImage || !biggestImage.width) && rawBytes) biggestImage = largestImageDims(rawBytes);
   const widthIn = vp.width / 72;
   const heightIn = vp.height / 72;
-  const isScan = !!biggestImage && biggestImage.width >= vp.width * 2 && items.length < 20;
+  const isScan = !!biggestImage && biggestImage.width >= vp.width * 1.5 && items.length < 20;
   const nativeDpi = isScan ? Math.round(biggestImage.width / widthIn) : null;
   const stamp = findScaleStamp(items.map((i) => i.str));
   return { page, widthPt: vp.width, heightPt: vp.height, widthIn, heightIn, isScan, nativeDpi, biggestImage, textCount: items.length, scaleStamp: stamp };
@@ -124,6 +140,13 @@ export async function decodeImageFile(file) {
     const pages = [];
     for (const ifd of ifds) {
       UTIF.decodeImage(buf, ifd, ifds);
+      const xres0 = ifd.t282 ? ifd.t282[0] : null;
+      if (ifd.t258 && ifd.t258[0] === 1 && (!ifd.t277 || ifd.t277[0] === 1)) {
+        const { tiffToBilevel } = await import('./bilevel.js');
+        const bl = tiffToBilevel(ifd);
+        pages.push({ canvas: null, bilevel: bl, width: ifd.width, height: ifd.height, dpi: xres0 ? Math.round(xres0) : null });
+        continue;
+      }
       const rgba = UTIF.toRGBA8(ifd);
       const canvas = document.createElement('canvas');
       canvas.width = ifd.width;

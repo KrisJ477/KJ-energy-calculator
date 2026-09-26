@@ -1,6 +1,6 @@
 // Versioned prompts (SPEC 4.2). The version is stored with every read so a later re-read can say which
 // prompt produced the model. Prompts are in English; the model writes reasoning in the UI language.
-export const PROMPT_VERSION = '1.0.0';
+export const PROMPT_VERSION = '1.1.0';
 
 const NOT_WALLS =
   'These are NOT walls and must never be returned as walls: match lines, sheet frame edges, title block borders, ' +
@@ -40,7 +40,8 @@ export const JOB_PROMPTS = {
 Tasks: classify the drawing (plan or vertical; discipline; which floor(s) and which part of the floor it shows, mapping floor names through the brief's alias table where possible);
 find the drawing region (the rectangle with the building, excluding title block, frame and legends);
 give a rough building outline polygon and rough room label positions; list every candidate reference measurement for scale: written dimension chain values (a and b = the two ends of the dimension line, value_text as printed, value_mm converted) and scale bars (a = 0 end, b = the far end, value_mm = the bar's total length in mm of building);
-note the scale stamp (e.g. "1:100") if printed, whether a scale bar and written dimensions exist, and rate clarity and completeness 0..1. Report drawings that are unusable as plans (foundation plans, forms without drawings) as type "other".`,
+note the scale stamp (e.g. "1:100") if printed, whether a scale bar and written dimensions exist, and rate clarity and completeness 0..1. Report drawings that are unusable as plans (foundation plans, forms without drawings) as type "other".
+Propose the sheet's role from the brief's drawing list (proposed_role): "base" = the drawing the layout and room names are read from; "scale-reference" = a drawing of the same floor used only for written dimensions; "change-patch" = a later drawing that replaces part of the base; "cross-check" = used only to verify; "ignore" = not to be used. Vertical drawings get "base" when they are to be read for heights, "ignore" when the brief excludes them. Explain in role_reasoning. Detail tiles are read only for base and change-patch sheets.`,
   tile: ({ sheetName, tile, mmPerPxHint }) =>
     `Detail tile of sheet "${sheetName}": columns ${tile.col}, row ${tile.row}, covering sheet pixels x ${tile.x}–${tile.x + tile.w}, y ${tile.y}–${tile.y + tile.h}. ${mmPerPxHint ? `Approximate resolution: ${mmPerPxHint.toFixed(1)} mm of building per pixel.` : 'Resolution unknown until the scale step.'}
 Read everything in this tile: walls (centerlines and thickness in pixels), enclosed rooms with label text and room type, openings (windows and doors) with width in pixels along the wall, gaps in walls with classification, and every text label (room names, apartment labels like "2 RoK C1402 34,0 m²", dimension strings, level texts, fixture codes).

@@ -5,6 +5,7 @@ import { PROMPT_VERSION, systemPrompt, JOB_PROMPTS } from './prompts.js';
 import { uid, newWall, newOpening, newRoom, ORIGIN, nextRoomIndex, roomIdFor } from '../state/model.js';
 import { getBlob, loadBitmap, openPdf, renderPdfRegion, canvasToBlob, downscale, inkFraction } from '../drawings/loader.js';
 import { tileSizePx, tileGrid, rectIntersectsPolygon, overviewScale } from '../drawings/tiling.js';
+import { loadBilevel } from '../drawings/bilevel.js';
 import { getLanguage } from '../i18n/strings.js';
 
 export class ReadRunner {
@@ -87,6 +88,11 @@ export class ReadRunner {
   // ---------- image access ----------
   // Render a region of a sheet (sheet px) at scale factor f (≤1) into a canvas.
   async renderSheetRegion(sheet, region, factor = 1) {
+    if (sheet.raster === 'bilevel') {
+      const bl = await loadBilevel(sheet, getBlob);
+      if (!bl) throw new Error('scan bits missing from browser storage');
+      return bl.toCanvas(region, factor);
+    }
     if (sheet.raster === 'pdf-on-demand') {
       const doc = await openPdf(sheet.drawingId);
       const page = await doc.getPage(sheet.page + 1);
@@ -107,8 +113,8 @@ export class ReadRunner {
   }
 
   // ---------- full read ----------
-  async fullRead(sheetIds = null, { onlyLevels = null } = {}) {
-    const sheets = this.project.sheets.filter((s) => (!sheetIds || sheetIds.includes(s.id)) && s.role !== 'ignore');
+  async fullRead(sheetIds = null, { onlyLevels = null, onlyUnread = false } = {}) {
+    const sheets = this.project.sheets.filter((s) => (!sheetIds || sheetIds.includes(s.id)) && s.role !== 'ignore' && (!onlyUnread || !s.readStatus || s.readStatus === 'unread' || s.readStatus === 'overview'));
     // 1. per sheet: overview then tiles (all sheets in parallel, tiles with limited concurrency)
     await runLimited(sheets, this.concurrency, (sheet) => this.readSheet(sheet));
     // 2. combined pass per floor
@@ -127,6 +133,10 @@ export class ReadRunner {
     const sheet = this.project.sheets.find((s) => s.id === sheetIn.id);
     const cfg = this.project.config.ai;
     const full = { x: 0, y: 0, w: sheet.widthPx, h: sheet.heightPx };
+    if (sheet.classification && sheet.overviewReadId && sheet.readStatus === 'overview') {
+      // resume: the overview was already read, continue with the detail reads
+      return this.afterOverview(sheet.id);
+    }
     // overview: whole sheet at the model limit
     const f = overviewScale(full, cfg);
     const ovCanvas = await this.renderSheetRegion(sheet, full, f);
@@ -155,17 +165,45 @@ export class ReadRunner {
       s.readStatus = 'overview';
       if (data.classification.floors) s.proposedFloors = data.classification.floors;
       if (data.classification.scale_stamp && !s.scaleStamp) s.scaleStamp = parseStamp(data.classification.scale_stamp);
+      // SPEC 3.13: the reader proposes the role, the user confirms (a role set by hand is kept)
+      if (data.classification.proposed_role && s.roleOrigin !== 'user') {
+        s.role = data.classification.proposed_role;
+        s.roleOrigin = 'ai';
+        s.roleReasoning = data.classification.role_reasoning || '';
+      }
     }, { undoable: false });
+    return this.afterOverview(sheet.id);
+  }
+
+  async afterOverview(sheetId) {
+    const sheet = { id: sheetId };
     const updated = this.project.sheets.find((x) => x.id === sheet.id);
-    if (updated.type === 'vertical') {
-      await this.readVertical(updated);
+    if (updated.role === 'ignore') {
+      this.store.update((p) => {
+        const s = p.sheets.find((x) => x.id === sheet.id);
+        s.readStatus = 'ignored';
+      }, { undoable: false });
       return;
     }
-    if (updated.type !== 'plan') {
+    if (updated.type !== 'plan' && updated.type !== 'vertical') {
       this.store.update((p) => {
         const s = p.sheets.find((x) => x.id === sheet.id);
         s.readStatus = 'unusable';
       }, { undoable: false });
+      return;
+    }
+    if (updated.role === 'scale-reference' || updated.role === 'cross-check') {
+      // no detail tiles: only the overview's reference measurements are used (SPEC 3.13, 4.4); alignment is manual
+      this.store.update((p) => {
+        const s = p.sheets.find((x) => x.id === sheet.id);
+        s.readStatus = 'overview-only';
+        s.tiles = [];
+        s.tileReads = [];
+      }, { undoable: false });
+      return;
+    }
+    if (updated.type === 'vertical') {
+      await this.readVertical(updated);
       return;
     }
     await this.readTiles(updated);
@@ -513,7 +551,7 @@ function shiftVertical(data, t) {
     ...data,
     drawing_region: data.drawing_region ? { ...data.drawing_region, x: data.drawing_region.x + t.x, y: data.drawing_region.y + t.y } : null,
     levels: data.levels.map((l) => ({ ...l, floor_line_y: l.floor_line_y + t.y })),
-    openings: data.openings.map((o) => ({ ...o, x: o.x + t.x, y: o.y + t.y })),
+    openings: data.openings.map((o) => ({ ...o, x: o.x + t.x, y: o.y + t.y, sill_px: o.sill_px != null ? o.sill_px + t.y : o.sill_px })),
     ground_line: data.ground_line && data.ground_line.y != null ? { ...data.ground_line, y: data.ground_line.y + t.y } : data.ground_line,
     reference_measurements: (data.reference_measurements || []).map((m) => ({ ...m, a: sh(m.a), b: sh(m.b) })),
   };

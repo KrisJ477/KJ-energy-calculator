@@ -256,4 +256,5 @@ function mergeExtras(a, b) {
   return out;
 }
 start();
+window.__kj = { ctx, store };
 export { ctx, store };

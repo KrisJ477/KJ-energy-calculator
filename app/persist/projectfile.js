@@ -18,7 +18,7 @@ async function dataUrlToBlob(url) {
 export async function exportProject(project) {
   const images = {};
   for (const sheet of project.sheets) {
-    for (const key of [sheet.imageKey, sheet.overviewKey, sheet.sourceKey].filter(Boolean)) {
+    for (const key of [sheet.imageKey, sheet.overviewKey, sheet.bitsKey, `src:${sheet.drawingId}`].filter(Boolean)) {
       if (images[key]) continue;
       const blob = await getBlob(key);
       if (blob) images[key] = await blobToDataUrl(blob);

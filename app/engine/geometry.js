@@ -608,7 +608,7 @@ export function floorPieces(lowerRooms, upperRooms, { sliverWidthMm = 150, slive
   let progress = true;
   while (progress) {
     progress = false;
-    const idx = pieces.findIndex((p) => isSliver(p, sliverWidthMm, sliverAreaM2));
+    const idx = pieces.findIndex((p) => !p.isolatedSliver && isSliver(p, sliverWidthMm, sliverAreaM2));
     if (idx < 0) break;
     const sliver = pieces[idx];
     let best = null;
@@ -622,9 +622,6 @@ export function floorPieces(lowerRooms, upperRooms, { sliverWidthMm = 150, slive
     if (!best) {
       // no neighbour: keep it (rare: isolated tiny overlap) but mark it
       sliver.isolatedSliver = true;
-      const rest = pieces.filter((p, i) => i !== idx);
-      const stillSliver = rest.findIndex((p) => isSliver(p, sliverWidthMm, sliverAreaM2) && !p.isolatedSliver);
-      if (stillSliver < 0) break;
       progress = true;
       continue;
     }

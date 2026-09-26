@@ -146,3 +146,13 @@ test('polygon helpers', () => {
   assert.equal(polygonArea(rect(0, 0, 2, 3).outer), 6);
   assert.equal(shapeArea({ outer: rect(0, 0, 4, 4).outer, holes: [rect(1, 1, 2, 2).outer] }), 15);
 });
+
+test('floorPieces terminates when a sliver has no neighbour and another sliver exists', () => {
+  // Two isolated tiny overlaps (no shared edges) must not loop forever (regression).
+  const sq = (x, y, w, h) => ({ outer: [{ x, y }, { x: x + w, y }, { x: x + w, y: y + h }, { x, y: y + h }], holes: [] });
+  const lower = [{ id: 'a', shape: sq(0, 0, 4000, 4000) }, { id: 'b', shape: sq(10000, 0, 4000, 4000) }];
+  const upper = [{ id: 'c', shape: sq(3950, 0, 4000, 100) }, { id: 'd', shape: sq(13950, 0, 4000, 100) }];
+  const res = floorPieces(lower, upper, { sliverWidthMm: 150, sliverAreaM2: 0.1 });
+  assert.equal(res.pieces.length, 2);
+  assert.ok(res.pieces.every((p) => p.isolatedSliver));
+});

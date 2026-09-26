@@ -27,6 +27,8 @@ const classification = obj({
   has_written_dimensions: bool,
   clarity: num,
   completeness: num,
+  proposed_role: { type: 'string', enum: ['base', 'scale-reference', 'change-patch', 'cross-check', 'ignore'] },
+  role_reasoning: str,
   reasoning: str,
 });
 
