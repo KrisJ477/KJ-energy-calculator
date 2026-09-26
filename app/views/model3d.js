@@ -111,8 +111,8 @@ async function build(host, ctx) {
     for (const rm of pl.roomList) {
       const poly = rm.shapeB.outer;
       if (poly.length < 3) continue;
-      const shape = new T.Shape(poly.map((q) => new T.Vector2(mm(q.x), -mm(q.y))));
-      for (const hole of rm.shapeB.holes) shape.holes.push(new T.Path(hole.map((q) => new T.Vector2(mm(q.x), -mm(q.y)))));
+      const shape = new T.Shape(poly.map((q) => new T.Vector2(mm(q.x), mm(q.y))));
+      for (const hole of rm.shapeB.holes) shape.holes.push(new T.Path(hole.map((q) => new T.Vector2(mm(q.x), mm(q.y)))));
       const isSel = selectedRoom === rm.id;
       const roomGeom = new T.ExtrudeGeometry(shape, { depth: H - slabT, bevelEnabled: false });
       const roomMesh = new T.Mesh(roomGeom, new T.MeshLambertMaterial({ color: isSel ? 0xffc000 : rm.record && rm.record.heated === false ? 0x8090c0 : 0x60c090, transparent: true, opacity: isSel ? 0.35 : selectedRoom ? 0.05 : 0.15, depthWrite: false }));
@@ -127,7 +127,7 @@ async function build(host, ctx) {
       slab.rotation.x = -Math.PI / 2;
       slab.position.y = z0;
       scene.add(slab);
-      const c = rm.face.centroid;
+      const c = rm.face.interiorPoint || rm.face.centroid;
       const cb = toB.apply(c);
       const orb = new T.Mesh(new T.SphereGeometry(0.25, 16, 12), new T.MeshLambertMaterial({ color: isSel ? 0xff8000 : 0x2060d0 }));
       orb.position.set(mm(cb.x), z0 + H / 2, -mm(cb.y));
@@ -138,8 +138,8 @@ async function build(host, ctx) {
     // ceiling/roof for the top level
     if (l === levels[levels.length - 1]) {
       for (const rm of pl.roomList) {
-        const shape = new T.Shape(rm.shapeB.outer.map((q) => new T.Vector2(mm(q.x), -mm(q.y))));
-        const pieceColor = selectedRoom ? rowColors[`piece:${rm.id}|above`] : null;
+        const shape = new T.Shape(rm.shapeB.outer.map((q) => new T.Vector2(mm(q.x), mm(q.y))));
+        const pieceColor = selectedRoom ? (Object.entries(rowColors).find(([k]) => k.startsWith(`piece:${rm.id}|above`)) || [])[1] : null;
         const roofMesh = new T.Mesh(new T.ExtrudeGeometry(shape, { depth: slabT, bevelEnabled: false }), new T.MeshLambertMaterial({ color: pieceColor || 0x7a6a5a, transparent: true, opacity: selectedRoom ? (pieceColor ? 1 : 0.1) : 0.85 }));
         roofMesh.rotation.x = -Math.PI / 2;
         roofMesh.position.y = z0 + H;
@@ -198,7 +198,8 @@ function colorForRoomFloor(roomId, rowColors) {
 function placeWallObject(mesh, a, b, z0, along, up, T, isExtrude = false) {
   const mm = (v) => v / 1000;
   const dir = sub(b, a);
-  const ang = Math.atan2(-mm(dir.y), mm(dir.x));
+  // world: x = plan x, z = -plan y (y up). A rotation about Y by θ maps local +x to (cos θ, 0, -sin θ), so θ = atan2(dir.y, dir.x).
+  const ang = Math.atan2(mm(dir.y), mm(dir.x));
   const L = mm(dist(a, b));
   const ax = mm(a.x);
   const az = -mm(a.y);

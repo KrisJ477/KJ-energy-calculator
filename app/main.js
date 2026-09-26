@@ -4,10 +4,11 @@ import { t, setLanguage, initLanguage, getLanguage } from './i18n/strings.js';
 import { h, clear, button, select, modal, toast, pickFiles } from './ui/dom.js';
 import { attachAutosave, loadProject, saveProject, loadLibraryExtras, clearProject } from './persist/autosave.js';
 import { exportProject, importProject } from './persist/projectfile.js';
-import { derive, sheetToLevel } from './state/derive.js';
+import { derive, sheetToLevel, syncRooms } from './state/derive.js';
+import { invertTransform } from './engine/geometry.js';
 import { ReadRunner } from './ai/jobs.js';
 import { ApiProvider, ManualProvider } from './ai/provider.js';
-import { newProject, newLevel, uid } from './state/model.js';
+import { newProject, newLevel, newRoom, uid, ORIGIN } from './state/model.js';
 import { openPopout, listScreens } from './windows/popout.js';
 import { importFiles } from './views/drawings.js';
 import * as wizard from './views/wizard.js';
@@ -60,6 +61,38 @@ function getDerived() {
   }
   return derivedCache.value;
 }
+
+// ---- every enclosed face gets a room record (SPEC 3.2): runs after any change that alters the room graph ----
+let syncing = false;
+let syncedVersion = -1;
+const SYNC_REASON = 'sluten yta utan rumstext i läsningen; namn och rumstyp sätts av användaren';
+function syncAllRooms() {
+  if (syncing || !store.isMain || store.version === syncedVersion) return;
+  syncedVersion = store.version;
+  const d = getDerived();
+  const levels = Object.values(d.perLevel).filter((pl) => pl.faceRooms.some((fr) => !fr.record) || pl.orphanRecords.some((r) => r.origin === ORIGIN.machine && r.reasoning === SYNC_REASON && !r.name)).map((pl) => pl.level);
+  if (!levels.length) return;
+  syncing = true;
+  try {
+    store.update((pr) => {
+      for (const level of levels) {
+        // records this sync created earlier whose face no longer exists (or never matched) are dropped, not kept forever
+        const orphanIds = new Set(d.perLevel[level].orphanRecords.filter((r) => r.origin === ORIGIN.machine && r.reasoning === SYNC_REASON && !r.name).map((r) => r.id));
+        if (orphanIds.size) pr.rooms = pr.rooms.filter((r) => !orphanIds.has(r.id));
+        const base = pr.sheets.find((s) => s.level === level && s.type === 'plan' && s.role === 'base') || pr.sheets.find((s) => s.level === level && s.type === 'plan');
+        const inv = base ? invertTransform(sheetToLevel(base).T) : null;
+        syncRooms(pr, level, (lv, index, extra) => {
+          const anchorPx = inv && extra.anchor ? inv.apply(extra.anchor) : null;
+          return newRoom(lv, index, { ...extra, anchor: anchorPx ? null : extra.anchor, anchorPx, sheetId: base ? base.id : null, origin: ORIGIN.machine, reasoning: SYNC_REASON });
+        }, d.perLevel[level]);
+      }
+    }, { undoable: false, label: 'sync rooms' });
+    syncedVersion = store.version;
+  } finally {
+    syncing = false;
+  }
+}
+store.subscribe(() => { try { syncAllRooms(); } catch (e) { console.error('room sync failed', e); } });
 
 // ---- providers ----
 const manualProvider = new ManualProvider({ onStatus: () => scheduleRender() });

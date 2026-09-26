@@ -362,6 +362,10 @@ export class ReadRunner {
         if (lvl) {
           if (data.floor_height_mm && !lvl.heightMm) lvl.heightMm = data.floor_height_mm;
           lvl.undergroundGuess = data.underground_guess;
+          // the machine guess is the default percent underground of the level's exterior walls until the user changes it (SPEC 4.7)
+          const pct = data.underground_guess && data.underground_guess.percent;
+          const lowest = Math.min(...p.levels.map((l) => l.level));
+          if (pct > 0 && level === lowest && !lvl.undergroundAnswered) for (const w of p.walls) if (w.level === level && !w.deleted && w.exteriorGuess !== false && w.origin !== ORIGIN.user) w.percentUnderground = pct;
           lvl.lastReadId = readId;
           lvl.readNotes = data.notes;
         }

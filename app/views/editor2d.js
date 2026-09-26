@@ -18,7 +18,9 @@ export function render(root, ctx) {
   const { store } = ctx;
   const p = store.project;
   clear(root);
-  const st = ctx.editorState || (ctx.editorState = { level: null, tool: 'select', panel: 'object', showSlivers: false, layers: { walls: true, rooms: true, openings: true, gaps: true, separators: true, annotations: true }, pending: null, hover: null });
+  const defaults = { level: null, tool: 'select', panel: 'object', showSlivers: false, layers: { walls: true, rooms: true, openings: true, gaps: true, separators: true, annotations: true }, pending: null, hover: null };
+  const st = (ctx.editorState = { ...defaults, ...(ctx.editorState || {}) });
+  st.layers = { ...defaults.layers, ...(st.layers || {}) };
   const levels = [...p.levels].sort((a, b) => a.level - b.level);
   if (st.level == null || !levels.some((l) => l.level === st.level)) st.level = levels[0] ? levels[0].level : null;
   const level = st.level;
@@ -84,7 +86,8 @@ export function render(root, ctx) {
     onKey: (e) => { if (e.key === 'Delete' && selectedId) deleteObject(selectedId); if (e.key === 'Escape') { st.pending = null; view.draw(); } },
   });
   ctx.registerCanvas(view);
-  const layers = sheets.map((s) => sheetLayer(ctx, s, { paper: s.opacity ? s.opacity.paper : 0.6, line: s.opacity ? s.opacity.line : 1, tint: s.role === 'scale-reference' ? '#4070ff' : s.role === 'change-patch' ? '#00a050' : s.role === 'cross-check' ? '#a040a0' : null }));
+  // a scale-reference / change-patch / cross-check sheet is drawn only once it has been aligned to the base sheet (placement set) or switched on in the layer panel
+  const layers = sheets.map((s) => sheetLayer(ctx, s, { visible: s.visible != null ? s.visible : s.role === 'base' || !!s.placement, paper: s.opacity ? s.opacity.paper : 0.6, line: s.opacity ? s.opacity.line : 1, tint: s.role === 'scale-reference' ? '#4070ff' : s.role === 'change-patch' ? '#00a050' : s.role === 'cross-check' ? '#a040a0' : null }));
   const savedView = ctx.editorViews && ctx.editorViews[level];
   view.setLayers(layers).then(() => {
     if (savedView) { view.view = { ...savedView }; view.draw(); }
@@ -377,7 +380,7 @@ export function render(root, ctx) {
     return h('div', {}, table(['', t('editor.comment'), ''], rows), h('p', { class: 'muted small' }, `${annL.length} ${t('editor.annotations')}`), button(t('editor.sendComments'), () => sendComments(ctx, level, commentsL, annL), { class: 'btn primary', disabled: !commentsL.length && !annL.length }));
   }
   function layersPanel() {
-    return h('div', {}, ...sheets.map((s) => h('div', { class: 'layer-row' }, h('b', {}, `${sheetLabel(p, s)} (${t(`drawings.roles.${s.role}`)})`), h('div', { class: 'row' }, h('label', {}, t('editor.paper')), h('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.opacity.paper, onInput: (e) => { const l = view.layers.find((x) => x.id === s.id); if (l) { l.paper = Number(e.target.value); view.draw(); } }, onChange: (e) => store.update((pr) => (pr.sheets.find((x) => x.id === s.id).opacity.paper = Number(e.target.value)), { undoable: false }) }), h('label', {}, t('editor.lines')), h('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.opacity.line, onInput: (e) => { const l = view.layers.find((x) => x.id === s.id); if (l) { l.line = Number(e.target.value); view.draw(); } }, onChange: (e) => store.update((pr) => (pr.sheets.find((x) => x.id === s.id).opacity.line = Number(e.target.value)), { undoable: false }) })))),
+    return h('div', {}, ...sheets.map((s) => h('div', { class: 'layer-row' }, checkbox(s.visible != null ? s.visible : s.role === 'base' || !!s.placement, (v) => { set((pr) => (pr.sheets.find((x) => x.id === s.id).visible = v), 'layer'); const l = view.layers.find((x) => x.id === s.id); if (l) { l.visible = v; view.draw(); } }, ''), h('b', {}, `${sheetLabel(p, s)} (${t(`drawings.roles.${s.role}`)})`), h('div', { class: 'row' }, h('label', {}, t('editor.paper')), h('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.opacity.paper, onInput: (e) => { const l = view.layers.find((x) => x.id === s.id); if (l) { l.paper = Number(e.target.value); view.draw(); } }, onChange: (e) => store.update((pr) => (pr.sheets.find((x) => x.id === s.id).opacity.paper = Number(e.target.value)), { undoable: false }) }), h('label', {}, t('editor.lines')), h('input', { type: 'range', min: 0, max: 1, step: 0.05, value: s.opacity.line, onInput: (e) => { const l = view.layers.find((x) => x.id === s.id); if (l) { l.line = Number(e.target.value); view.draw(); } }, onChange: (e) => store.update((pr) => (pr.sheets.find((x) => x.id === s.id).opacity.line = Number(e.target.value)), { undoable: false }) })))),
       h('h4', {}, t('editor.overlay')), ...Object.keys(st.layers).map((k) => checkbox(st.layers[k], (v) => { st.layers[k] = v; view.draw(); }, t(`editor.${k}`))), checkbox(st.showSlivers, (v) => { st.showSlivers = v; view.draw(); }, t('editor.highlightSlivers')));
   }
   function infoPanel() {

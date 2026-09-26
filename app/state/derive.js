@@ -1,6 +1,6 @@
 // Derivation pipeline: project → per-level geometry → floor/ceiling pieces → calculation model → results.
 // Pure with respect to the project (never mutates it). Views and the calculation read from here.
-import { cleanupWalls, buildRooms, snapToleranceMm, floorPieces, slabZones, roomSlabSplit, polygonArea, shapeArea, unionShapes, offsetPolygonInward, applyTransform, transformShape, dist, sub, cross, projectOnSegment, multiArea } from '../engine/geometry.js';
+import { cleanupWalls, buildRooms, snapToleranceMm, floorPieces, slabZones, roomSlabSplit, polygonArea, shapeArea, unionShapes, offsetPolygonInward, applyTransform, transformShape, dist, sub, cross, projectOnSegment, multiArea, bbox } from '../engine/geometry.js';
 import { typeU, constructionU } from '../engine/uvalue.js';
 import { calculate } from '../engine/calc.js';
 import { sortedLevels } from './model.js';
@@ -116,24 +116,18 @@ function pointIn(p, poly) {
 }
 
 // Create room records for faces that have none (called inside store updates that change geometry).
-export function syncRooms(project, level, newRoomFactory) {
-  const g = levelGeometry(project, level);
+export function syncRooms(project, level, newRoomFactory, geometry = null) {
+  const g = geometry || levelGeometry(project, level);
   const records = project.rooms.filter((r) => r.level === level);
   let maxIndex = records.reduce((m, r) => Math.max(m, r.index), 0);
   for (const fr of g.faceRooms) {
     if (fr.record) continue;
-    // a face without an anchor: was it part of a previous room's polygon (split by a separator)?
-    const c = fr.face.centroid;
+    // anchor at a point that is inside the face even when it is concave, so the record matches on the next derive
+    const c = fr.face.interiorPoint || fr.face.centroid;
+    if (!pointIn(c, fr.face.centerline)) continue; // degenerate face (sliver): no record rather than one that never matches
     const rec = newRoomFactory(level, ++maxIndex, { anchor: c, origin: 'user' });
-    // if the split parent exists and this face is larger than the parent's face, the larger keeps the number (SPEC 3.2)
     project.rooms.push(rec);
     fr.record = rec;
-  }
-  // SPEC 3.2: after a split the largest resulting room keeps the number
-  const byAnchor = new Map();
-  for (const fr of g.faceRooms) if (fr.record) byAnchor.set(fr.record.id, fr);
-  for (const fr of g.faceRooms) {
-    if (!fr.record || fr.record.origin !== 'user' || !fr.record.splitFrom) continue;
   }
   for (const rec of g.orphanRecords) rec.orphan = true;
   for (const fr of g.faceRooms) if (fr.record) fr.record.orphan = false;
@@ -243,6 +237,8 @@ export function derive(project, libraryMaterials) {
   }
 
   // wall surfaces
+  const interiorFacingOutside = new Map(); // walls the read called interior that border the unbounded face (unread interior?)
+  const openingsWithoutSize = new Set();
   for (const l of levels) {
     const pl = perLevel[l.level];
     const H = pl.heightMm / 1000;
@@ -282,6 +278,7 @@ export function derive(project, libraryMaterials) {
       }
       const wallU = wall && wall.wallTypeId && types.walls[wall.wallTypeId] ? types.walls[wall.wallTypeId] : { U: null, chain: null };
       if (wall && !wall.wallTypeId) warnings.push({ level: l.level, type: 'wall-no-type', id: wall.id });
+      if (exterior && rooms2.length === 1 && wrec && wrec.exteriorGuess === false) { const k = `${l.level}:${wall.id}`; interiorFacingOutside.set(k, { level: l.level, id: wall.id, mm: (interiorFacingOutside.get(k)?.mm || 0) + lengthMm }); }
       // openings on this edge
       const ops = (openingsByWall.get(e.wallId) || []).map((o) => ({ o, ...openingMm(o) })).filter((x) => {
         if (!x.mid) return true;
@@ -293,6 +290,7 @@ export function derive(project, libraryMaterials) {
       for (const x of ops) {
         if (x.widthMm == null || x.heightMm == null) {
           warnings.push({ level: l.level, type: 'opening-no-size', id: x.o.id });
+          openingsWithoutSize.add(x.o.id);
           continue;
         }
         const a = (x.widthMm / 1000) * (x.heightMm / 1000);
@@ -325,6 +323,14 @@ export function derive(project, libraryMaterials) {
         }
       }
     }
+  }
+
+  for (const w of interiorFacingOutside.values()) warnings.push({ level: w.level, type: 'outside-edge-read-as-interior', id: w.id, message: `${(w.mm / 1000).toFixed(1)} m` });
+  // openings that sit on a wall outside the room graph never become a surface: say so (SPEC 4.7 gap list)
+  const openingIdsWithSurface = new Set(surfaces.filter((s) => s.openingId).map((s) => s.openingId));
+  for (const l of levels) {
+    const lost = project.openings.filter((o) => !o.deleted && o.level === l.level && !openingIdsWithSurface.has(o.id) && !openingsWithoutSize.has(o.id));
+    if (lost.length) warnings.push({ level: l.level, type: 'opening-not-on-room-wall', message: `${lost.length} (${lost.map((o) => o.id).slice(0, 6).join(', ')}${lost.length > 6 ? ', …' : ''})` });
   }
 
   // floor / ceiling pieces between adjacent levels (building frame)
@@ -363,9 +369,13 @@ export function derive(project, libraryMaterials) {
       surfaces.push({ id: `piece:${p.id}`, kind, level: lower.level, pieceId: p.id, roomA: p.lowerRoomId, roomB: p.upperRoomId, areaM2: p.areaM2, U, envelope: false, label: kind === 'fake_floor' ? 'fake floor' : 'floor/ceiling', refs });
     }
     // ceiling with nothing above
-    for (const u of res.uncoveredLower) {
+    const westFirst = (a, b) => (a.roomId === b.roomId ? bbox(a.shape.outer).minX - bbox(b.shape.outer).minX || bbox(a.shape.outer).minY - bbox(b.shape.outer).minY : 0);
+    const seenAbove = {};
+    for (const u of [...res.uncoveredLower].sort(westFirst)) {
       const room = lowerById.get(u.roomId);
-      const pid = `${u.roomId}|above`;
+      // several separate uncovered parts of one room get distinct piece ids
+      const nAbove = (seenAbove[u.roomId] = (seenAbove[u.roomId] || 0) + 1);
+      const pid = `${u.roomId}|above${nAbove > 1 ? `#${nAbove}` : ''}`;
       const ov = project.pieceOverrides[pid] || {};
       const cold = lower.coldAttic === true;
       let type = null;
@@ -385,8 +395,10 @@ export function derive(project, libraryMaterials) {
     }
     // floor with nothing below (upper rooms of this pair whose area is not over a lower room)
     if (upper) {
-      for (const u of res.uncoveredUpper) {
-        const pid = `${u.roomId}|below`;
+      const seenBelow = {};
+      for (const u of [...res.uncoveredUpper].sort(westFirst)) {
+        const nBelow = (seenBelow[u.roomId] = (seenBelow[u.roomId] || 0) + 1);
+        const pid = `${u.roomId}|below${nBelow > 1 ? `#${nBelow}` : ''}`;
         const ov = project.pieceOverrides[pid] || {};
         const ft = ov.floorTypeId ? lib.floorTypes.find((f) => f.id === ov.floorTypeId) : defaultFloorType;
         const tu = ft && types.floors[ft.id] ? types.floors[ft.id].down : null;
@@ -395,6 +407,15 @@ export function derive(project, libraryMaterials) {
         surfaces.push({ id: `piece:${pid}`, kind: 'floor', level: upper.level, pieceId: pid, roomA: u.roomId, other, areaM2: u.areaM2, U: tu ? tu.U : null, envelope: true, label: 'floor to outside', refs: { floorType: ft ? ft.id : null, chain: tu ? tu.chain : null } });
       }
     }
+  }
+
+  // coverage: floor area with nothing below (upper level) or nothing above (a level with a level above it) is unread area, not envelope
+  for (let i = 0; i < levels.length; i++) {
+    const l = levels[i];
+    const noBelow = i > 0 ? pieces.filter((pc) => pc.kind === 'floor_to_outside' && pc.upperLevel === l.level).reduce((s, pc) => s + pc.areaM2, 0) : 0;
+    const noAbove = i < levels.length - 1 ? pieces.filter((pc) => (pc.kind === 'roof' || pc.kind === 'ceiling_cold_attic') && pc.lowerLevel === l.level).reduce((s, pc) => s + pc.areaM2, 0) : 0;
+    if (noBelow > 1) warnings.push({ level: l.level, type: 'floor-with-nothing-below', message: `${Math.round(noBelow)} m² counted as floor to outside air` });
+    if (noAbove > 1) warnings.push({ level: l.level, type: 'ceiling-with-nothing-above', message: `${Math.round(noAbove)} m² counted as roof / ceiling to cold attic` });
   }
 
   // ground slab for the bottom level (SPEC 3.5)

@@ -459,6 +459,8 @@ export function buildRooms(walls, separators = [], options = {}) {
     for (const h of r.holes) area -= Math.abs(polygonArea(h.inside));
     r.areaM2 = area / 1e6;
     r.centroid = polygonCentroid(r.inside);
+    // a point that is inside the face even when it is concave (anchor of a synced room record, 3D orb)
+    r.interiorPoint = interiorPoint(r.centerline, r.holes.map((h) => h.centerline));
   }
 
   // Wall sides: for each live edge, which room (or outside) lies on each side.
@@ -520,6 +522,27 @@ export function insidePolygon(poly, edgesInfo, sign = 1) {
 }
 
 // ---------- Minimum width of a polygon (rotating calipers on the convex hull) ----------
+// A point strictly inside a polygon (with holes): the centroid when it is inside, otherwise the grid sample
+// farthest from the boundary. Concave rooms (L, U) have their centroid outside the polygon.
+export function interiorPoint(poly, holes = []) {
+  const inside = (p) => pointInPolygon(p, poly) && !holes.some((h) => pointInPolygon(p, h));
+  const c = polygonCentroid(poly);
+  if (inside(c)) return c;
+  const b = bbox(poly);
+  let best = null;
+  const N = 24;
+  for (let i = 1; i < N; i++) {
+    for (let j = 1; j < N; j++) {
+      const p = { x: b.minX + ((b.maxX - b.minX) * i) / N, y: b.minY + ((b.maxY - b.minY) * j) / N };
+      if (!inside(p)) continue;
+      let dmin = Infinity;
+      for (const ring of [poly, ...holes]) for (let k = 0; k < ring.length; k++) dmin = Math.min(dmin, projectOnSegment(p, { a: ring[k], b: ring[(k + 1) % ring.length] }).distance);
+      if (!best || dmin > best.d) best = { p, d: dmin };
+    }
+  }
+  return best ? best.p : c;
+}
+
 export function convexHull(points) {
   const pts = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
   if (pts.length < 3) return pts;
