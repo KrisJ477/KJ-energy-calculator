@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { newProject, newLevel, newSheet, newWall, newRoom } from '../app/state/model.js';
+import { newProject, newLevel, newSheet, newWall, newRoom, newOpening } from '../app/state/model.js';
 import { derive, syncRooms } from '../app/state/derive.js';
 
 // Two stacked floors, each a 10 × 6 m box split into two rooms, on a 1:1 mm sheet (scale 1 mm/px).
@@ -70,4 +70,22 @@ test('derive: a wall facing an unread part of the floor is not an exterior wall,
   assert.ok(!d.calcModel.surfaces.some((s) => s.kind === 'wall' && s.other && s.other.type === 'outside' && s.wallId === p.walls[3].id));
   const w = d.results.rooms['0-1'].rows.find((r) => r.surfaceId === east.id);
   assert.equal(w.watts, 0, 'no loss to a space assumed heated');
+});
+
+test('derive: a window at a wall junction is counted on one edge only', () => {
+  const p = newProject('t');
+  p.levels = [newLevel(0, 'BV')];
+  p.levels[0].heightMm = 3000;
+  const sh = newSheet('d', 0, { level: 0, type: 'plan', role: 'base', widthPx: 20000, heightPx: 20000, scale: { mmPerPx: 1, pxPerM: 1000, method: 'typed', label: 't' } });
+  p.sheets.push(sh);
+  const W = (ax, ay, bx, by, t, ext) => { const w = newWall(sh.id, 0, { x: ax, y: ay }, { x: bx, y: by }, null, { thicknessPx: t, exteriorGuess: ext }); p.walls.push(w); return w; };
+  const north = W(0, 0, 10000, 0, 300, true); W(10000, 0, 10000, 6000, 300, true); W(10000, 6000, 0, 6000, 300, true); W(0, 6000, 0, 0, 300, true);
+  W(5000, 0, 5000, 6000, 150, false); // splits the north wall into two edges at x = 5 m
+  p.rooms.push(newRoom(0, 1, { name: 'A', anchorPx: { x: 2500, y: 3000 }, sheetId: sh.id }), newRoom(0, 2, { name: 'B', anchorPx: { x: 7500, y: 3000 }, sheetId: sh.id }));
+  // window centred exactly on the junction
+  p.openings.push(newOpening(north.id, 'window', { aPx: { x: 4400, y: 0 }, bPx: { x: 5600, y: 0 }, widthPx: 1200, heightMm: 1400, sheetId: sh.id, level: 0 }));
+  const d = derive(p, []);
+  const win = d.calcModel.surfaces.filter((s) => s.kind === 'window');
+  assert.equal(win.length, 1);
+  assert.ok(Math.abs(win[0].areaM2 - 1.68) < 0.01);
 });

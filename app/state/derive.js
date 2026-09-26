@@ -280,6 +280,24 @@ export function derive(project, libraryMaterials) {
       const mid = o.aPx && o.bPx && tr ? tr.apply({ x: (o.aPx.x + o.bPx.x) / 2, y: (o.aPx.y + o.bPx.y) / 2 }) : null;
       return { widthMm, heightMm: o.heightMm, mid };
     };
+    // assign every opening of this level to one edge of its wall: the edge its midpoint projects onto with the smallest
+    // distance (ties at a junction go to the first edge), so a window is never counted on two edge segments
+    const openingEdge = new Map();
+    for (const [wallId, list] of openingsByWall) {
+      const edgesOfWall = pl.edges.filter((e) => e.wallId === wallId && !e.separator);
+      for (const o of list) {
+        const m = openingMm(o);
+        if (!m.mid) { if (edgesOfWall[0]) openingEdge.set(o.id, edgesOfWall[0].id); continue; }
+        let best = null;
+        for (const e of edgesOfWall) {
+          const pr = projectOnSegment(m.mid, { a: e.a, b: e.b });
+          const inside = pr.t >= 0 && pr.t <= 1;
+          const score = pr.distance + (inside ? 0 : 1e6);
+          if (!best || score < best.score) best = { e, score };
+        }
+        if (best && best.score < 500) openingEdge.set(o.id, best.e.id);
+      }
+    }
     for (const e of pl.edges) {
       const wall = wallById.get(e.wallId) || (e.separator ? null : null);
       if (e.separator) continue;
@@ -303,12 +321,8 @@ export function derive(project, libraryMaterials) {
       }
       const wallU = wall && wall.wallTypeId && types.walls[wall.wallTypeId] ? types.walls[wall.wallTypeId] : { U: null, chain: null };
       if (wall && !wall.wallTypeId) warnings.push({ level: l.level, type: 'wall-no-type', id: wall.id });
-      // openings on this edge
-      const ops = (openingsByWall.get(e.wallId) || []).map((o) => ({ o, ...openingMm(o) })).filter((x) => {
-        if (!x.mid) return true;
-        const pr = projectOnSegment(x.mid, { a: e.a, b: e.b });
-        return pr.distance < 500 && pr.t >= 0 && pr.t <= 1;
-      });
+      // openings on this edge: each opening belongs to exactly one edge of its wall (the one its midpoint projects onto best)
+      const ops = (openingsByWall.get(e.wallId) || []).map((o) => ({ o, ...openingMm(o) })).filter((x) => openingEdge.get(x.o.id) === e.id);
       let openingAreaM2 = 0;
       const surfaceBase = { wallId: e.wallId, edgeId: e.id, level: l.level };
       for (const x of ops) {
