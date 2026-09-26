@@ -1,0 +1,17 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_högra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gårdsfasad_för_fönsterräkning Högra delen av GÅRDSFASADEN: fönster i 2 TR och 1 TR, trapphusets burspråk med balkong, plushöjd +35,35 vid takfoten.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen med skriven plushöjd +35,35
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 900 text=+35,35 Takfotslinje med nivåpil och texten +35,35
+V window 120 990 250 260 sill=1250 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1180 1000 240 270 sill=1270 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1670 1010 130 260 sill=1270 floor=2_TR conf=0.5 Fönster i 2 TR, avskuret i högerkanten
+V window 120 1450 240 250 sill=1700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1170 1470 250 270 sill=1740 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1660 1470 120 270 sill=1740 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+V window 660 1250 220 200 sill=1450 floor=2_TR conf=0.6 Trapphusfönster över balkongen i burspråket
+V door 670 1660 210 276 floor=1_TR conf=0.5 Balkongdörr i burspråket, fortsätter nedanför rutan
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Oinredd vind med takkupa (lanternin) över burspråket
+N Skorstenar och lanterninen är inte öppningar.

@@ -1,0 +1,12 @@
+
+# E2E harness working data (drawings, exchange folder, browser profile, overlays)
+e2e/exchange/
+e2e/profile/
+e2e/overlays/
+e2e/*.png
+e2e/*.json
+e2e/*.log
+
+# review bundle for the artifact page
+review/
+review.html

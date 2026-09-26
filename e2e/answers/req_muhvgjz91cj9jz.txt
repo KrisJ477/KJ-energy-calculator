@@ -1,0 +1,21 @@
+W g1 566 1516 566 1936 60 0.85 gavelvägg väster, dubbellinje ca 60 px (murad gavel)
+W f1 566 1545 1936 1545 45 0.85 fasadvägg (dubbellinje) med fönster och trapptorn
+W s1 1015 1570 1015 1936 15 0.6 lägenhetsvägg mellan RUM 16:7/garderob och trapphuset
+W p1 1210 1570 1080 1690 20 0.7 trapphusets snedställda vägg (tjock linje med B-streckning)
+W p2 1080 1690 1080 1936 20 0.7 trapphusvägg vänster
+W p3 1390 1570 1530 1690 20 0.7 trapphusets snedställda vägg höger
+W p4 1530 1690 1530 1936 20 0.7 trapphusvägg höger
+W s2 1590 1570 1590 1936 15 0.6 lägenhetsvägg mellan trapphuset och KÖK 16:4
+O window f1 655 1545 865 1545 conf=0.8 fönstersymbol i fasaden
+O window f1 1215 1545 1390 1545 conf=0.7 fönster F6 i fasaden ovanför entrén
+O window f1 1760 1545 1936 1545 conf=0.6 fönster, fortsätter utanför rutan
+R RUM living 810 1880 apt=16 conf=0.8 texten RUM 16:7
+R G. storage 1045 1630 apt=16 conf=0.5 texten G. (garderob) i smalt utrymme vid trapphuset
+R - stairwell 1330 1800 conf=0.8 trapphus med svängd trappa och pil, B30-dörrar
+R KÖK kitchen 1860 1880 apt=16 conf=0.8 texten KÖK 16:4 med köksinredning
+T room_name 810 1880 RUM
+T room_name 1860 1880 KÖK
+T other 1275 1495 F6
+T other 1400 1905 B30
+T fixture 1075 1615 G.
+N Streckade lodräta linjer vid x≈1160 och x≈1440 är brandklassmarkeringar. Endast fasadremsan syns; resten av rutan är tomt papper.

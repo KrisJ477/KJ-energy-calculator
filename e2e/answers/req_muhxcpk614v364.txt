@@ -1,0 +1,32 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_nedre_vänstra_delen stamp=- bar=0 dims=1 clarity=0.65 compl=0.7 role=base rolewhy=1924_fasad_för_fönsterräkning Nedre vänstra delen av FASAD MOT MARIAGATAN: lodrät måttkedja (1,60 / 0,80 / 3,00, totalhöjd 10,50) med bjälklagslinjer, fönster i 2 TR (avskurna) och 1 TR, butiksfönster med dörrar i BV, SOCKEL +25,55, TERRASS +24,85, marklinje +24,09, streckad linje +23,35 och titeln FASAD MOT MARIAGATAN.
+FLOOR 2_TR 3 Bjälklagslinje högst upp i kedjan (dubbellinje y≈250)
+FLOOR 1_TR 2 Bjälklagslinje i kedjan (dubbellinje y≈740)
+FLOOR BV 1 Bjälklagslinje med plushöjd +26,35 (dubbellinje y≈1225)
+FLOOR KÄLLARE 0 Streckad linje +23,35 längst ned
+REGION 0 0 1936 1936
+L 2_TR 3 253 text=+32,35 Bjälklagslinje (dubbellinje) i måttkedjan; plushöjd beräknad
+L 1_TR 2 740 text=+29,35 Bjälklagslinje (dubbellinje) 3,00 under 2 TR; plushöjd beräknad
+L BV 1 1225 text=+26,35 Bjälklagslinje med skriven plushöjd +26,35 (texten delvis avskuren i vänsterkanten)
+L KÄLLARE 0 1735 text=+23,35 Streckad linje för källargolvet
+F 2_TR 1_TR 487 text=3,00 Skrivet mått 3,00 i kedjan
+F 1_TR BV 485 text=3,00 Skrivet mått 3,00 i kedjan
+F BV KÄLLARE 510 - Härledd; sektionen anger 3,00
+V window 660 0 270 150 sill=130 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret av rutans överkant
+V window 1200 0 270 160 sill=140 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret
+V window 1760 0 176 160 sill=140 floor=2_TR conf=0.5 Fönster i 2 TR, avskuret i högerkanten
+V window 660 350 270 290 sill=640 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1200 350 270 290 sill=640 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1760 360 176 280 sill=640 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret i högerkanten
+V window 620 860 340 470 sill=1330 floor=BV conf=0.6 Butiksfönster (glasparti med överljus) i BV ned till sockeln
+V window 1160 860 170 470 sill=1330 floor=BV conf=0.5 Butiksfönster i BV, vänster om butiksdörren
+V door 1330 1040 170 390 sill=1430 floor=BV conf=0.6 Butiksdörr i BV med räcke/trappa framför
+V window 1720 860 216 470 sill=1330 floor=BV conf=0.5 Butiksfönster i BV, avskuret i högerkanten
+V door 1750 1040 150 390 sill=1430 floor=BV conf=0.4 Butiksdörr i BV, avskuren i högerkanten
+GND 1590 Marklinje med skriven plushöjd +24,09 (nivåpil vid x≈1410)
+ROOF - Taket ligger utanför rutan
+REF dimension 160 350 160 600 1,60 mm=1600 Skriven fönsterhöjd 1,60 i den lodräta kedjan (1 TR)
+REF dimension 160 600 160 730 0,80 mm=800 Skriven bröstningshöjd 0,80 i kedjan
+REF dimension 65 740 65 1225 3,00 mm=3000 Skriven våningshöjd 3,00 mellan bjälklagslinjerna 1 TR och BV (+26,35)
+REF level_difference 500 1225 500 1590 +26,35_till_+24,09 mm=2260 Skrivna plushöjder BV-bjälklag +26,35 och mark +24,09
+REF level_difference 500 1345 500 1590 +25,55_till_+24,09 mm=1460 SOCKEL +25,55 (nivåpil vid x≈530) och mark +24,09
+N Totalhöjden 10,50 (lodrät linje x≈390) går från terrassen +24,85 (y≈1440) upp till takfoten utanför rutan. Terrassräcket (y 1330–1440, x 470–1200) är inte en öppning.

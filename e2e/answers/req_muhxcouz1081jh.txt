@@ -1,0 +1,10 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASADER_mot_Strandridaregatan_och_Mariagatan_(1986) stamp=1:100 bar=1 dims=0 clarity=0.7 compl=0.9 role=cross-check rolewhy=1986_års_fasadritning_A-30:16_(blivande_utseende)_används_enligt_briefen_bara_för_att_kontrollera_fönster_per_rum;_fönsterräkningen_görs_på_1924_års_fasader Ombyggnadsritning 1986 (A-30:16) med FASAD MOT STRANDRIDAREGATAN (överst) och FASAD MOT MARIAGATAN (nederst), skala 1:100, skalstock 0–10 M nederst. Visar blivande utseende efter ombyggnaden: tre bostadsvåningar, källarfönster i sockeln, takkupor.
+FLOOR BV 1 Nedersta bostadsvåningen ovanför sockeln
+FLOOR 1_TR 2 Mellersta bostadsvåningen
+FLOOR 2_TR 3 Översta bostadsvåningen under takfoten
+REGION 120 60 2130 1380
+REF scale_bar 1196 1443 1529 1443 0–10_M mm=10000 Skalstock 0 till 10 M nederst på bladet; lågupplöst avläsning.
+TITLE FASADER, A-30:16, ombyggnad 1986, skala 1:100
+TITLE FASAD MOT STRANDRIDAREGATAN, FASAD MOT MARIAGATAN
+N Ritningen är en 1986 års fasadritning (blivande utseende) och används endast som korskontroll av fönster per rum; inga detaljrutor behövs.
+N Stämpel, arkivlinjal och bildnummer ska ignoreras.

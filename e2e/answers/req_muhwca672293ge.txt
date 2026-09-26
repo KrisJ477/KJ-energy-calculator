@@ -1,0 +1,33 @@
+W f1 0 1450 1936 1450 50 0.85 södra källarfasaden (gårdsfasad, dubbellinje) med källarfönster
+W a1 270 0 270 1450 50 0.8 tjock murad vägg (dubbellinje med sektionslinje) tvärs källaren
+W t1 300 150 810 150 25 0.7 vägg mellan trapphus TB:0 och entrén (B60, branddörr BD1h)
+W w2 300 395 600 395 40 0.6 tjock vägg (dubbellinje) mellan cykelrummet och TB:0
+W s1 815 150 815 640 20 0.7 skrafferad vägg mellan TB:0 och FÖRENINGSLOKAL, dörr S8av
+W w3 585 430 585 640 15 0.5 vägg vid TB:0:s nedre vänstra del
+W w1 1640 0 1936 600 40 0.6 vägg (dubbellinje) mellan FÖRENINGSLOKAL och KRYP-UTR., öppning X8
+W m1 0 668 1936 668 60 0.7 tjock murad vägg (två linjer ca 60 px isär) mellan FÖRENINGSLOKAL/TB:0 och gången
+W m2 0 890 1936 890 20 0.6 gångens nedre vägg mot förråden
+W c1 630 900 630 1400 15 0.6 förrådsvägg
+W c2 946 900 946 1400 15 0.6 förrådsvägg
+W c3 1270 890 1190 1400 12 0.5 snedställd förrådsvägg (tunn dubbellinje)
+W c4 1533 700 1533 1400 55 0.6 tjock vägg (dubbellinje) mellan förråden och rummet till höger
+O window f1 560 1450 720 1450 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 1100 1450 1270 1450 conf=0.7 källarfönster
+O window f1 1650 1450 1810 1450 conf=0.7 källarfönster
+O door s1 815 190 815 300 conf=0.5 dörr S8av TB:0 – FÖRENINGSLOKAL
+O window w1 1810 300 1880 450 conf=0.4 öppning märkt X8 mot KRYP-UTR.
+R TB:0 stairwell 710 450 conf=0.8 texten TB:0, trapphus
+R FÖRENINGSLOKAL other 1330 230 conf=0.8 texten FÖRENINGSLOKAL (uppvärmd enligt projektbriefen)
+R - corridor 900 780 conf=0.4 omärkt gång mellan förråden
+R - storage 450 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 790 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1080 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1350 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1750 1150 heated=0 conf=0.4 omärkt förråd/utrymme till höger om den tjocka väggen
+T room_name 710 450 TB:0
+T room_name 1330 230 FÖRENINGSLOKAL
+T other 400 110 B60
+T other 380 200 BD1h
+T other 860 230 S8av
+T other 1900 340 X8
+N Texten CYKEL O BARNVAGNS- uppe till vänster tillhör rummet i rutan till vänster. Förråden saknar rumstexter och är enligt briefen kalla eller halvvarma.

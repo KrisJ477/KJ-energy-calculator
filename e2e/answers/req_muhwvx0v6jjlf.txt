@@ -1,0 +1,32 @@
+CLASS type=plan sub=- disc=architectural part= stamp=- bar=1 dims=1 clarity=0.5 compl=0.95 role=scale-reference rolewhy=1924_plan_296426_=_2_TR_enligt_briefen,_endast_för_mått_och_skala 1924 års bygglovsritning "PLAN AV TREDJE VÅNINGEN" (296426, KOPIA) = 2 TR enligt briefens alias-tabell. Måttkedjor längs hörnflygelns gavel (10,00) och Mariagatan-sidan (3,60, 3,70, 3,50, 5,05). Skalstock 0–30 M nederst.
+FLOOR TREDJE_VÅNINGEN 3 Rubriken PLAN AV TREDJE VÅNINGEN = Plan 3 vån = 2 TR (nivå 3) enligt briefen.
+REGION 599 422 1248 821
+OUTLINE 604,889 1265,889 1237,559 1516,428 1847,1174 1676,1231 604,1231
+RR KÖK 660 973
+RR RUM 890 973
+RR KÖK 1010 973
+RR KÖK 1215 973
+RR TAMB 1450 965
+RR HALL 1530 975
+RR KÖK 1340 594
+RR RUM 1490 560
+RR RUM 1540 690
+RR RUM 1600 790
+RR KÖK 1420 810
+RR KÖK 1640 900
+RR RUM 1690 1005
+RR RUM 1735 1120
+RR RUM 690 1140
+RR KÖK 800 1140
+RR RUM 910 1140
+RR RUM 1040 1140
+RR RUM 1185 1140
+RR KÖK 1320 1140
+RR RUM 1450 1140
+RR RUM 1590 1140
+REF dimension 1237 559 1516 428 10,00 mm=10000 Skriven längd 10,00 längs hörnflygelns nordvästra gavel (Mariagatan-hörnet); lågupplöst avläsning, mät om på fullupplöst bild.
+REF scale_bar 735 1391 1710 1391 0–30_M mm=30000 Skalstock nederst, 0 till 30 M; lågupplöst avläsning.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE PLAN AV TREDJE VÅNINGEN
+TITLE 296426, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Fler delmått finns längs hörnflygelns sydöstra sida (3,60, 3,70, 3,50, 5,05 m.m.); de är för små för att läsas säkert i översikten. Balkonger (BALK.) är inte rum. Innerväggarna ändrades 1988.

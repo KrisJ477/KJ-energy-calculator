@@ -1,0 +1,26 @@
+W f1 0 1583 120 1583 45 0.8 fasadvägg (dubbellinje), fortsätter från rutan till vänster
+W f2 330 1583 730 1583 45 0.85 fasadvägg mellan fönster
+W f3 950 1583 1070 1583 45 0.8 fasadvägg fram till burspråket
+W f4 1630 1583 1740 1583 45 0.8 fasadvägg efter burspråket
+W b1 1070 1583 1220 1450 25 0.7 trapptornets burspråk, sned sida
+W b2 1220 1450 1450 1450 25 0.7 burspråkets front
+W b3 1450 1450 1630 1583 25 0.7 burspråk, sned sida
+W i1 648 1605 648 1936 20 0.7 vägg mellan kök och rum (tjock linje med B60-streckning intill)
+W s1 1005 1605 1005 1936 15 0.7 trapphusvägg vänster (TC:1)
+W s2 1590 1605 1590 1936 15 0.7 trapphusvägg höger (TC:1)
+O window f1 120 1583 330 1583 conf=0.8 fönstersymbol i fasaden
+O window f2 730 1583 950 1583 conf=0.8 fönstersymbol i fasaden
+O window f4 1740 1583 1936 1583 conf=0.7 fönster, fortsätter utanför rutan
+O window b2 1230 1450 1440 1450 conf=0.6 fönster i burspråkets front
+O door s1 1005 1655 1005 1785 conf=0.6 dörr med kort diagonal (dörrblad) i trapphusväggen
+O door s2 1590 1655 1590 1785 conf=0.6 dörr med diagonal i trapphusväggen
+R KÖK kitchen 215 1890 apt=13 conf=0.85 texten KÖK samt k/f och st (lgh 13:4)
+R RUM living 795 1900 apt=9 conf=0.7 texten RUM (lgh 9:7)
+R TC:1 stairwell 1320 1800 conf=0.8 trapphus TC:1 med trappa
+R KÖK kitchen 1800 1890 apt=9 conf=0.85 texten KÖK (lgh 9:2)
+T room_name 215 1890 KÖK
+T room_name 795 1900 RUM
+T room_name 1800 1890 KÖK
+T fixture 555 1690 st
+T fixture 560 1780 k/f
+N Streckade linjer vid x≈1155 och x≈1530 är brandklassmarkeringar (B60), inte väggar. Trappstegen är inte väggar.

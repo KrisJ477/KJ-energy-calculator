@@ -1,0 +1,31 @@
+W p1 0 110 560 10 35 0.6 vägg mellan PORT-passagen och RUM 1:4 (dubbellinje med B60-streckning), fortsätter från rutan till vänster
+W e1 560 10 1400 1720 45 0.85 hörnflygelns sydöstra yttervägg (butiksfasad) med glaspartier GP2/GP4
+W e2 1400 1720 1560 1936 45 0.7 ytterväggen viker av vid butikens hörn, fortsätter utanför rutan (GP5)
+W n1 1400 1720 1936 1420 35 0.5 dubbellinje med streckning från hörnet åt höger, troligen brandvägg/gräns mot grannen
+W l1 160 880 900 600 35 0.7 vägg mellan RUM 1:4 och LAGER L1:3 (dubbellinje med B60-streckning)
+W l2 160 880 330 1250 30 0.7 LAGER:s vänstra vägg mot KÖK 1:5 / D 1:6
+W l3 330 1250 480 1430 30 0.6 vägg mellan D 1:6 och LAGER
+W l4 480 1430 620 1620 30 0.5 vägg mellan D 1:6/TAMB och BUTIK, med dörr
+W b1 540 780 780 1300 15 0.6 tunn dubbellinje mellan LAGER L1:3 och BUTIK L1:2
+W t1 230 1865 560 1865 20 0.6 TAMB:s nedre vägg
+W t2 460 1640 600 1936 20 0.6 vägg mellan TAMB L1:1 och BUTIK L1:2 med dörr
+W bw 600 1936 1400 1730 40 0.6 BUTIK:s nedre vägg (dubbellinje med streckning), fortsätter utanför rutan
+O window e1 690 180 800 370 conf=0.7 fönster i sydöstra fasaden (tunna linjer mellan tvärstreck), RUM 1:4
+O window e1 1060 960 1170 1190 conf=0.7 glasparti GP2 (butiksfönster)
+O window e1 1240 1340 1300 1470 conf=0.6 glasparti GP4 (butiksfönster)
+O door e2 1480 1850 1560 1936 conf=0.5 glasparti GP5, troligen butiksentré
+R RUM living 310 370 apt=1 conf=0.85 texten RUM 1:4
+R LAGER storage 500 1120 apt=L1 conf=0.8 texten LAGER L1:3
+R BUTIK shop 780 1600 apt=L1 conf=0.85 texten BUTIK L1:2
+R TAMB hall 400 1780 apt=L1 conf=0.7 texten TAMB. L1:1
+R D. bathroom 150 1420 apt=1 conf=0.5 texten D. 1:6, fortsätter från rutan till vänster
+T room_name 310 370 RUM 1:4
+T room_name 500 1120 LAGER L1:3
+T room_name 780 1600 BUTIK L1:2
+T room_name 400 1780 TAMB. L1:1
+T other 1010 760 GP2
+T other 1230 1250 GP4
+T other 1540 1880 GP5
+T other 180 1720 B15
+T other 150 1350 S7bh
+N Symbolerna i högerkanten (skraffering, ramar) tillhör teckenförklaringen och är inte väggar. Hörnflygeln är vriden ca 27 grader.

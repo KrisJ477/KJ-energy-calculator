@@ -1,0 +1,19 @@
+CLASS type=vertical sub=section disc=architectural part=SEKTION_A-A_vänstra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=sektion_med_våningshöjder_enligt_briefen Vänstra delen av SEKTION A-A: yttervägg med fönster (1,60 + bröstning 0,80), bjälklag med våningshöjd 3,00, takfot +35,35 och takstol med nockhöjd 3,85 över vindsbjälklaget.
+FLOOR +35,35_vindsbjälklag 4 Plushöjd +35,35 skriven vid takfoten
+FLOOR 2_TR 3 Bjälklag 3,00 under vindsbjälklaget
+FLOOR 1_TR 2 Bjälklag 6,00 under vindsbjälklaget
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 775 text=+35,35 Golvlinje/vindsbjälklag med plushöjd +35,35 och nivåpil
+L 2_TR 3 1280 text=+32,35 Bjälklagslinje 3,00 m under +35,35 (måttet 3,00 skrivet i kedjan), plushöjd beräknad
+L 1_TR 2 1770 text=+29,35 Bjälklagslinje ytterligare 3,00 m ned, plushöjd beräknad
+F 2_TR +35,35_vindsbjälklag 505 text=3,00 Skrivet mått 3,00 mellan bjälklagen
+F 1_TR 2_TR 490 text=3,00 Skrivet mått 3,00 mellan bjälklagen
+V window 985 880 30 265 sill=1140 floor=2_TR conf=0.7 Fönster i sektionens yttervägg, höjd 1,60 (skrivet), bröstning 0,80 (skrivet)
+V window 985 1375 30 265 sill=1640 floor=1_TR conf=0.7 Fönster i sektionens yttervägg, höjd 1,60, bröstning 0,80
+GND - Marklinjen ligger utanför rutan (nedanför)
+ROOF cold Vinden ovanför +35,35 ritas som oinredd takstol (kallvind 1924); nockhöjd 3,85
+REF dimension 1220 775 1220 1280 3,00 mm=3000 Skriven våningshöjd 3,00 i den lodräta måttkedjan mitt i sektionen (mellan bjälklagslinjerna)
+REF dimension 905 880 905 1140 1,60 mm=1600 Skriven fönsterhöjd 1,60 i kedjan vid ytterväggen
+REF dimension 905 1140 905 1280 0,80 mm=800 Skriven bröstningshöjd 0,80
+REF dimension 1240 180 1240 775 3,85 mm=3850 Skriven höjd 3,85 från vindsbjälklag till nock
+N Bjälklagslinjernas y är avlästa på bjälklagets överkant (golvlinje). Rutan visar sektionens övre del; BV (+26,35) och källaren (+23,35) ligger i rutan nedanför.

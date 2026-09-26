@@ -1,0 +1,37 @@
+W g1 610 0 610 1300 60 0.85 gavelvägg väster (dubbellinje ca 60 px)
+W f1 610 1300 1936 1300 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W s1 1055 0 1055 500 20 0.7 vägg mellan RUM 15:8 / TAMB och trapphus TD:1 (skrafferad, B15)
+W t1 1055 305 1420 305 20 0.7 skrafferad vägg mellan TD:1 och TAMB 15:1
+W s2 1610 0 1610 500 15 0.7 TD:1:s högra vägg mot KÖK 15:4 / 15:2
+W w1 640 210 830 210 15 0.6 skrafferad vägg ovanför WC 15:9
+W w2 830 210 830 460 15 0.6 WC 15:9:s högra vägg
+W m1 640 510 1936 510 20 0.7 vägg mellan norra rumsraden (WC, TAMB, 15:2) och RUM 15:7 / 15:5, med dörröppningar
+W s3 1370 510 1370 1300 20 0.7 vägg mellan RUM 15:7 och RUM 15:5
+W s4 1760 510 1760 740 15 0.5 vägg vid L.-skåpet
+W s5 1810 740 1810 1300 25 0.7 lägenhetsskiljande vägg mellan lgh 15 (RUM 15:5) och lgh 10
+W s6 1620 305 1620 500 15 0.6 vägg mellan TAMB 15:1 och 15:2 ut
+W s7 1840 305 1840 500 15 0.5 vägg mellan 15:2 ut och KÖK 15:4
+O window f1 860 1300 1070 1300 conf=0.8 fönstersymbol i gårdsfasaden, RUM 15:7
+O window f1 1450 1300 1660 1300 conf=0.8 fönstersymbol i gårdsfasaden, RUM 15:5
+O door m1 860 510 960 510 conf=0.5 dörröppning till RUM 15:7
+O door m1 1100 510 1240 510 conf=0.5 dörröppning TAMB 15:1 – RUM 15:7
+O door m1 1440 510 1590 510 conf=0.5 dörröppning TAMB 15:1 – RUM 15:5
+R RUM living 800 110 apt=15 conf=0.85 texten RUM 15:8
+R WC wc 740 330 apt=15 conf=0.8 texten WC 15:9
+R - stairwell 1330 150 conf=0.8 trapphus TD:1 med trappa
+R TAMB hall 1450 400 apt=15 conf=0.8 texten TAMB. 15:1
+R 15:2_ut hall 1700 450 apt=15 conf=0.5 texten 15:2 ut.
+R KÖK kitchen 1870 100 apt=15 conf=0.8 texten KÖK 15:4
+R RUM living 860 880 apt=15 conf=0.85 texten RUM 15:7
+R RUM living 1550 980 apt=15 conf=0.85 texten RUM 15:5
+T room_name 800 110 RUM 15:8
+T room_name 740 330 WC 15:9
+T room_name 1450 400 TAMB. 15:1
+T room_name 1870 100 KÖK 15:4
+T room_name 860 880 RUM 15:7
+T room_name 1550 980 RUM 15:5
+T other 1090 200 B15
+T other 1500 260 B15
+T other 860 320 S7bv
+T other 1700 350 S8bh
+N Rutor märkta G. och L. är skåp. Nedre delen av rutan är tomt papper.

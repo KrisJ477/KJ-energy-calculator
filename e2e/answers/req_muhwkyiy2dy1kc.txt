@@ -1,0 +1,15 @@
+W f1 0 545 1936 545 50 0.85 södra källarfasaden (gårdsfasad, dubbellinje) med källarfönster
+W a1 270 0 270 545 50 0.8 tjock murad vägg tvärs källaren, nedre delen
+W c1 630 0 630 500 15 0.6 förrådsvägg
+W c2 946 0 946 500 15 0.6 förrådsvägg
+W c3 1190 0 1170 500 12 0.5 snedställd förrådsvägg
+W c4 1533 0 1533 500 55 0.6 tjock vägg mellan förråden och rummet till höger
+O window f1 560 545 720 545 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 1100 545 1270 545 conf=0.7 källarfönster
+O window f1 1650 545 1810 545 conf=0.7 källarfönster
+R - storage 450 250 heated=0 conf=0.4 omärkt förrådscell, fortsätter från rutan ovanför
+R - storage 790 250 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1080 250 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1350 250 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1750 250 heated=0 conf=0.4 omärkt förråd
+N Linjen längst ned (y≈1886) är ritningshuvudets ram. Resten av rutan är tomt papper.

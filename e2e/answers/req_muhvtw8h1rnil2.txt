@@ -1,0 +1,48 @@
+W f1 0 1300 1936 1300 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 528 0 528 1300 40 0.8 lägenhetsskiljande vägg mellan lgh 15 och lgh 10 (dubbellinje med B60-streckning)
+W k1 0 310 520 310 20 0.7 skrafferad vägg mellan KÖK 15:4 och BAD 15:3
+W w1 60 310 60 800 15 0.5 BAD:s vänstra vägg (tunn dubbellinje)
+W w2 60 790 520 790 20 0.7 skrafferad vägg mellan BAD 15:3 och RUM 15:6
+W w3 460 310 460 520 15 0.5 kort vägg vid BAD
+W s1 965 0 965 330 20 0.7 trapphus TC:1:s vänstra vägg (skrafferad)
+W t1 965 325 1540 325 20 0.7 skrafferad vägg mellan TC:1 och 10:1 (B15)
+W s2 1540 0 1540 330 20 0.7 TC:1:s högra vägg (skrafferad)
+W s4 965 330 965 530 15 0.5 vägg mellan RUM 10:7 och 10:1
+W s5 1540 330 1540 530 15 0.5 vägg mellan 10:1 och KÖK 10:2
+W m1 540 530 1936 530 20 0.7 vägg mellan norra rumsraden och d./WC/10:5/RUM 10:3, med dörröppningar
+W w4 540 800 1200 800 20 0.7 skrafferad vägg mellan d./WC 10:6/10:5 och RUM 10:4
+W w5 900 540 900 800 15 0.6 skrafferad vägg mellan WC 10:6 och 10:5 ut
+W s3 1212 530 1212 1300 20 0.7 vägg mellan RUM 10:4 / 10:5 och RUM 10:3 (skrafferad dubbellinje)
+O window f1 230 1300 440 1300 conf=0.8 fönstersymbol i gårdsfasaden, RUM 15:6
+O window f1 820 1300 1030 1300 conf=0.8 fönstersymbol i gårdsfasaden, RUM 10:4
+O window f1 1440 1300 1660 1300 conf=0.8 fönstersymbol i gårdsfasaden, RUM 10:3
+O door m1 1010 530 1150 530 conf=0.5 dörröppning 10:1 – 10:5
+O door m1 1350 530 1500 530 conf=0.5 dörröppning 10:1 – RUM 10:3
+R KÖK kitchen 110 120 apt=15 conf=0.85 texten KÖK 15:4
+R RUM living 730 120 apt=10 conf=0.85 texten RUM 10:7
+R TC:1 stairwell 1250 200 conf=0.85 trapphus TC:1 med trappa och sektionsmarkering A
+R KÖK kitchen 1720 130 apt=10 conf=0.85 texten KÖK 10:2 med k/f och st.
+R BAD bathroom 350 600 apt=15 conf=0.85 texten BAD 15:3 med badkar
+R d. bathroom 600 700 apt=10 conf=0.5 texten d. (dusch)
+R WC wc 750 700 apt=10 conf=0.8 texten WC 10:6
+R 10:5_ut hall 1030 700 apt=10 conf=0.5 texten 10:5 ut., passage/hall
+R 10:1 hall 1240 420 apt=10 conf=0.5 lägenhetsnumret 10:1 innanför trapphuset, tambur
+R RUM living 280 1000 apt=15 conf=0.85 texten RUM 15:6
+R RUM living 800 1000 apt=10 conf=0.85 texten RUM 10:4
+R RUM living 1660 860 apt=10 conf=0.85 texten RUM 10:3
+T room_name 110 120 KÖK 15:4
+T room_name 730 120 RUM 10:7
+T room_name 1720 130 KÖK 10:2
+T room_name 350 600 BAD 15:3
+T room_name 750 700 WC 10:6
+T room_name 280 1000 RUM 15:6
+T room_name 800 1000 RUM 10:4
+T room_name 1660 860 RUM 10:3
+T other 1080 280 B15
+T other 130 440 S7bh
+T other 130 750 S8bv
+T other 860 690 S7bv
+T other 980 770 S8bh
+T other 1570 400 S8bv
+T dimension 990 860 900
+N Rutor märkta G. och L. är skåp. Skrafferade väggar är nya (1988). Nedre delen av rutan är tomt papper.

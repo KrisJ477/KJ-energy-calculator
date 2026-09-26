@@ -1,0 +1,22 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_mitten stamp=- bar=0 dims=0 clarity=0.65 compl=0.6 role=base rolewhy=1924_fasad_för_fönsterräkning Mittdelen av FASAD MOT MARIAGATAN: takkupa med fönster, fyra fönster per våning i 2 TR och 1 TR.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 900 text=+35,35 Takfotslinje
+L 2_TR 3 1380 - Golvlinje härledd från fönstrens underkant 1250 + bröstning 0,80
+L 1_TR 2 1870 - Golvlinje härledd från fönstrens underkant 1740 + bröstning 0,80
+F 2_TR +35,35_vindsbjälklag 480 - Härledd våningshöjd (3,00 enligt kedjan)
+F 1_TR 2_TR 490 - Härledd våningshöjd
+V window 10 990 240 260 sill=1250 floor=2_TR conf=0.7 Fönster i 2 TR, delvis avskuret
+V window 565 1000 255 260 sill=1260 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1150 1010 260 260 sill=1270 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1720 1020 216 260 sill=1280 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret i högerkanten
+V window 10 1470 240 260 sill=1730 floor=1_TR conf=0.7 Fönster i 1 TR, delvis avskuret
+V window 565 1480 255 260 sill=1740 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1150 1490 260 260 sill=1750 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1720 1500 216 260 sill=1760 floor=1_TR conf=0.6 Fönster i 1 TR, avskuret
+V window 600 560 200 180 floor=vind conf=0.6 Takkupans fönster (kallvind 1924)
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Plåttak med takkupa, oinredd vind 1924
+N Skorstenarna är inte öppningar.

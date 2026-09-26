@@ -1,0 +1,11 @@
+W g1 675 0 675 560 60 0.85 gavelvägg väster (dubbellinje), nedre delen
+W f1 675 540 1936 540 50 0.85 södra källarfasaden (gårdsfasad, dubbellinje) med källarfönster
+W c1 1042 0 1042 515 15 0.6 förrådsvägg
+W c2 1330 0 1330 515 18 0.6 förrådsvägg
+W c3 1625 0 1625 515 15 0.6 förrådsvägg
+O window f1 960 540 1130 540 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 1560 540 1700 540 conf=0.7 källarfönster
+R - storage 1180 250 heated=0 conf=0.4 omärkt förrådscell, fortsätter från rutan ovanför
+R - storage 1480 250 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1780 250 heated=0 conf=0.4 omärkt förrådscell
+N Resten av rutan är tomt papper (ritningens ram längst ned).

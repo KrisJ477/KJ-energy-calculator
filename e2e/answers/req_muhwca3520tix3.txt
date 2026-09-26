@@ -1,0 +1,21 @@
+W k1 620 240 1360 0 40 0.7 KRYP-UTR.:s nordvästra vägg (dubbellinje) mot BASTU/TORKRUM
+W k2 1360 0 1790 940 45 0.8 hörnflygelns sydöstra yttervägg (dubbellinje), källare
+W k3 1790 940 1070 1230 45 0.8 hörnflygelns sydvästra yttervägg vid hörnet, med källarfönster
+W k4 490 70 700 430 40 0.6 vägg (dubbellinje) mellan FÖRENINGSLOKAL och KRYP-UTR. med öppning X8
+W k5 700 430 1070 1230 40 0.7 KRYP-UTR.:s sydvästra vägg mot förråden
+W f1 0 1440 780 1440 50 0.85 huvudlängans södra källarfasad (dubbellinje) med källarfönster
+W e4 780 1440 1070 1230 45 0.7 ytterväggen viker av mot hörnflygeln
+W m1 0 663 740 663 60 0.7 tjock murad vägg (två linjer) mellan FÖRENINGSLOKAL och gången
+W m2 0 890 300 890 20 0.6 gångens nedre vägg
+W c1 323 700 323 1400 55 0.6 tjock vägg (dubbellinje) mellan förråden
+W w5 745 640 785 1400 20 0.4 vägg mellan förråden och hörnpartiet, osäker
+O window k3 1230 1180 1380 1120 conf=0.6 källarfönster i sydvästra hörnväggen
+O window k4 600 330 700 430 conf=0.4 öppning X8
+O window f1 450 1440 600 1440 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+R KRYP-UTR. other 1210 550 heated=0 conf=0.8 texten KRYP-UTR., ouppvärmt kryputrymme under hörnflygeln
+R FÖRENINGSLOKAL other 120 230 conf=0.5 texten ENINGSLOKAL avskuren, rummet fortsätter i rutan till vänster
+R - storage 150 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 530 1100 heated=0 conf=0.4 omärkt förrådscell
+T room_name 1210 550 KRYP-UTR.
+T other 690 330 X8
+N Nedre högra delen av rutan är tomt papper.

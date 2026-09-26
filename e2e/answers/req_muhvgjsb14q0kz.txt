@@ -1,0 +1,5 @@
+W e1 90 1900 1480 1240 45 0.8 yttervägg (dubbellinje med streckprickad mittlinje), hörnflygelns nordvästra källarfasad
+W e2 1480 1240 1790 1936 45 0.8 yttervägg, hörnet och nordöstra fasaden, fortsätter utanför rutan
+W i1 1250 1936 1720 1830 25 0.5 skrafferad innervägg (murad) i hörnflygelns källare, delvis synlig
+O window e2 1590 1470 1700 1690 conf=0.5 källarfönster/ljusgård (tunna linjer mellan tvärstreck)
+N Den långa vågräta linjen upptill (y≈60) med svart triangel är ritningens ram/sektionslinje, inte en vägg. Inga rumstexter i rutan.

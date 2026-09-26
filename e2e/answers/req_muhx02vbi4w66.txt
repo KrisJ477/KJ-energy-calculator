@@ -1,0 +1,15 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_hörnflygeln stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Högra delen av gatufasaden: hörnflygelns gavelparti med valmat tak, balkonger med fönsterdörrar på 2 TR och 1 TR, plushöjd +35,35 vid takfoten.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen med skriven plushöjd +35,35
+FLOOR 2_TR 3 Övre balkongen
+FLOOR 1_TR 2 Nedre balkongen i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 960 text=+35,35 Takfotslinje med nivåpil och texten +35,35
+L 2_TR 3 1440 - Golvlinje härledd: balkongens golv ≈ 1440 (balkongräckets underkant)
+L 1_TR 2 1936 - Golvlinje härledd, vid rutans nederkant
+F 2_TR +35,35_vindsbjälklag 480 - Härledd våningshöjd
+V door 325 1060 295 380 floor=2_TR conf=0.6 Balkongdörr med fönster (fönsterdörr) på 2 TR mot balkongen
+V door 325 1520 295 416 floor=1_TR conf=0.5 Balkongdörr på 1 TR, fortsätter nedanför rutan
+V window 240 640 220 130 floor=vind conf=0.5 Lunettfönster i det valmade taket
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Valmat tak med lunettfönster
+N Hörnflygelns gavelkant vid x≈975; till höger tomt papper. Balkongräcken är inte öppningar.

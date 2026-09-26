@@ -1,0 +1,13 @@
+W f1 0 527 1936 527 60 0.85 södra källarfasaden (gårdsfasad, två linjer ca 60 px isär) med källarfönster
+W a1 628 0 628 500 60 0.8 tjock murad vägg (dubbellinje med sektionslinje) tvärs källaren
+W c1 300 0 320 500 12 0.5 snedställd förrådsvägg (tunn dubbellinje)
+W c2 1030 0 1050 500 12 0.5 snedställd förrådsvägg
+W c3 1332 0 1335 500 12 0.5 förrådsvägg
+W c4 1650 0 1630 500 12 0.5 snedställd förrådsvägg
+O window f1 330 527 500 527 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 930 527 1100 527 conf=0.7 källarfönster
+O window f1 1560 527 1730 527 conf=0.7 källarfönster
+R - storage 600 250 heated=0 conf=0.4 omärkt förrådscell, fortsätter från rutan ovanför
+R - storage 1180 250 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1500 250 heated=0 conf=0.4 omärkt förrådscell
+N Resten av rutan är tomt papper.

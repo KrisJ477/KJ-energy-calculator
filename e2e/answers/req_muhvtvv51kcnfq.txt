@@ -1,0 +1,52 @@
+W g1 90 130 320 550 30 0.5 hörnflygelns västra gavel/grannvägg: kort tjock dubbellinje som övergår i tunna linjer
+W b1 330 550 500 560 25 0.5 utbyggnad vid trapphus TA:0 (trappsymbol V)
+W b2 500 560 460 680 25 0.5 utbyggnadens sida
+W b3 460 680 400 740 25 0.5 utbyggnadens sida
+W t1 400 740 490 910 15 0.4 tunn dubbellinje, yttertrappa/entré YD1b till källaren
+W f1 490 910 860 1650 45 0.8 hörnflygelns sydvästra yttervägg (dubbellinje) med källarfönster F2 och F3
+W p1 350 530 1900 0 35 0.6 vägg parallell med nordvästra fasaden (dubbellinje med B60-streckning)
+W s1 1080 300 1200 600 25 0.6 vägg mellan trapphus TA:0 och WC/OMKL-blocket
+W s2 1200 600 1300 830 25 0.6 vägg mellan passagen vid TA:0 och TORKRUM
+W s3 490 920 1240 800 25 0.6 vägg mellan TA:0-passagen och TVÄTTSTUGA, dörr BD2h
+W w1 1080 300 1440 200 20 0.5 skrafferad vägg (ny) ovanför WC
+W w2 1150 420 1430 340 15 0.5 skrafferad vägg mellan WC och OMKL.
+W w3 1400 200 1480 380 15 0.5 skrafferad vägg mellan WC och D.
+W w5 1200 620 1560 480 20 0.5 skrafferad vägg mellan TORKRUM och OMKL.
+W w6 1560 480 1720 760 20 0.5 skrafferad vägg mellan TORKRUM och BASTU
+W w8 1700 480 1936 380 15 0.4 skrafferad vägg mellan OMKL. och BASTU
+W e1 1700 0 1936 530 45 0.7 hörnflygelns sydöstra yttervägg (dubbellinje) i övre högra hörnet
+W w9 1310 960 1936 690 30 0.6 vägg (dubbellinje med streckning) mellan TORKRUM och KRYP-UTR.
+W w10 1330 980 1650 1640 30 0.6 vägg mellan TVÄTTSTUGA och KRYP-UTR.
+W m0 0 1660 850 1660 45 0.8 huvudlängans fasadlinje i källaren (dubbellinje) med ytterdörr YD1ah och fönster F30
+W m1 850 1660 1420 1600 35 0.6 vägg mellan TVÄTTSTUGA och rummen nedanför, dörr BD2h
+W w11 280 1680 280 1936 30 0.6 vägg (dubbellinje med B60-streckning) nedanför entrén
+O window f1 600 1200 720 1400 conf=0.6 källarfönster F2 (tunna linjer mellan tvärstreck)
+O window f1 760 1540 840 1650 conf=0.5 källarfönster F3
+O door m0 360 1660 520 1660 conf=0.6 ytterdörr YD1ah (tunna linjer)
+O window m0 660 1660 750 1660 conf=0.5 fönster/glasparti F30
+O door m1 970 1655 1100 1645 conf=0.5 branddörr BD2h
+O door s3 900 880 1000 860 conf=0.5 branddörr BD2h mot TA:0
+R TA:0 stairwell 880 470 conf=0.8 trapphus TA:0 med trappa
+R WC wc 1230 340 conf=0.7 texten WC
+R OMKL. other 1580 400 conf=0.6 texten OMKL. (omklädningsrum till bastun)
+R D. bathroom 1680 180 conf=0.5 texten D. (dusch)
+R BASTU other 1800 580 conf=0.7 texten BASTU
+R TORKRUM laundry 1450 750 conf=0.7 texten TORKRUM
+R TVÄTTSTUGA laundry 1050 1280 conf=0.85 texten TVÄTTSTUGA med tvättmaskiner
+R KRYP-UTR. other 1850 1270 heated=0 conf=0.6 texten KRYP-UTR. (kryputrymme under hörnflygeln), ouppvärmt
+T room_name 880 470 TA:0
+T room_name 1230 340 WC
+T room_name 1580 400 OMKL.
+T room_name 1800 580 BASTU
+T room_name 1450 750 TORKRUM
+T room_name 1050 1280 TVÄTTSTUGA
+T room_name 1850 1270 KRYP-UTR.
+T other 570 1290 F2
+T other 680 1610 F3
+T other 450 1720 YD1ah
+T other 700 1720 F30
+T other 1030 1700 BD2h
+T other 1000 900 BD2h
+T other 940 840 B30
+T other 540 680 BD1
+N Skrafferade väggar är nya (1988). Hörnflygeln är vriden ca 27 grader mot huvudlängan.
