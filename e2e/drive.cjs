@@ -114,6 +114,12 @@ const cmds = {
     await page.screenshot({ path: file || path.join(ROOT, `shot_${view || 'x'}.png`) });
     console.log('shot', file);
   },
+  async download({ page }, [file]) {
+    // click "Save project" and store the downloaded project file
+    const [dl] = await Promise.all([page.waitForEvent('download', { timeout: 600000 }), ev(page, () => { const b = [...document.querySelectorAll('button')].find((x) => x.textContent.trim() === 'Spara projekt' || x.textContent.trim() === 'Save project'); b.click(); })]);
+    await dl.saveAs(file);
+    console.log('downloaded', file, fs.statSync(file).size);
+  },
   async status({ page }) {
     console.log(JSON.stringify(await ev(page, () => { const p = window.__kj.store.project; return { done: window.__readDone, err: window.__readError, sheets: p.sheets.map((s) => ({ id: s.id, lvl: s.level, type: s.type, role: s.role, status: s.readStatus, tiles: s.tiles ? s.tiles.map((t) => t.status).join(',') : '' })), reads: p.reads.map((r) => `${r.jobType}:${r.status}`).join(' '), levels: p.levels.map((l) => [l.level, l.name, l.heightMm]), walls: p.walls.length, rooms: p.rooms.length, pending: window.__kj.ctx.manualProvider.listPending().map((x) => x.id) }; }), null, 1));
   },
