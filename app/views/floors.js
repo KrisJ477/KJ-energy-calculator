@@ -41,6 +41,16 @@ export function render(root, ctx) {
       table([t('floors.level'), t('floors.name'), t('floors.aliases'), t('floors.height'), t('floors.reference'), t('floors.coldAttic'), t('floors.approved'), ''], rows),
       h('div', { class: 'row' },
         button(t('floors.addLevel'), () => set((pr) => { const max = pr.levels.length ? Math.max(...pr.levels.map((l) => l.level)) : 0; pr.levels.push(newLevel(max + 1)); })),
+        button(t('floors.addProposed'), () => set((pr) => {
+          // SPEC 3.2: pre-fill the level list from the readers' floor proposals (sheet level numbers); the user confirms
+          for (const s of pr.sheets) {
+            if (s.level == null || pr.levels.some((l) => l.level === s.level)) continue;
+            const prop = (s.proposedFloors || []).find((f) => f.level_number === s.level);
+            const nl = newLevel(s.level, prop ? prop.name : '');
+            if (prop) nl.aliases = [prop.name];
+            pr.levels.push(nl);
+          }
+        })),
         button(t('floors.confirm'), () => { set((pr) => (pr.ui.floorsConfirmed = true)); toast(t('floors.confirm')); }, { class: 'btn primary' }),
         button(t('floors.copyTo'), () => copyDialog(ctx))
       )
