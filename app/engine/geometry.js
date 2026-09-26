@@ -1,7 +1,33 @@
 // Geometry processing (SPEC 3.4, 3.15, 4.5). Pure functions over plain objects.
 // Coordinates are millimetres in the floor frame unless stated otherwise.
 // Walls: { id, a:{x,y}, b:{x,y}, thicknessMm }. Separators: { id, a, b } (thickness 0).
-import polygonClipping from '../../vendor/polygon-clipping/polygon-clipping.esm.js';
+import polygonClippingLib from '../../vendor/polygon-clipping/polygon-clipping.esm.js';
+
+// polygon-clipping can throw on near-degenerate input ("Unable to find segment … in SweepLine tree"). A failed
+// operation is retried on coordinates rounded to whole millimetres, then to centimetres; if it still fails the
+// caller gets a conservative fallback instead of a dead calculation.
+function roundMulti(multi, step) {
+  return multi.map((poly) => poly.map((ring) => ring.map(([x, y]) => [Math.round(x / step) * step, Math.round(y / step) * step])));
+}
+function clipSafe(op, a, b) {
+  const args = b === undefined ? [a] : [a, b];
+  try {
+    return polygonClippingLib[op](...args);
+  } catch (e1) {
+    for (const step of [1, 10]) {
+      try {
+        return polygonClippingLib[op](...args.map((m) => roundMulti(m, step)));
+      } catch (e2) {
+        /* try coarser */
+      }
+    }
+    console.warn(`polygon clipping ${op} failed, using fallback`, e1 && e1.message);
+    if (op === 'intersection') return [];
+    if (op === 'difference') return a;
+    return b === undefined ? a : [...a, ...b];
+  }
+}
+const polygonClipping = { union: (a, b) => clipSafe('union', a, b), intersection: (a, b) => clipSafe('intersection', a, b), difference: (a, b) => clipSafe('difference', a, b) };
 
 export const EPS = 1e-6;
 

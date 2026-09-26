@@ -156,3 +156,11 @@ test('floorPieces terminates when a sliver has no neighbour and another sliver e
   assert.equal(res.pieces.length, 2);
   assert.ok(res.pieces.every((p) => p.isolatedSliver));
 });
+
+test('floorPieces survives near-degenerate input (clipping fallback)', () => {
+  // two rooms whose overlap is a hair-thin, non-axis-aligned strip: polygon-clipping can throw here
+  const a = { outer: [{ x: 0, y: 0 }, { x: 18309.613222215146, y: 0 }, { x: 18318.488700078145, y: 28698.85477253357 }, { x: 0, y: 28698.85477253357 }], holes: [] };
+  const b = { outer: [{ x: 18309.613222215146, y: 28698.85477253357 }, { x: 18318.488700078145, y: 28698.85477253357 }, { x: 18318.4887, y: 28700.0000001 }, { x: 18309.6132, y: 28700.0000001 }], holes: [] };
+  const res = floorPieces([{ id: 'a', shape: a }, { id: 'b', shape: b }], [{ id: 'c', shape: a }, { id: 'd', shape: b }], { sliverWidthMm: 150, sliverAreaM2: 0.1 });
+  assert.ok(res.pieces.length >= 1);
+});

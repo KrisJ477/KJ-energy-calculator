@@ -57,7 +57,14 @@ const ctx = {
 let derivedCache = { version: -1, value: null };
 function getDerived() {
   if (derivedCache.version !== store.version || !derivedCache.value) {
-    derivedCache = { version: store.version, value: derive(store.project, ctx.materials.materials) };
+    try {
+      derivedCache = { version: store.version, value: derive(store.project, ctx.materials.materials) };
+    } catch (e) {
+      console.error('derive failed', e);
+      if (!derivedCache.value) throw e;
+      derivedCache = { version: store.version, value: { ...derivedCache.value, warnings: [...derivedCache.value.warnings, { type: 'derive-failed', message: String(e.message || e) }], stale: true } };
+      toast(`${t('status.deriveFailed')}: ${e.message || e}`);
+    }
   }
   return derivedCache.value;
 }
