@@ -1,0 +1,11 @@
+W f1 0 430 1936 430 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 180 0 180 430 40 0.8 lägenhetsskiljande vägg mellan lgh 9 och lgh 6
+W w3 720 0 720 430 20 0.7 vägg mellan KÖK 6:4 och RUM 6:5
+W w4 1435 0 1435 430 15 0.7 vägg mellan RUM 6:5 och RUM 6:6
+O window f1 450 430 660 430 conf=0.8 fönstersymbol i gårdsfasaden, KÖK 6:4
+O window f1 1000 430 1210 430 conf=0.8 fönstersymbol i gårdsfasaden, RUM 6:5
+O window f1 1540 430 1750 430 conf=0.8 fönstersymbol i gårdsfasaden, RUM 6:6
+R KÖK kitchen 430 60 apt=6 conf=0.4 KÖK 6:4, rummet fortsätter i rutan ovanför
+R RUM living 980 60 apt=6 conf=0.4 RUM 6:5, rummet fortsätter i rutan ovanför
+R RUM living 1660 60 apt=6 conf=0.4 RUM 6:6, rummet fortsätter i rutan ovanför
+N Linjerna längst ned (y≈1795–1895) är ritningshuvudets ram. Resten av rutan är tomt papper.

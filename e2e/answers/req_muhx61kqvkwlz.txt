@@ -1,0 +1,21 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_nedre_mitten_höger stamp=- bar=0 dims=0 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Nedre del av gatufasaden: 1 TR- och BV-fönster (tre per våning), källarfönster i sockeln; hörnflygelns gräns vid x≈1750.
+FLOOR 1_TR 2 Mellersta fönsterraden i rutan
+FLOOR BV 1 Nedersta fönsterraden ovanför sockeln
+FLOOR KÄLLARE 0 Källarfönster i sockeln
+REGION 0 0 1936 1936
+L 1_TR 2 852 - Golvlinje härledd från fönstrens underkant 720 + bröstning 0,80
+L BV 1 1298 - Golvlinje härledd från marklinjen (+24,46) plus 1,89 m
+L KÄLLARE 0 1850 text=+23,35 Källargolv (streckad linje längst ned)
+F BV 1_TR 446 - Härledd; osäker, sektionen anger 3,00 m
+V window 220 450 250 270 sill=720 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 770 450 260 270 sill=720 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1310 460 270 270 sill=730 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 220 940 240 280 sill=1220 floor=BV conf=0.8 Fönster i BV
+V window 770 950 240 270 sill=1220 floor=BV conf=0.8 Fönster i BV
+V window 1310 960 240 270 sill=1230 floor=BV conf=0.8 Fönster i BV
+V window 260 1440 160 80 sill=1520 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 810 1450 160 80 sill=1530 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 1350 1460 160 80 sill=1540 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+GND 1610 Marklinje (lutande) under sockeln
+ROOF - Taket ligger utanför rutan
+N Fönstrens underkanter i 2 TR syns längst upp (avskurna). Lodräta linjen vid x≈1750 är hörnflygelns gräns.

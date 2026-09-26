@@ -1,0 +1,54 @@
+W g1 130 50 340 460 30 0.5 hörnflygelns västra gavel/grannvägg: kort tjock dubbellinje som övergår i tunna linjer
+W b1 340 460 530 480 25 0.5 utbyggnad vid trapphus TA:1 (trappsymbol V)
+W b2 530 480 490 600 25 0.5 utbyggnadens sida
+W b3 490 600 420 670 25 0.5 utbyggnadens sida
+W t1 420 670 500 830 15 0.4 tunn dubbellinje, troligen yttertrappa/entré till TA:1
+W f1 500 830 880 1600 45 0.8 hörnflygelns sydvästra yttervägg (dubbellinje) fram till huvudlängans fasadlinje
+W p1 400 480 1560 0 35 0.7 vägg mellan PORT-passagen och rummen (dubbellinje med B60-streckning)
+W w1 1120 200 1360 720 25 0.7 vägg mellan 1:1 ut / 1:3 ut och RUM 1:4
+W w2 890 290 1000 450 20 0.6 vägg mellan WC 1:2 och trapphus TA:1
+W w3 960 450 1100 770 20 0.6 vägg mellan TA:1 och 1:1 ut / 1:3 ut (B15)
+W w4 970 440 1180 380 15 0.5 vägg mellan WC 1:2 och 1:1 ut
+W w5 1040 600 1230 560 15 0.5 vägg mellan 1:1 ut och 1:3 ut
+W w6 1100 770 1360 720 20 0.6 vägg under 1:3 ut mot ST/G
+W w7 600 950 1100 790 25 0.6 vägg mellan TA:1 och KÖK 1:5 / förråden ST och G (delvis skrafferad)
+W l1 1370 880 1936 640 35 0.7 vägg mellan RUM 1:4 och LAGER L1:3 (dubbellinje med B60-streckning)
+W l2 1400 900 1520 1230 30 0.7 vägg mellan KÖK 1:5 och LAGER
+W l3 1520 1230 1680 1600 30 0.7 vägg mellan D 1:6 och LAGER, fortsätter till TAMB
+W d1 1160 1450 1400 1310 20 0.6 skrafferad vägg (ny) runt duschrum D 1:6
+W d2 1145 1440 1145 1600 20 0.5 skrafferad kort vägg vid D 1:6
+W m1 0 1590 1340 1590 45 0.8 huvudlängans fasadlinje (dubbellinje) som här fortsätter in i hörnflygeln mot trapphus TB:1; glaspartier F30/F5
+W m2 1340 1600 1590 1560 30 0.6 vägg mellan D 1:6 och TAMB L1:1
+W s1 1430 1600 1430 1936 20 0.7 vägg mellan trapphus TB:1 och TAMB L1:1 (B15)
+W t2 1690 1660 1830 1900 20 0.6 vägg mellan TAMB L1:1 och BUTIK med dörr
+W t3 1440 1880 1780 1860 20 0.6 TAMB:s nedre vägg
+O window f1 640 1140 740 1340 conf=0.7 fönstersymbol (tunna linjer) i sydvästra ytterväggen, k/f-skåp innanför
+O window m1 400 1590 560 1590 conf=0.5 glasparti märkt F30 (troligen brandklassat), mot TB:1
+O window m1 700 1590 800 1590 conf=0.5 glasparti märkt F5
+R WC wc 990 330 apt=1 conf=0.8 texten WC 1:2
+R TA:1 stairwell 850 540 conf=0.8 trapphus TA:1 med trappa
+R 1:1_ut storage 1100 520 apt=1 conf=0.5 texten 1:1 ut. (litet utrymme, sannolikt förråd/klädkammare)
+R 1:3_ut storage 1170 650 apt=1 conf=0.5 texten 1:3 ut. med trappsteg
+R RUM living 1520 390 apt=1 conf=0.85 texten RUM 1:4
+R KÖK kitchen 1060 1060 apt=1 conf=0.85 texten KÖK 1:5 med k/f
+R ST storage 1070 860 apt=1 conf=0.5 texten ST (städskåp/förråd)
+R G. storage 1170 810 apt=1 conf=0.5 texten G (garderob)
+R LAGER storage 1710 1110 apt=L1 conf=0.8 texten LAGER L1:3, lokal 1
+R D. bathroom 1360 1420 apt=1 conf=0.6 texten D. 1:6 (dusch), skrafferade nya väggar
+R TB:1 stairwell 1050 1830 conf=0.8 trapphus TB:1
+R TAMB hall 1600 1770 apt=L1 conf=0.7 texten TAMB. L1:1 (tambur till lokalen)
+T room_name 990 330 WC 1:2
+T room_name 850 540 TA:1
+T room_name 1520 390 RUM 1:4
+T room_name 1060 1060 KÖK 1:5
+T room_name 1710 1110 LAGER L1:3
+T room_name 1360 1420 D. 1:6
+T room_name 1050 1830 TB:1
+T room_name 1600 1770 TAMB. L1:1
+T other 950 560 B15
+T other 470 1660 F30
+T other 740 1660 F30
+T other 720 1520 F5
+T other 1370 1370 S7bh
+T fixture 830 1300 k/f
+N Hörnflygeln är vriden ca 27 grader mot huvudlängan. Streckade linjer i väggarna är brandklassmarkeringar (B60/B15). Texten KÖK längst ned till vänster tillhör KÖK 13:4 i rutan till vänster.

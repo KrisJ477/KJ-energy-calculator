@@ -1,0 +1,19 @@
+W e1 500 0 1400 1936 45 0.85 hörnflygelns sydöstra yttervägg (dubbellinje) med fönster, fortsätter nedåt
+W w1 100 830 700 590 15 0.6 vägg mellan RUM 4:4 och KÖK 4:5 med dörr
+W w2 0 1560 1050 1120 35 0.7 lägenhetsskiljande vägg mellan KÖK 4:5 (lgh 4) och KÖK 7:6 (lgh 7), dubbellinje med streckning
+W w3 320 1470 520 1936 20 0.6 skrafferad vägg mellan hallen 4:7/7:3 och KÖK 7:6
+O window e1 600 190 700 400 conf=0.7 fönstersymbol i sydöstra fasaden, RUM 4:4
+O window e1 830 720 930 920 conf=0.7 fönstersymbol i sydöstra fasaden, KÖK 4:5
+O window e1 1000 1140 1160 1460 conf=0.5 tunna linjer i fasaden, troligen fönster till KÖK 7:6
+O window e1 1300 1800 1380 1936 conf=0.4 fönster, fortsätter utanför rutan
+R RUM living 260 450 apt=4 conf=0.85 texten RUM 4:4
+R KÖK kitchen 490 1030 apt=4 conf=0.85 texten KÖK 4:5 med köksinredning
+R st. storage 150 920 apt=4 conf=0.5 texten st.
+R ut. hall 90 1400 apt=4 conf=0.4 texten ut. (del av hallen 4:7), fortsätter från rutan till vänster
+R KÖK kitchen 760 1560 apt=7 conf=0.85 texten KÖK 7:6
+R 7:3 living 300 1890 apt=7 conf=0.4 lägenhetsnumret 7:3
+T room_name 260 450 RUM 4:4
+T room_name 490 1030 KÖK 4:5
+T room_name 760 1560 KÖK 7:6
+T fixture 640 1260 k/s f
+N Symbolerna i högerkanten (skraffering, ramar, cirkel A) tillhör teckenförklaringen och är inte väggar.

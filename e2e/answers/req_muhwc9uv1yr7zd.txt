@@ -1,0 +1,28 @@
+W e1 1320 0 1700 900 45 0.85 hörnflygelns sydöstra yttervägg (dubbellinje) med fönster
+W e2 1700 900 1320 1080 45 0.8 ytterväggens sydvästra sida vid hörnet, med balkongdörr till balkongen nedanför
+W e3 730 1350 1320 1080 45 0.7 ytterväggen viker av mot huvudlängans södra fasad
+W f1 0 1350 730 1350 50 0.85 huvudlängans södra fasadvägg (dubbellinje) med fönster
+W w1 770 700 1010 1230 30 0.7 vägg mellan RUM 7:5 och RUM 7:8 (dubbellinje)
+W w2 830 650 1460 340 20 0.6 vägg mellan RUM 7:7 och RUM 7:8 med dörr
+W w3 500 150 700 510 20 0.5 vägg (streckad dubbellinje) mellan 7:3 HALL och RUM 7:7
+W w4 110 200 330 470 20 0.6 vägg mellan 7:3 HALL och passagen, med skrafferad dörr
+W c1 720 520 860 620 60 0.5 murstock vid öppen spis (ÖS)
+W m1 0 570 600 570 25 0.7 vägg mellan passagen/garderoberna och RUM 7:5, dörr S8bv
+W a2 210 570 210 1350 35 0.8 lägenhetsskiljande vägg (dubbellinje med B60-streckning) vänster om RUM 7:5
+O window e1 1340 90 1410 200 conf=0.6 fönstersymbol i sydöstra fasaden, RUM 7:7
+O window e1 1540 520 1620 700 conf=0.7 fönstersymbol i sydöstra fasaden, RUM 7:8
+O door e2 1130 1170 1320 1080 conf=0.5 balkongdörr (tunna linjer) mot balkongen
+O window f1 300 1350 520 1350 conf=0.8 fönstersymbol i gårdsfasaden, RUM 7:5
+O door w2 1000 560 1130 500 conf=0.5 dörröppning RUM 7:7 – RUM 7:8
+O door m1 400 570 560 570 conf=0.5 dörr S8bv
+R HALL hall 350 190 apt=7 conf=0.8 texten 7:3 HALL
+R RUM living 1000 230 apt=7 conf=0.85 texten RUM 7:7
+R RUM living 1230 780 apt=7 conf=0.85 texten RUM 7:8
+R RUM living 420 940 apt=7 conf=0.85 texten RUM 7:5
+T room_name 350 190 7:3 HALL
+T room_name 1000 230 RUM 7:7
+T room_name 1230 780 RUM 7:8
+T room_name 420 940 RUM 7:5
+T fixture 770 570 ÖS
+T other 490 530 S8bv
+N Rektangeln under sydvästra hörnväggen (x≈1100–1420, y≈1100–1300) är en balkong, inte ett rum. Rutor G., L. är skåp. Nedre delen av rutan är tomt papper.

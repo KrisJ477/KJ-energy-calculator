@@ -1,0 +1,63 @@
+W g1 30 30 240 400 45 0.7 hörnflygelns västra gavel (dubbellinje)
+W b1 430 470 340 570 25 0.5 trapptornets utbyggnad (halvcirkelformad trappa innanför)
+W b2 340 570 330 640 25 0.5 trapptornets utbyggnad
+W b3 330 640 460 800 25 0.5 trapptornets utbyggnad, med balkongdörr FD1 mot balkongen
+W b4 460 800 640 870 25 0.5 trapptornets utbyggnad
+W b5 640 870 800 800 25 0.5 trapptornets utbyggnad, ansluter till TAMB 3:1
+W f1 420 830 750 1500 45 0.8 hörnflygelns sydvästra yttervägg (dubbellinje) fram till huvudlängans fasadlinje
+W p1 450 460 1600 0 30 0.6 vägg parallell med nordvästra fasaden (dubbellinje med B60-streckning) mellan KÖK 2:4/2:1 och rummen mot gatan
+W w1 1000 50 1110 330 15 0.5 vägg mellan 2:1 och garderob/RUM 3:6
+W w2 1110 330 1240 620 20 0.6 vägg mellan WC 2:2 / d. och RUM 3:6 (skrafferad)
+W w3 830 210 1040 700 20 0.6 skrafferad vägg mellan trapptornet/2:1 och WC 2:2 / d.
+W w4 1030 720 1250 630 25 0.6 vägg mellan d. (lgh 2) och TAMB 3:1 / st 3:3 (lägenhetsskiljande, dubbellinje med streckning)
+W w5 1240 620 1380 1000 20 0.6 vägg mellan st 3:3 / L. / G. och RUM 3:6 / 3:4
+W w6 1380 1000 1460 1240 20 0.6 vägg mellan KÖK 3:2 och RUM 3:4
+W w7 820 830 900 1020 20 0.5 skrafferad vägg vid TAMB 3:1
+W w8 900 1020 1140 930 15 0.5 vägg mellan TAMB 3:1 och KÖK 3:2
+W w9 1050 1290 1460 1230 20 0.6 vägg mellan KÖK 3:2 och d. / WC 3:5
+W w10 1060 1300 1100 1440 15 0.5 skrafferad vägg mellan KÖK 3:2 och d.
+W w11 1460 1240 1540 1440 20 0.6 WC 3:5:s högra vägg
+W w12 1560 1440 1936 1220 30 0.6 lägenhetsskiljande vägg mellan lgh 3 och lgh 5 (dubbellinje med streckning)
+W m0 0 1510 750 1510 45 0.8 huvudlängans fasadlinje (dubbellinje), fönster F7
+W m1 750 1510 1560 1450 35 0.7 vägg mellan lgh 3 (WC/d.) och lgh 5 (WC 5:2 / d.), i huvudlängans fasadlinje
+W w13 920 1520 920 1936 20 0.6 skrafferad vägg mellan trapphus TB:1 och WC 5:2 (B15)
+W w14 1310 1520 1310 1800 20 0.6 vägg mellan d. (lgh 5) och 5:3
+W w15 920 1775 1310 1775 20 0.6 skrafferad vägg mellan WC 5:2 / d. och TAMB 5:1
+W w16 180 1520 180 1936 25 0.6 vägg mellan rummet till vänster och trapphus TB:1 (B60-streckning intill)
+O window f1 560 1090 660 1300 conf=0.7 fönstersymbol (tunna linjer mellan tvärstreck) i sydvästra ytterväggen
+O window m0 270 1510 480 1510 conf=0.6 fönster F7 (tunna linjer) i fasadlinjen
+O door b3 350 680 430 760 conf=0.4 balkongdörr FD1 från trapptornet till balkongen
+R KÖK kitchen 540 80 apt=2 conf=0.85 texten KÖK 2:4 med köksinredning
+R 2:1 hall 950 290 apt=2 conf=0.4 lägenhetsnumret 2:1 vid en liten trappa, troligen hall
+R WC wc 990 460 apt=2 conf=0.8 texten WC 2:2
+R d. bathroom 1070 620 apt=2 conf=0.5 texten d. (dusch)
+R RUM living 1520 430 apt=3 conf=0.85 texten RUM 3:6
+R - stairwell 600 620 conf=0.6 halvcirkelformad trappa i trapptornet (TA:1)
+R TAMB hall 940 890 apt=3 conf=0.8 texten TAMB. 3:1
+R st. storage 1150 820 apt=3 conf=0.5 texten st. 3:3 (städ/förråd)
+R RUM living 1770 1000 apt=3 conf=0.85 texten RUM 3:4
+R KÖK kitchen 920 1130 apt=3 conf=0.85 texten KÖK 3:2 med köksinredning
+R d. bathroom 1140 1440 apt=3 conf=0.5 texten d. (dusch)
+R WC wc 1280 1400 apt=3 conf=0.8 texten WC 3:5
+R WC wc 1090 1690 apt=5 conf=0.8 texten WC 5:2
+R d. bathroom 1230 1660 apt=5 conf=0.5 texten d. (dusch)
+R TAMB hall 1120 1860 apt=5 conf=0.8 texten TAMB. 5:1
+R 5:3 living 1580 1890 apt=5 conf=0.4 lägenhetsnumret 5:3, rumstyp avskuren
+R - stairwell 430 1700 conf=0.6 halvcirkelformad trappa (TB:1)
+T room_name 540 80 KÖK 2:4
+T room_name 1520 430 RUM 3:6
+T room_name 940 890 TAMB. 3:1
+T room_name 1770 1000 RUM 3:4
+T room_name 920 1130 KÖK 3:2
+T room_name 1280 1400 WC 3:5
+T room_name 1090 1690 WC 5:2
+T room_name 1120 1860 TAMB. 5:1
+T other 300 720 FD1
+T other 350 1490 F7
+T other 360 1600 F30
+T other 880 780 B15
+T other 880 1850 B15
+T other 1030 380 S7bh
+T other 1220 900 S1ch
+T other 1130 1800 S7bv
+N Polygonen till vänster om trapptornet (x≈200–500, y≈600–900) är en balkong med dörr FD1, inte ett rum. Rutor märkta G., L., st. är skåp. Skrafferade väggar är nya (1988).

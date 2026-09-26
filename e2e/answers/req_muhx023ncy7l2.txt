@@ -1,0 +1,11 @@
+W n1 0 570 1450 570 25 0.8 norra knäväggen i GEMENSAMHETSLOKAL (skrafferad), fortsätter från rutan till vänster
+W n2 1515 590 1936 590 15 0.6 norra knäväggen öster om trapphuset (befintlig, oskrafferad)
+W w1 1482 570 1482 1936 60 0.7 tjock vägg (två linjer) mellan GEMENSAMHETSLOKAL och trapphus/förråd i öster
+W t1 1510 720 1780 720 12 0.5 trapphusets övre vägg på vinden
+W t2 1780 720 1780 1250 12 0.5 trapphusets högra vägg
+W t3 1510 1250 1660 1250 12 0.5 trapphusets nedre vägg
+O door n1 700 570 810 570 conf=0.5 dörr med svängbåge i norra knäväggen (från trapphuset)
+R GEMENSAMHETSLOKAL other 300 1500 conf=0.5 GEMENSAMHETSLOKAL, fortsätter från rutan till vänster
+R - stairwell 1650 950 conf=0.6 trapphus med halvcirkelformad trappa på vinden (TD)
+T other 1230 700 TF
+N T-formade symboler är murstockar. TF = takfönster. Den tunna linjen vid y≈450 är takfoten.

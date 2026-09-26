@@ -1,0 +1,36 @@
+W g1 720 0 720 1376 60 0.85 gavelvägg väster (dubbellinje ca 60 px), huvudlängan
+W f1 720 1346 1936 1346 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W s1 1160 0 1160 575 15 0.7 vägg mellan KÖK 14:1 / WC 14:3 och trapphus TD:1 (B15)
+W s2 1720 0 1720 413 15 0.7 trapphus TD:1:s högra vägg mot 13:2
+W t1 1080 365 1520 365 20 0.7 skrafferad vägg (ny) mellan TD:1 och WC 14:3 / d.
+W s3 1517 365 1517 575 15 0.6 vägg mellan d. och TAMB 13:1
+W s4 1700 365 1700 575 15 0.6 vägg mellan TAMB 13:1 och 13:2
+W k1 930 600 1500 600 20 0.6 vägg mellan KÖK 14:1 / WC-blocket och RUM 14:2, med dörröppningar
+W k2 1500 600 1936 600 20 0.6 vägg mellan TAMB 13:1 / 13:2 och RUM 13:5
+W s5 1485 600 1485 1376 20 0.7 lägenhetsskiljande vägg mellan RUM 14:2 och RUM 13:5 (dubbellinje med streckning)
+O window f1 980 1346 1190 1346 conf=0.8 fönstersymbol (tunna linjer mellan tvärstreck) i gårdsfasaden
+O window f1 1560 1346 1780 1346 conf=0.6 fönstersymbol i gårdsfasaden
+O door k1 940 600 1080 600 conf=0.5 dörröppning mellan KÖK 14:1 och RUM 14:2
+O door k1 1210 600 1340 600 conf=0.5 dörröppning mot WC/d.
+R KÖK kitchen 900 120 apt=14 conf=0.85 texten KÖK 14:1 med st. och k/f
+R TD:1 stairwell 1380 250 conf=0.85 trapphus TD:1 med trappa
+R WC wc 1300 500 apt=14 conf=0.8 texten WC 14:3
+R d. bathroom 1440 480 apt=14 conf=0.5 texten d. (dusch) med duschsymbol
+R TAMB hall 1610 470 apt=13 conf=0.8 texten TAMB. 13:1
+R 13:2 hall 1800 520 apt=13 conf=0.4 endast lägenhetsnumret 13:2, troligen hall/passage
+R L. storage 840 690 apt=14 conf=0.5 texten L. (linneskåp/klädkammare)
+R RUM living 920 900 apt=14 conf=0.85 texten RUM 14:2
+R G. storage 1420 700 apt=13 conf=0.5 texten G. (garderob) vid dörren till 13:5
+R RUM living 1680 900 apt=13 conf=0.85 texten RUM 13:5
+R G. storage 1440 1240 apt=14 conf=0.5 texten G. (garderob) i RUM 14:2:s hörn
+T room_name 900 120 KÖK 14:1
+T room_name 1380 250 TD:1
+T room_name 1300 500 WC 14:3
+T room_name 1610 470 TAMB. 13:1
+T room_name 920 900 RUM 14:2
+T room_name 1680 900 RUM 13:5
+T other 1190 240 B15
+T other 1600 320 B15
+T other 1800 400 S8bv
+T fixture 1100 100 k/f
+N Blocket vid gavelns insida (x≈750–900, y≈270–530) är murstock/skåp, inte ett rum. Streckade linjer i väggarna är brandklassmarkeringar. Nedre delen av rutan är tomt papper.

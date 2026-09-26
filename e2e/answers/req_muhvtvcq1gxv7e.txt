@@ -1,0 +1,52 @@
+W f1 0 1346 1936 1346 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 655 0 655 1376 60 0.8 lägenhetsskiljande vägg mellan lgh 13 och lgh 9 (dubbellinje med B60-streckning)
+W s1 1065 0 1065 360 20 0.7 trapphus TC:1:s vänstra vägg
+W s2 1628 0 1628 360 20 0.7 trapphus TC:1:s högra vägg (skrafferad)
+W t1 1050 365 1640 365 20 0.7 skrafferad vägg (ny) mellan TC:1 och TAMB 9:1 (B15)
+W k1 0 365 620 365 20 0.7 skrafferad vägg mellan KÖK 13:4 och WC 13:3 / d.
+W w3 225 365 225 570 15 0.5 vägg mellan 13:2 och WC 13:3
+W w4 575 365 575 570 15 0.5 vägg mellan d. och lägenhetsväggen
+W s3 1640 365 1640 570 15 0.6 vägg mellan TAMB 9:1 och KÖK 9:2
+W m1 0 595 1936 595 25 0.7 vägg mellan norra rumsraden (kök, wc, tamburer) och södra rumsraden, med dörröppningar
+W s4 1327 625 1327 1376 20 0.7 vägg mellan RUM 9:4 / 9:5 och RUM 9:3 (dubbellinje)
+W w1 690 845 1310 845 20 0.6 skrafferad vägg mellan d./WC 9:6/9:5 och RUM 9:4
+W w2 1030 625 1030 845 15 0.5 vägg mellan WC 9:6 och 9:5 ut
+W w5 190 625 190 800 12 0.5 vägg vid L. (klädkammare)
+W w6 160 800 160 1376 15 0.5 vägg mellan RUM 13:6 och rummet till vänster
+O window f1 350 1346 560 1346 conf=0.8 fönstersymbol i gårdsfasaden (två lufter, tvärstreck vid 450)
+O window f1 950 1346 1150 1346 conf=0.8 fönstersymbol i gårdsfasaden
+O window f1 1560 1346 1780 1346 conf=0.8 fönstersymbol i gårdsfasaden
+O door m1 940 595 1050 595 conf=0.5 dörröppning mellan TAMB 9:1 och 9:5
+O door m1 1440 595 1560 595 conf=0.5 dörröppning mellan TAMB 9:1 och RUM 9:3
+R KÖK kitchen 220 150 apt=13 conf=0.85 texten KÖK 13:4
+R RUM living 800 150 apt=9 conf=0.85 texten RUM 9:7
+R TC:1 stairwell 1350 240 conf=0.85 trapphus TC:1 med trappa
+R KÖK kitchen 1800 150 apt=9 conf=0.85 texten KÖK 9:2 med k/f och sk.
+R WC wc 330 430 apt=13 conf=0.8 texten WC 13:3
+R d. bathroom 490 460 apt=13 conf=0.5 texten d. (dusch)
+R 13:2 hall 40 520 apt=13 conf=0.4 lägenhetsnumret 13:2, fortsätter från rutan till vänster
+R TAMB hall 1320 450 apt=9 conf=0.8 texten TAMB. 9:1
+R RUM living 370 930 apt=13 conf=0.85 texten RUM 13:6
+R d. bathroom 740 700 apt=9 conf=0.5 texten d. (dusch)
+R WC wc 890 760 apt=9 conf=0.8 texten WC 9:6
+R 9:5_ut hall 1150 750 apt=9 conf=0.5 texten 9:5 ut., passage/hall
+R RUM living 930 960 apt=9 conf=0.85 texten RUM 9:4
+R RUM living 1650 930 apt=9 conf=0.85 texten RUM 9:3
+T room_name 220 150 KÖK 13:4
+T room_name 800 150 RUM 9:7
+T room_name 1350 240 TC:1
+T room_name 1800 150 KÖK 9:2
+T room_name 330 430 WC 13:3
+T room_name 1320 450 TAMB. 9:1
+T room_name 370 930 RUM 13:6
+T room_name 890 760 WC 9:6
+T room_name 930 960 RUM 9:4
+T room_name 1650 930 RUM 9:3
+T other 1170 300 B15
+T other 1100 230 A
+T other 260 480 S7bv
+T other 990 780 S7bv
+T other 1200 810 S9bh
+T fixture 1680 200 k/f
+T fixture 1680 300 sk.
+N Små rutor märkta L. och G. är linne-/garderobsskåp, inte rum. Skrafferade väggar är nya väggar (1988). Nedre delen av rutan är tomt papper.

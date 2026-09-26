@@ -1,0 +1,31 @@
+W f1 0 150 1390 150 40 0.9 norra fasadväggen
+W f2 1390 150 1936 700 45 0.9 nordöstra snedställda fasadväggen (hörnet)
+W f3 0 1690 770 1690 40 0.9 södra fasadväggen mot gården
+W f4 770 1690 1000 1936 40 0.8 gårdsfasaden viker av mot sydost
+W p1 300 150 300 820 25 0.8 lägenhetsgräns D1502/D1503 (EI60-linje)
+W p2 0 820 300 820 25 0.8 lägenhetsgräns D1502/D1503
+W p3 790 150 790 1690 25 0.8 lägenhetsgräns D1503 mot trapphus E (EI60-linje)
+W p4 800 690 1300 690 25 0.8 trapphus E:s södra vägg
+W p5 1300 150 1300 690 25 0.8 trapphus E:s östra vägg
+W p6 1100 690 1100 1130 25 0.8 korridorens vägg mot lägenhet E1501
+W p7 1100 1130 1560 1590 25 0.7 snedställd lägenhetsgräns korridor/E1509 (EI60-linje)
+W p8 1560 1590 1936 1936 25 0.6 lägenhetsgräns E1509 fortsätter mot sydost
+W p9 1290 1010 1936 1660 25 0.7 lägenhetsgräns E1501 mot korridoren, parallell med fasaden
+W b1 310 650 540 650 12 0.7 badrumsvägg D1503
+W b2 540 650 540 1080 12 0.7 badrumsvägg D1503
+W b3 310 1080 540 1080 12 0.7 badrumsvägg D1503
+W b4 800 940 1100 940 12 0.7 badrumsvägg E-lägenheten vid trapphuset
+O window f1 0 150 170 150 conf=0.7 fönster norra fasaden
+O window f1 470 150 640 150 conf=0.8 fönster norra fasaden
+O door f1 800 150 1060 150 conf=0.7 balkongdörr/fönster norra fasaden
+O window f2 1560 320 1640 400 conf=0.7 fönster i snedställda fasaden
+O window f2 1760 520 1850 620 conf=0.7 fönster i snedställda fasaden
+O window f3 190 1690 430 1690 conf=0.8 fönster södra fasaden
+O window f3 530 1690 690 1690 conf=0.8 fönster södra fasaden
+R 4_RoK_D1503 living 400 1400 apt=D1503 conf=0.9 lägenheten D1503 (text i rutan till vänster) med vardagsrum här
+R - bathroom 420 900 apt=D1503 conf=0.8 TT/TM + klinker
+R TH_E stairwell 1050 500 conf=0.9 text "TH E E1500 6,8 m²" med hiss; plushöjd +26,02
+R TH stairwell 1250 1300 conf=0.8 text "TH 38,3 m²" – lång trapphuskorridor längs snedställda delen
+R 2_RoK_E1501 living 1600 900 apt=E1501 conf=0.9 lägenhetstext "2 RoK E1501 35,6 m²"
+R 3_RoK_E1509 living 1450 1750 apt=E1509 conf=0.8 lägenhetstext "3 RoK E1509 55,2 m²"
+N Snedställda delen: väggarna är avlästa ungefärligt; balkonger utanför fasaden ignorerade.

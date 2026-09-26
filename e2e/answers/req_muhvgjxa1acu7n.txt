@@ -1,0 +1,21 @@
+W g1 610 1490 610 1936 60 0.85 gavelvägg väster, dubbellinje ca 60 px
+W f1 610 1505 1936 1505 40 0.85 fasadvägg (dubbellinje) med fönster, fönsterdörr och trapptorn
+W s1 1050 1520 1050 1936 15 0.6 lägenhetsvägg mellan RUM 15:8/garderob och trapphuset
+W p1 1240 1530 1100 1670 20 0.7 trapphusets snedställda vägg vänster
+W p2 1100 1670 1100 1936 20 0.7 trapphusvägg vänster
+W p3 1420 1530 1560 1670 20 0.7 trapphusets snedställda vägg höger
+W p4 1560 1670 1560 1936 20 0.7 trapphusvägg höger
+W s2 1620 1520 1620 1936 15 0.6 lägenhetsvägg mellan trapphuset och KÖK 15:4
+O window f1 700 1505 905 1505 conf=0.8 fönstersymbol i fasaden
+O door f1 1245 1505 1420 1505 conf=0.7 fönsterdörr FD1 till balkongen ovanför entrén
+O window f1 1750 1505 1936 1505 conf=0.5 fönster, fortsätter utanför rutan
+R RUM living 810 1880 apt=15 conf=0.8 texten RUM 15:8
+R G. storage 1075 1630 apt=15 conf=0.5 texten G. (garderob) vid trapphuset
+R - stairwell 1330 1800 conf=0.8 trapphus med svängd trappa och pil
+R KÖK kitchen 1870 1880 apt=15 conf=0.75 texten KÖK 15:4 med köksinredning
+T room_name 810 1880 RUM
+T room_name 1870 1880 KÖK
+T other 1320 1450 FD1
+T fixture 1105 1610 G.
+T other 1150 1700 A
+N Rektangeln ovanför fasaden (x≈1170–1490, y≈1370–1500) är en balkong, inte en vägg. Streckade lodräta linjer vid x≈1190 och 1470 är brandklassmarkeringar.

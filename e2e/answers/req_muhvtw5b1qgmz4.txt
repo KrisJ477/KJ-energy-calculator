@@ -1,0 +1,22 @@
+W p1 0 250 560 10 30 0.6 vägg parallell med nordvästra fasaden (dubbellinje med B60-streckning), fortsätter från rutan till vänster
+W e1 560 0 1400 1936 45 0.85 hörnflygelns sydöstra yttervägg (dubbellinje) med fönster, fortsätter nedåt
+W w1 300 830 780 560 20 0.6 vägg mellan RUM 3:6 och RUM 3:4 med dörr
+W w2 130 850 240 1230 15 0.5 RUM 3:4:s vänstra vägg mot L./G./passage (oregelbunden)
+W w3 330 1450 1080 1130 35 0.7 lägenhetsskiljande vägg mellan lgh 3 (RUM 3:4) och lgh 5 (KÖK 5:6), dubbellinje med streckning
+W w4 0 1560 330 1450 35 0.6 fortsättning av lägenhetsväggen mot WC 3:5
+W w5 350 1470 480 1800 20 0.6 KÖK 5:6:s vänstra vägg
+W w6 480 1800 1000 1600 20 0.5 vägg mellan KÖK 5:6 och rummet nedanför (5:3), med skåp
+O window e1 615 160 705 350 conf=0.7 fönstersymbol i sydöstra fasaden, RUM 3:6
+O window e1 845 700 950 920 conf=0.7 fönstersymbol i sydöstra fasaden, RUM 3:4
+O window e1 1095 1250 1185 1450 conf=0.7 fönstersymbol i sydöstra fasaden, KÖK 5:6
+O window e1 1320 1700 1400 1880 conf=0.6 fönstersymbol i sydöstra fasaden, fortsätter utanför rutan
+R RUM living 310 420 apt=3 conf=0.85 texten RUM 3:6
+R RUM living 560 1000 apt=3 conf=0.85 texten RUM 3:4
+R KÖK kitchen 760 1560 apt=5 conf=0.85 texten KÖK 5:6 med köksinredning
+R WC wc 80 1420 apt=3 conf=0.6 texten WC 3:5, fortsätter från rutan till vänster
+R 5:3 living 360 1890 apt=5 conf=0.4 lägenhetsnumret 5:3
+T room_name 310 420 RUM 3:6
+T room_name 560 1000 RUM 3:4
+T room_name 760 1560 KÖK 5:6
+T fixture 850 1290 k/f
+N Symbolerna i högerkanten tillhör teckenförklaringen och är inte väggar. Rutor märkta G. och L. är skåp.

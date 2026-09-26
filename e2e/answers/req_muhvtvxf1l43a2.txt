@@ -1,0 +1,25 @@
+W p1 0 190 500 0 35 0.6 vägg parallell med nordvästra fasaden (dubbellinje med streckning), fortsätter från rutan till vänster
+W e1 500 0 1400 1936 45 0.85 hörnflygelns sydöstra yttervägg (dubbellinje) med källarfönster F1
+W w1 180 200 500 80 20 0.5 skrafferad vägg ovanför D. och OMKL.
+W w2 300 560 520 470 20 0.5 skrafferad vägg mellan OMKL. och BASTU
+W w3 420 490 540 760 20 0.5 skrafferad vägg mellan TORKRUM och BASTU
+W w4 540 760 770 650 20 0.5 skrafferad vägg mellan BASTU och KRYP-UTR.
+W w5 100 960 800 700 30 0.6 vägg (dubbellinje med streckning) mellan TORKRUM och KRYP-UTR.
+W w6 110 970 430 1650 30 0.6 vägg mellan TVÄTTSTUGA-delen och KRYP-UTR.
+W w7 500 1936 1250 1660 30 0.5 KRYP-UTR.:s nedre vägg (dubbellinje), delvis synlig
+O window e1 600 280 700 440 conf=0.6 källarfönster F1 (två fönster märkta F1)
+R D. bathroom 460 180 conf=0.5 texten D. (dusch)
+R OMKL. other 370 400 conf=0.6 texten OMKL.
+R BASTU other 600 580 conf=0.7 texten BASTU
+R TORKRUM laundry 240 740 conf=0.7 texten TORKRUM
+R KRYP-UTR. other 700 1270 heated=0 conf=0.6 texten KRYP-UTR., ouppvärmt kryputrymme
+T room_name 460 180 D.
+T room_name 370 400 OMKL.
+T room_name 600 580 BASTU
+T room_name 240 740 TORKRUM
+T room_name 700 1270 KRYP-UTR.
+T other 730 300 F1
+T other 770 370 F1
+T other 580 440 S7av
+T other 540 1770 S6ah
+N Övre högra delen av rutan är tomt papper.

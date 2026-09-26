@@ -1,0 +1,43 @@
+W f1 0 1350 1936 1350 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 160 0 160 1350 40 0.8 lägenhetsskiljande vägg mellan lgh 11 och lgh 8 (dubbellinje med B60-streckning)
+W t1 160 275 960 275 25 0.7 vägg mellan trapphus TB:3 och 8:3 / TAMB 8:1 (B15), delvis skrafferad
+W s1 890 0 890 275 20 0.7 skrafferad vägg mellan TB:3 och TAMB 7:1 (B15)
+W t2 900 215 1290 215 20 0.6 skrafferad vägg mellan TAMB 7:1 och 7:2
+W w1 1320 190 1540 550 20 0.6 snedställd vägg mellan 7:2 och 7:3 HALL med dörr
+W w2 610 290 610 545 20 0.6 skrafferad vägg mellan 8:3 och TAMB 8:1
+W w3 850 290 850 545 15 0.5 vägg mellan TAMB 8:1 och skåpen st./G./G.
+W w4 960 275 960 545 20 0.6 skrafferad vägg mellan skåpen och 7:2 (lägenhetsgräns 8/7)
+W w5 1290 215 1290 545 15 0.5 vägg mellan 7:2 och HALL 7:3
+W m1 360 560 1936 560 25 0.7 vägg mellan norra rumsraden och KÖK 8:4 / RUM 8:5 / RUM 7:5, med dörröppningar
+W w6 700 560 700 1350 15 0.7 vägg mellan KÖK 8:4 och RUM 8:5 (delvis skrafferad)
+W a2 1420 560 1420 1350 35 0.8 lägenhetsskiljande vägg mellan RUM 8:5 (lgh 8) och RUM 7:5 (lgh 7)
+W w7 1790 600 1936 690 20 0.3 kort snedställd vägg uppe till höger, osäker
+O window f1 430 1350 640 1350 conf=0.8 fönstersymbol i gårdsfasaden, KÖK 8:4
+O window f1 970 1350 1180 1350 conf=0.8 fönstersymbol i gårdsfasaden, RUM 8:5
+O window f1 1520 1350 1730 1350 conf=0.8 fönstersymbol i gårdsfasaden, RUM 7:5
+O door t1 640 275 760 275 conf=0.5 dörr TB:3 – TAMB 8:1
+O door t2 1090 215 1190 215 conf=0.5 dörr S7bh TAMB 7:1 – 7:2
+O door m1 1610 560 1750 560 conf=0.5 dörr S8bv HALL 7:3 – RUM 7:5
+R TB:3 stairwell 500 100 conf=0.6 trapphus TB:3 med halvcirkelformad trappa, fortsätter från rutan ovanför
+R TAMB hall 1100 110 apt=7 conf=0.8 texten TAMB. 7:1
+R HALL hall 1560 190 apt=7 conf=0.8 texten 7:3 HALL
+R 8:3 hall 370 370 apt=8 conf=0.4 lägenhetsnumret 8:3 med tvättställ, troligen hall/klädkammare
+R TAMB hall 730 450 apt=8 conf=0.8 texten TAMB. 8:1
+R 7:2 bathroom 1150 370 apt=7 conf=0.5 lägenhetsnumret 7:2 med dusch- och wc-symboler
+R KÖK kitchen 410 930 apt=8 conf=0.85 texten KÖK 8:4 med k/f
+R RUM living 990 900 apt=8 conf=0.85 texten RUM 8:5
+R RUM living 1640 900 apt=7 conf=0.85 texten RUM 7:5
+T room_name 1100 110 TAMB. 7:1
+T room_name 1560 190 7:3 HALL
+T room_name 730 450 TAMB. 8:1
+T room_name 410 930 KÖK 8:4
+T room_name 990 900 RUM 8:5
+T room_name 1640 900 RUM 7:5
+T other 700 230 B15
+T other 840 80 B15
+T other 520 160 B30
+T other 1130 270 S7bh
+T other 570 360 S7bh
+T other 1690 520 S8bv
+T fixture 260 1270 k/f
+N Den streckade diagonalen uppe till höger (x≈1650–1936, y≈0–600) är en gräns-/sektionslinje, inte en vägg. Rutor G., L., st. är skåp. Nedre delen av rutan är tomt papper.

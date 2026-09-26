@@ -1,0 +1,11 @@
+CLASS type=vertical sub=elevation disc=architectural part=Fasader_40-3-001 stamp=1:50 dims=0 bar=1 clarity=0.9 compl=0.9 role=cross-check rolewhy=fasadritning_används_i_detta_test_endast_som_korskontroll_av_fönster;_inga_detaljrutor ArchiCAD-fasader KV39-A2-40-3-001 (två fasader): bostadsplan med regelbundna fönsterrader ovanpå garagets sockelvåningar; skalstock 0–5 METER nederst.
+FLOOR Plan_13 13 Nedersta bostadsplanet ovanför garaget
+FLOOR Plan_14 14 Bostadsplan
+FLOOR Plan_15 15 Bostadsplan
+FLOOR Plan_16 16 Bostadsplan
+FLOOR Plan_17 17 Bostadsplan
+FLOOR Plan_18 18 Bostadsplan
+REGION 340 190 1350 1100
+REF scale_bar 1116 1615 1185 1615 0–5_METER mm=5000 Skalstock nederst på arket
+TITLE KV39-A2-40-3-001 FASADER, SKALA 1:50
+N Korskontroll: fönster per rum räknas inte i detta test.

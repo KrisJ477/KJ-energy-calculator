@@ -1,0 +1,21 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_hörnpartiets_nedre_del_(högerkant) stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Samma innehåll som rutan till vänster förskjutet 160 px: balkonger med balkongdörrar i 2 TR och 1 TR, butiksfönster i BV, källarfönster, sockel +25,55, mark +24,06, måttet 7,00 och terrassräcket.
+FLOOR 2_TR 3 Övre balkongen
+FLOOR 1_TR 2 Nedre balkongen
+FLOOR BV 1 Butiksfönstret ovanför sockeln
+FLOOR KÄLLARE 0 Källarfönster i sockeln, källargolv +23,35
+REGION 0 0 1936 1936
+L 2_TR 3 355 - Golvlinje härledd från balkongplattan och 3,00 m
+L 1_TR 2 845 - Golvlinje härledd från balkongplattan och 3,00 m
+L BV 1 1335 text=+26,35 Golvlinje härledd: sockel +25,55 plus 0,80 m
+L KÄLLARE 0 1880 text=+23,35 Streckad linje längst ned
+F 1_TR 2_TR 490 - Härledd; sektionen anger 3,00
+F BV 1_TR 490 - Härledd; sektionen anger 3,00
+V door 200 0 240 380 sill=380 floor=2_TR conf=0.6 Balkongdörr i 2 TR bakom balkongräcket, avskuren av rutans överkant
+V door 200 490 240 370 sill=860 floor=1_TR conf=0.7 Balkongdörr i 1 TR bakom balkongräcket
+V window 150 980 310 490 sill=1470 floor=BV conf=0.5 Stort butiksfönster/glasparti i BV ned till sockeln
+V window 230 1520 145 80 sill=1600 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+GND 1690 Marklinje med skriven plushöjd +24,06 vid hörnet (x≈800)
+ROOF - Taket ligger utanför rutan
+REF dimension 0 1700 800 1700 7,00 mm=7000 Skrivet mått 7,00 längs nederkanten; vänstra änden utanför rutan, högra änden vid hörnet x≈800
+REF level_difference 800 1470 800 1690 +25,55_till_+24,06 mm=1490 Skrivna plushöjder sockel +25,55 och mark +24,06 vid hörnet
+N Rutan överlappar nästan helt rutan till vänster (samma öppningar). Terrassräcket till höger är inte en öppning.

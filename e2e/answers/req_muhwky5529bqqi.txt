@@ -1,0 +1,11 @@
+W f1 0 440 1936 440 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 330 0 330 440 40 0.8 lägenhetsskiljande vägg mellan lgh 9 och lokal 2 (dubbellinje med B60-streckning)
+W w6 830 0 830 440 15 0.6 vägg mellan PENTRY L2:4 och LAGER L2:5
+W w7 1560 0 1560 440 20 0.6 vägg mellan LAGER L2:5 och LAGER L2:6
+O window f1 560 440 780 440 conf=0.8 fönstersymbol i gårdsfasaden, PENTRY
+O window f1 1120 440 1330 440 conf=0.8 fönstersymbol i gårdsfasaden, LAGER L2:5
+O window f1 1660 440 1870 440 conf=0.8 fönstersymbol i gårdsfasaden, LAGER L2:6
+R PENTRY kitchen 600 100 apt=L2 conf=0.4 PENTRY L2:4, rummet fortsätter i rutan ovanför
+R LAGER storage 1130 100 apt=L2 conf=0.4 LAGER L2:5, rummet fortsätter i rutan ovanför
+R LAGER storage 1880 100 apt=L2 conf=0.3 LAGER L2:6, rummet fortsätter i rutan ovanför
+N Linjerna längst ned (y≈1820–1925) är ritningshuvudets ram. Resten av rutan är tomt papper.

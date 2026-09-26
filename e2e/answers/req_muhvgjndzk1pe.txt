@@ -1,0 +1,19 @@
+W g1 715 1561 715 1936 60 0.85 gavelvägg väster, dubbellinje ca 60 px (murad gavel)
+W f1 715 1590 826 1590 55 0.85 fasadvägg (dubbellinje) mellan gaveln och första fönstret
+W f2 1005 1595 1346 1595 60 0.85 fasadvägg mellan fönster
+W f3 1522 1595 1825 1595 60 0.85 fasadvägg mellan fönster
+W s1 1195 1625 1195 1936 40 0.7 trapphusvägg (tjock linje + B60-streckning), vänster sida av TD:1
+W s2 1720 1625 1720 1936 25 0.7 trapphusvägg höger sida av TD:1
+W b1 1290 1595 1335 1490 25 0.7 burspråk/trapptorn, snedställd sida
+W b2 1335 1490 1520 1490 25 0.7 burspråk, front
+W b3 1520 1490 1600 1595 25 0.7 burspråk, snedställd sida
+O window f1 826 1590 1005 1590 conf=0.8 fönstersymbol (tunna linjer) i fasaden
+O window f2 1346 1595 1522 1595 conf=0.6 öppning i fasaden bakom burspråket
+O window f3 1825 1595 1936 1595 conf=0.7 fönster, fortsätter utanför rutan
+O window b2 1345 1490 1510 1490 conf=0.6 fönster i burspråkets front
+R KÖK kitchen 930 1900 apt=14 conf=0.85 texten KÖK, köksinredning k/f och st.
+R TD:1 stairwell 1440 1850 conf=0.8 trapphus TD:1 med trappa (svängda steg)
+T room_name 930 1900 KÖK
+T fixture 1110 1700 st.
+T fixture 1110 1790 k/f
+N Endast fasadremsan och gaveln syns i rutan; resten är tomt papper.

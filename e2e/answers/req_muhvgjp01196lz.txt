@@ -1,0 +1,13 @@
+W e1 40 1868 1450 1163 45 0.85 yttervägg ritad som dubbellinje, hörnflygelns nordvästra fasad
+W e2 1450 1163 1785 1936 45 0.85 yttervägg, hörnet och nordöstra fasaden, fortsätter utanför rutan
+W i1 870 1640 1000 1936 20 0.6 innervägg mellan hall/BAD och RUM, tunn dubbellinje med dörröppning
+W c1 800 1450 850 1640 40 0.5 murstock vid öppen spis (ÖS), ritad som svart block
+O window e2 1555 1440 1655 1650 conf=0.7 fönstersymbol (tunna linjer mellan tvärstreck) i nordöstra fasaden
+O door i1 890 1680 950 1800 conf=0.5 dörröppning i innerväggen (tunna dubbla linjer, ingen svängbåge)
+R BAD bathroom 560 1880 apt=4 conf=0.85 texten BAD 4:2 samt badkar/tvättställ
+R RUM living 1160 1690 apt=4 conf=0.75 texten RUM 4:3 i hörnrummet med öppen spis
+T room_name 560 1880 BAD
+T room_name 1160 1690 RUM
+T fixture 1000 1600 ÖS
+T other 830 1730 x9
+N Rutan visar hörnflygelns norra del; övre delen är tomt papper. Streckade linjer intill väggarna är brandklassmarkeringar, inte väggar.

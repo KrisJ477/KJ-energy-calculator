@@ -1,0 +1,23 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_nedre_högra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gårdsfasad_för_fönsterräkning Nedre högra delen av gårdsfasaden: 1 TR- och BV-fönster, trapphusentré (+24,85), burspråk med fönster och balkongdörr, källarfönster.
+FLOOR 1_TR 2 Mellersta fönsterraden i rutan
+FLOOR BV 1 Nedersta fönsterraden ovanför sockeln
+FLOOR KÄLLARE 0 Källarfönster i sockeln
+REGION 0 0 1936 1936
+L 1_TR 2 872 - Golvlinje härledd från fönstrens underkant 740 + bröstning 0,80
+L BV 1 1298 text=+26,35 Golvlinje härledd från entréns marknivå +24,85 vid y 1570 plus 1,50 m
+L KÄLLARE 0 1790 text=+23,35 Källargolv (streckad linje längst ned)
+V window 120 470 240 270 sill=740 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1170 500 250 280 sill=780 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1660 500 120 280 sill=780 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+V window 120 960 220 270 sill=1230 floor=BV conf=0.8 Fönster i BV
+V window 1180 1000 220 250 sill=1250 floor=BV conf=0.8 Fönster i BV
+V window 1750 1000 186 250 sill=1250 floor=BV conf=0.5 Fönster i BV, avskuret
+V door 680 1230 150 330 floor=BV conf=0.7 Trapphusentré med portal, tröskel +24,85
+V window 680 290 190 190 floor=2_TR conf=0.5 Burspråkets fönster (halvplan) ovanför balkongen
+V door 680 760 190 180 floor=1_TR conf=0.4 Balkongdörr i burspråket (halvplan)
+V window 150 1390 150 80 sill=1470 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 1210 1410 150 80 sill=1490 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+GND 1570 Marklinje vid entrén, skriven plushöjd +24,85
+ROOF - Taket ligger utanför rutan
+REF level_difference 760 1570 760 1790 +24,85_till_+23,35 mm=1500 Marknivå vid entrén och källargolv (streckad linje)
+N Höger om x≈1500 fortsätter fasaden mot hörnflygeln (valv/passage vid x≈1600).

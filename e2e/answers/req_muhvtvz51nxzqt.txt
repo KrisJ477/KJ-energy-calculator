@@ -1,0 +1,26 @@
+W f1 0 1445 1936 1445 50 0.85 södra källarfasaden (gårdsfasad, dubbellinje) med källarfönster
+W a1 620 0 620 1445 50 0.8 tjock murad vägg (dubbellinje med sektionslinje) tvärs källaren
+W p1 1050 0 1050 290 20 0.5 entréns vägg, fortsätter från rutan ovanför
+W p2 1560 0 1560 290 20 0.5 entréns vägg, fortsätter från rutan ovanför
+W s1 1070 300 1070 650 15 0.6 vägg mellan förrådet och trapphus TC:0
+W s2 1580 290 1580 650 15 0.6 vägg mellan TC:0 och CYKEL- O BARNVAGNSRUM
+W m1 0 685 1936 685 60 0.7 tjock murad vägg (två linjer ca 60 px isär) mellan trapphus/förråd och gången
+W m2 0 900 1936 900 20 0.6 gångens nedre vägg mot förråden
+W c1 130 905 290 1420 12 0.5 snedställd förrådsvägg (tunn dubbellinje)
+W c2 940 905 1030 1420 12 0.5 snedställd förrådsvägg
+W c3 1320 905 1330 1420 12 0.5 förrådsvägg
+W c4 1720 905 1650 1420 12 0.5 snedställd förrådsvägg
+O window f1 330 1445 500 1445 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 930 1445 1100 1445 conf=0.7 källarfönster
+O window f1 1560 1445 1730 1445 conf=0.7 källarfönster
+R TC:0 stairwell 1290 460 conf=0.8 trapphus TC:0 med trappa
+R CYKEL_O_BARNVAGNSRUM storage 1780 330 conf=0.8 texten CYKEL O BARNVAGNSRUM
+R - corridor 900 800 conf=0.4 omärkt gång mellan förråden
+R - storage 600 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1180 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1500 1150 heated=0 conf=0.4 omärkt förrådscell
+T room_name 1290 460 TC:0
+T room_name 1780 330 CYKEL O BARNVAGNSRUM
+T other 1330 40 B60
+T other 1400 100 BD1h
+N De snedställda tunna dubbellinjerna är förrådsväggar (nätväggar?). Förråden saknar rumstexter; enligt briefen är de kalla eller halvvarma. Nedre delen av rutan är tomt papper.

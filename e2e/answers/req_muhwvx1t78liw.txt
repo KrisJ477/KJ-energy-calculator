@@ -1,0 +1,14 @@
+W e1 0 540 830 180 30 0.7 hörnflygelns nordvästra yttervägg/knävägg på vinden (dubbellinje); tunn linje utanför = takfot
+W e2 830 180 1680 1936 30 0.7 hörnflygelns nordöstra långsida på vinden (dubbellinje, knävägg under snedtaket)
+W w1 760 1400 1290 1120 25 0.7 skrafferad ny vägg mellan BEF. FÖRRÅD och VINDSRUM 4:8
+W w2 1290 1120 1480 1500 25 0.7 skrafferad ny vägg (VINDSRUM 4:8 mot takkupan/nordöstra sidan)
+W w4 600 1500 780 1780 25 0.6 skrafferad ny vägg med dörr YD2h (B30) mellan förrådet och VINDSRUM 4:8
+R BEF._FÖRRÅD storage 600 800 heated=0 conf=0.8 texten BEF. FÖRRÅD, befintligt vindsförråd (kallvind enligt briefen)
+R VINDSRUM living 1170 1720 apt=4 conf=0.8 texten VINDSRUM 4:8, uppvärmt vindsrum till lgh 4
+R D. bathroom 870 1900 apt=4 conf=0.4 texten D. (dusch), fortsätter i rutan nedanför
+T room_name 600 800 BEF. FÖRRÅD
+T room_name 1170 1720 VINDSRUM 4:8
+T other 700 1740 YD2h
+T other 840 1740 B30
+T other 1560 1560 F4
+N Blocket vid x≈540–800, y≈1280–1520 är en trappa/skorstensstock, inte ett rum. Streckade linjer parallellt med nordöstra väggen markerar takkupan (se ritn. A30:19). Yttre tunna linjer är takfoten.

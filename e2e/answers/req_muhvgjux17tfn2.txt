@@ -1,0 +1,17 @@
+W f1 0 1678 1936 1678 45 0.85 källarfasad mot gatan (dubbellinje) med källarfönster och entré
+W i1 610 1700 610 1936 20 0.6 innervägg (dubbellinje) mellan källarutrymmen
+W p1 1200 1700 1040 1850 20 0.6 trapphusets snedställda vägg vänster
+W p2 1040 1850 1040 1936 20 0.6 trapphusvägg vänster
+W p3 1440 1700 1540 1800 20 0.6 trapphusets snedställda vägg höger
+W p4 1540 1800 1540 1936 20 0.6 trapphusvägg höger
+W s2 1590 1700 1590 1936 15 0.5 vägg mellan trapphuset och källarutrymme till höger
+W c1 1860 120 1936 250 45 0.5 hörnflygelns fasad (dubbellinje) i övre högra hörnet
+O window f1 100 1678 250 1678 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 720 1678 870 1678 conf=0.7 källarfönster
+O door f1 1210 1678 1400 1678 conf=0.6 ytterdörr YD1 bv med skärmtak ritat ovanför
+O window f1 1700 1678 1900 1678 conf=0.6 källarfönster
+R - stairwell 1300 1900 conf=0.5 trapphus innanför entrén (B60/BD1h-dörrar)
+T other 1300 1720 YD1 bv
+T other 1330 1790 B60
+T other 1400 1860 BD1h
+N Diagonala tunna dubbla linjer vid x≈170–230 är troligen en trappa/ramp, inte en vägg. Den tunna diagonala linjen uppe till höger är en sektionslinje.

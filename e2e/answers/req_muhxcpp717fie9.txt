@@ -1,0 +1,29 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_hörnflygelns_nedre_del stamp=- bar=0 dims=1 clarity=0.6 compl=0.7 role=base rolewhy=1924_fasad_för_fönsterräkning Hörnflygelns GÅRDSFASAD, nedre del: fönster i 2 TR (avskurna) och 1 TR, trapphusets burspråk med balkongdörr och halvplansfönster, entréportal med tandsnittsvalv i BV (mark +24,60), bostadsfönster och källarfönster till höger, valvöppningar till vänster, sockel +25,55, streckad linje +23,35 och en vägg-/bjälklagssektion längst till höger (x>1690).
+FLOOR 2_TR 3 Bjälklag i sektionen till höger (y≈350) och övre fönsterraden
+FLOOR 1_TR 2 Bjälklag i sektionen till höger (y≈830)
+FLOOR BV 1 Bjälklag i sektionen till höger (y≈1300), +26,35
+FLOOR KÄLLARE 0 Källargolv +23,35 (streckad linje y≈1790, grundsula i sektionen)
+REGION 0 0 1936 1936
+L 2_TR 3 350 - Bjälklagslinje i väggsektionen längst till höger (x 1690–1936)
+L 1_TR 2 830 - Bjälklagslinje i väggsektionen till höger
+L BV 1 1300 text=+26,35 Bjälklagslinje i väggsektionen till höger; mark +24,60 (y 1560) plus 1,75 m ger 1271
+L KÄLLARE 0 1790 text=+23,35 Streckad linje med skriven plushöjd +23,35 (x≈1160)
+F 2_TR 1_TR 480 - Avstånd mellan bjälklagslinjerna i sektionen (3,00 enligt kedjan)
+F 1_TR BV 470 - Avstånd mellan bjälklagslinjerna i sektionen
+F BV KÄLLARE 490 - Härledd; sektionen anger 3,00
+V window 240 0 260 210 sill=210 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret av rutans överkant
+V window 1230 0 250 220 sill=220 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret
+V door 750 200 190 340 sill=540 floor=2_TR conf=0.5 Balkongdörr i trapphusets burspråk (halvplan) bakom balkongräcket 410–540
+V window 240 400 260 300 sill=700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1230 410 250 290 sill=700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 750 680 190 180 sill=860 floor=1_TR conf=0.5 Halvplansfönster i trapphusets burspråk under balkongen
+V door 700 1040 300 480 sill=1520 floor=BV conf=0.7 Entréportal med rundbågigt överljus och tandsnittsvalv; mark +24,60 vid trappan
+V window 1250 930 200 250 sill=1180 floor=BV conf=0.8 Bostadsfönster i BV (två lufter)
+V window 1250 1330 200 150 sill=1480 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V door 180 960 350 600 sill=1560 floor=BV conf=0.3 Rundbågig valvöppning (arkad/portgång) i BV
+V door 0 1040 80 520 sill=1560 floor=BV conf=0.2 Rundbågig valvöppning, avskuren i vänsterkanten
+GND 1560 Marklinje med skriven plushöjd +24,60 vid entrén (x≈820)
+ROOF - Taket ligger utanför rutan
+REF level_difference 1080 1390 1080 1560 +25,55_till_+24,60 mm=950 Skrivna plushöjder sockel +25,55 (nivåpil x≈1080) och mark +24,60
+REF level_difference 1160 1560 1160 1790 +24,60_till_+23,35 mm=1250 Skrivna plushöjder mark +24,60 och källargolv +23,35 (streckad linje)
+N Den lodräta streckprickade linjen vid x≈110 är en sektionslinje. Väggsektionen längst till höger (x>1690) visar bjälklagen och grundmuren; den är inte en fasadöppning.

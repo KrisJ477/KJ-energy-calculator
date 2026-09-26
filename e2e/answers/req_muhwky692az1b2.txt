@@ -1,0 +1,15 @@
+W f1 0 440 870 440 50 0.85 huvudlängans södra fasadvägg (dubbellinje) med fönster
+W e4 870 440 1210 280 45 0.7 ytterväggen viker av mot hörnflygeln
+W e3 1210 280 1850 0 45 0.8 hörnflygelns sydvästra yttervägg mot gården med glasparti GP1
+W g1 990 0 1130 285 40 0.6 tjock dubbellinje mellan LAGER L2:6 och BUTIK L2:7, fortsätter från rutan ovanför
+W w1 370 0 370 440 25 0.6 vägg mellan LAGER L2:5 och LAGER L2:6
+O window f1 130 440 450 440 conf=0.6 fönstersymbol i gårdsfasaden
+O window f1 650 440 760 440 conf=0.5 fönstersymbol i gårdsfasaden
+O window e3 1230 270 1500 110 conf=0.7 glasparti GP1 (butiksfönster)
+R LAGER storage 720 100 apt=L2 conf=0.4 LAGER L2:6, rummet fortsätter i rutan ovanför
+R BUTIK shop 1500 100 apt=L2 conf=0.3 BUTIK L2:7, rummet fortsätter i rutan ovanför
+T other 1330 280 GP1
+T dimension 450 1830 skalstock 6–10 M
+T other 1450 1300 kvarnström arkitektkontor ab
+T other 1100 1860 1986.04.10
+N Nedre delen av rutan är ritningshuvudet med skalstock (0–10 M, delstreck 6–10 synliga) och arkitektkontorets stämpel; inga väggar där.

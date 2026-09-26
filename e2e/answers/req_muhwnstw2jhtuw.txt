@@ -1,0 +1,35 @@
+CLASS type=plan sub=- disc=architectural part= stamp=- bar=1 dims=1 clarity=0.55 compl=0.95 1924 års bygglovsritning "PLAN AV FÖRSTA VÅNINGEN" (296424) = BV enligt briefens alias-tabell. Måttkedjor längs gårdsfasaden (totalt 31,45 m), gavlarna (4,95 + 5,05) och hörnflygeln (Mariagatan 19,60). Skalstock 0–30 M nederst.
+FLOOR FÖRSTA_VÅNINGEN 1 Rubriken PLAN AV FÖRSTA VÅNINGEN = Plan 1 vån = BV (nivå 1) enligt briefen.
+REGION 456 376 1505 969
+OUTLINE 496,912 1231,912 1231,570 1420,455 1700,1030 1540,1180 496,1237
+RR KÖK 547 994
+RR RUM 787 994
+RR KÖK 1123 994
+RR TAMB 1215 1040
+RR RUM 1322 1163
+RR LAGER 1471 1163
+RR BUTIK 1585 1043
+RR BUTIK 1528 906
+RR LAGER 1471 809
+RR KÖK 1317 827
+RR INFART 1288 587
+RR RUM 1414 680
+RR RUM 570 1163
+RR KÖK 690 1163
+RR RUM 798 1163
+RR RUM 929 1163
+RR RUM 1066 1163
+RR KÖK 1208 1163
+REF dimension 496 1328 1511 1328 31,45 mm=31450 Nedersta måttkedjan längs gårdsfasaden (Strandridaregatan), totalmått 31,45 mellan gavlarnas ytterliv; lågupplöst avläsning av ändpunkterna.
+REF dimension 496 1328 849 1328 11,00 mm=11000 Delmått 11,00 i kedjan ovanför totalmåttet (västra delen).
+REF dimension 849 1328 1151 1328 9,20 mm=9200 Delmått 9,20 (mittdelen).
+REF dimension 1151 1328 1511 1328 11,25 mm=11250 Delmått 11,25 (östra delen).
+REF dimension 471 912 471 1072 4,95 mm=4950 Lodrät måttkedja vid västra gaveln, norra rumsraden 4,95.
+REF dimension 471 1083 471 1237 5,05 mm=5050 Lodrät måttkedja vid västra gaveln, södra rumsraden 5,05.
+REF scale_bar 684 1414 1659 1414 0–30_M mm=30000 Skalstock nederst, 0 till 30 M; lågupplöst avläsning.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE PLAN AV FÖRSTA VÅNINGEN
+TITLE 296424, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Måttkedjornas ändpunkter är avlästa på den lågupplösta översikten (osäkerhet ca ±10 bildpixlar); mät om på fullupplöst bild innan skalan fastställs. Fler delmått finns i kedjorna (2,30, 3,80, 3,60, 3,80, 4,00, 2,70, 2,25, 3,50, 3,50, 2,00 samt 4,95, 2,80, 3,25, 4,25, 4,95, 3,25, 4,90, 3,10).
+N Hörnflygeln har egna måttkedjor längs Mariagatan (19,60) och gårdssidan (3,60, 4,05, 3,70, 3,00 m.m.) samt plushöjder (+24,60 butik, +26,35 bostad). Planterad terrass utanför hörnflygeln är inte byggnad.
+N 1924 års innerväggar gäller inte längre (ombyggt 1988); använd bara stommen. Arkivlinjal och bildnummer nederst ska ignoreras.

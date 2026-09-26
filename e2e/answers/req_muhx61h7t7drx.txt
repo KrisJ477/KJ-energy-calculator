@@ -1,0 +1,21 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_nedre_vänstra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Nedre vänstra delen av gatufasaden: BV-fönster, portalen (PORT) längst till vänster, sockel +25,05, marklinje +24,46, källargolv +23,35 (streckad), källarfönster i sockeln, burspråk till höger.
+FLOOR 1_TR 2 Fönsterunderkanter längst upp i rutan
+FLOOR BV 1 Fönsterraden ovanför sockeln
+FLOOR KÄLLARE 0 Källarfönster i sockeln, källargolv +23,35
+REGION 0 0 1936 1936
+L BV 1 1278 text=+26,35 Golvlinje härledd: marklinje +24,46 vid y 1590 plus 1,89 m (165 px/m)
+L KÄLLARE 0 1830 text=+23,35 Källargolv med skriven plushöjd +23,35 (streckad linje)
+F KÄLLARE BV 552 - Härledd; skriven skillnad 3,00 m i sektionen
+V window 620 410 230 280 sill=690 floor=BV conf=0.8 Fönster i BV
+V window 1210 420 240 280 sill=700 floor=BV conf=0.8 Fönster i BV
+V window 1760 430 176 270 sill=700 floor=BV conf=0.5 Burspråksfönster i BV, avskuret i högerkanten
+V window 620 0 230 170 sill=170 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret av rutans överkant
+V window 1210 0 240 170 sill=170 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+V door 50 950 250 490 floor=BV conf=0.6 Portöppning (PORT) med valv längst till vänster
+V window 660 1400 160 70 sill=1470 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 1260 1410 150 70 sill=1480 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+GND 1590 Marklinje med skriven plushöjd +24,46; sockelns överkant +25,05 vid y≈1470
+ROOF - Taket ligger utanför rutan
+REF level_difference 380 1590 380 1830 +24,46_till_+23,35 mm=1110 Skrivna plushöjder vid marklinjen och källargolvet (streckad linje)
+REF level_difference 380 1470 380 1590 +25,05_till_+24,46 mm=590 Sockelns överkant +25,05 och marklinjen +24,46
+N Marklinjen lutar svagt; plushöjderna gäller vid den lodräta linjen x≈380.

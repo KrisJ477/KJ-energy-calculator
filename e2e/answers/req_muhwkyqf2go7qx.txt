@@ -1,0 +1,12 @@
+W w7 230 0 230 440 15 0.7 vägg mellan rummet till vänster och RUM 6:6
+W f1 0 440 730 440 50 0.85 huvudlängans södra fasadvägg (dubbellinje) med fönster
+W e3 730 440 1320 175 45 0.7 ytterväggen viker av mot hörnflygeln
+W e2 1320 175 1700 0 45 0.8 hörnflygelns sydvästra yttervägg vid hörnet, balkongdörr mot balkongen nedanför
+W a1 890 0 1010 335 35 0.6 lägenhetsskiljande vägg mellan RUM 6:6 och RUM 5:8, fortsätter från rutan ovanför
+O window f1 300 440 520 440 conf=0.8 fönstersymbol i gårdsfasaden, RUM 6:6
+O door e2 1130 265 1320 175 conf=0.5 balkongdörr (tunna linjer) mot balkongen
+R RUM living 460 60 apt=6 conf=0.4 RUM 6:6, rummet fortsätter i rutan ovanför
+R RUM living 1240 60 apt=5 conf=0.4 RUM 5:8, rummet fortsätter i rutan ovanför
+T dimension 400 1800 skalstock 7–10 M
+T other 1300 1300 kvarnström arkitektkontor ab
+N Rektangeln under hörnväggen (x≈1100–1420, y≈200–400) är en balkong. Nedre delen av rutan är ritningshuvudet med skalstock och stämpel; inga väggar där.

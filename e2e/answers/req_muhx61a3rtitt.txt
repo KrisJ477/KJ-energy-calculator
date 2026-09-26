@@ -1,0 +1,20 @@
+W sw1 626 0 930 804 30 0.7 hörnflygelns sydvästra knävägg (dubbellinje), fortsätter från rutan ovanför
+W e2 1720 0 1936 344 30 0.6 hörnflygelns nordöstra knävägg (dubbellinje), fortsätter från rutan ovanför
+W e3 1936 1560 1415 1720 30 0.5 hörnflygelns sydöstra gavel/knävägg, ansluter till huvudlängans södra fasad
+W f1 1120 144 1450 0 25 0.7 skrafferad ny vägg, FÖRRÅD 4:9:s nordvästra sida
+W f2 1626 0 1780 324 25 0.7 skrafferad ny vägg, FÖRRÅD 4:9:s nordöstra sida
+W f3 1780 324 1120 654 25 0.7 skrafferad ny vägg, FÖRRÅD 4:9:s sydöstra sida
+W f4 1000 404 1120 654 25 0.6 skrafferad ny vägg, FÖRRÅD 4:9:s sydvästra sida
+W wc1 760 0 900 204 20 0.6 skrafferad vägg runt D./WC 4:10
+W wc2 900 204 1060 134 15 0.5 vägg mellan WC 4:10 och FÖRRÅD 4:9, dörr S8bh
+W s1 0 1734 1415 1734 25 0.7 huvudlängans södra knävägg/fasad på vinden (dubbellinje)
+R FÖRRÅD storage 280 1294 heated=0 conf=0.7 texten FÖRRÅD (vindsförråd i långa flygeln, kallvind)
+R TORKVIND other 660 1294 heated=0 conf=0.8 texten TORKVIND (kallvind enligt briefen)
+R FÖRRÅD storage 1440 274 apt=4 conf=0.8 texten FÖRRÅD 4:9 (inredd del av hörnflygelns vind)
+R WC wc 900 30 apt=4 conf=0.5 texten WC 4:10, avskuret upptill
+R - storage 1400 1000 heated=0 conf=0.3 omärkt del av hörnflygelns vind sydost om FÖRRÅD 4:9
+T room_name 280 1294 FÖRRÅD
+T room_name 660 1294 TORKVIND
+T room_name 1440 274 FÖRRÅD 4:9
+T other 1200 124 S8bh
+N Rektangel- och L-formade symboler är murstockar; tunna dubbellinjer utanför knäväggarna är takfot/takbrott. Streckad linje vid y≈820 är takbrottet, inte en vägg.

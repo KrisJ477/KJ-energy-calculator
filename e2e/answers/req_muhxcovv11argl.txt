@@ -1,0 +1,21 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_hörnpartiets_nedre_del stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Hörnpartiets nedre del: balkonger med balkongdörrar i 2 TR och 1 TR, stort butiksfönster i BV, källarfönster, sockel +25,55, marklinje +24,06, måttet 7,00 för hörnpartiet och terrassräcket till höger om hörnet (x≈960).
+FLOOR 2_TR 3 Övre balkongen
+FLOOR 1_TR 2 Nedre balkongen
+FLOOR BV 1 Butiksfönstret ovanför sockeln
+FLOOR KÄLLARE 0 Källarfönster i sockeln, källargolv +23,35
+REGION 0 0 1936 1936
+L 2_TR 3 355 - Golvlinje härledd: balkongplattan vid y≈380 och 3,00 m över 1 TR
+L 1_TR 2 845 - Golvlinje härledd: balkongplattan vid y≈860 och 3,00 m över BV
+L BV 1 1335 text=+26,35 Golvlinje härledd: sockelns överkant +25,55 (y 1470) plus 0,80 m; marklinjen +24,06 ger 1312
+L KÄLLARE 0 1880 text=+23,35 Streckad linje längst ned (källargolv +23,35 enligt de andra rutorna)
+F 1_TR 2_TR 490 - Härledd; sektionen anger 3,00
+F BV 1_TR 490 - Härledd; sektionen anger 3,00
+V door 360 0 240 380 sill=380 floor=2_TR conf=0.6 Balkongdörr i 2 TR bakom balkongräcket (260–380), avskuren av rutans överkant
+V door 360 490 240 370 sill=860 floor=1_TR conf=0.7 Balkongdörr i 1 TR bakom balkongräcket (730–860)
+V window 310 980 310 490 sill=1470 floor=BV conf=0.5 Stort butiksfönster/glasparti i BV ned till sockeln
+V window 390 1520 145 80 sill=1600 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+GND 1690 Marklinje med skriven plushöjd +24,06 vid hörnet (x≈960)
+ROOF - Taket ligger utanför rutan
+REF dimension 0 1700 960 1700 7,00 mm=7000 Skrivet mått 7,00 längs nederkanten; vänstra änden utanför rutan (hörnflygelns gräns), högra änden vid hörnet x≈960
+REF level_difference 960 1470 960 1690 +25,55_till_+24,06 mm=1490 Skrivna plushöjder sockel +25,55 och mark +24,06 vid hörnet
+N Till höger om hörnet (x>960) ligger terrassen med räcke (+24,85) och trappa; räcket är inte en öppning. Golvlinjerna är osäkra (±0,3 m) eftersom balkongplattorna ligger något under de härledda golvnivåerna.

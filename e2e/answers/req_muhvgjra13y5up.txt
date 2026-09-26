@@ -1,0 +1,26 @@
+W f1 0 1545 1936 1545 40 0.85 fasadvägg (dubbellinje) med fönster och trapptorn
+W i1 514 1560 514 1936 12 0.65 vägg mellan KÖK 16:4 och KÖK 12:2 (tjock linje, garderober f/f och k/5 intill)
+W s1 915 1560 915 1936 15 0.6 lägenhetsvägg mellan KÖK 12:2 och trapphuset (tunn dubbellinje)
+W p1 1130 1560 985 1700 20 0.7 trapphusets snedställda vägg vänster
+W p2 985 1700 985 1936 20 0.7 trapphusvägg vänster
+W p3 1310 1560 1440 1700 20 0.7 trapphusets snedställda vägg höger
+W p4 1440 1700 1440 1936 20 0.7 trapphusvägg höger
+W s2 1510 1560 1510 1936 15 0.6 lägenhetsvägg mellan trapphuset och KÖK 11:1
+W c1 1800 30 1936 280 45 0.5 hörnflygelns fasad (dubbellinje), fortsätter i rutorna ovanför och till höger
+O window f1 0 1545 185 1545 conf=0.6 fönster, fortsätter utanför rutan till vänster
+O window f1 612 1545 830 1545 conf=0.8 fönstersymbol i fasaden
+O window f1 1130 1545 1310 1545 conf=0.7 fönster F6 ovanför entrén
+O window f1 1620 1545 1820 1545 conf=0.8 fönstersymbol i fasaden
+R KÖK kitchen 90 1880 apt=16 conf=0.8 texten KÖK 16:4 med köksinredning
+R KÖK kitchen 710 1880 apt=12 conf=0.8 texten KÖK 12:2
+R - stairwell 1215 1820 conf=0.8 trapphus med svängd trappa, pil och B30-dörr
+R KÖK kitchen 1700 1880 apt=11 conf=0.8 texten KÖK 11:1 med skåp sk/st
+T room_name 90 1880 KÖK
+T room_name 710 1880 KÖK
+T room_name 1700 1880 KÖK
+T other 1200 1500 F6
+T fixture 430 1610 f/f
+T fixture 430 1690 k/5
+T fixture 1470 1650 k/f
+T other 1330 1910 B30
+N Streckade lodräta linjer vid x≈497, 1080 och 1355 är brand-/sektionsmarkeringar, inte väggar. Övre delen av rutan är tomt papper.

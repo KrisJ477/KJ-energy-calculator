@@ -1,0 +1,46 @@
+W f1 0 150 1936 150 40 0.9 norra fasadväggen (skrafferad yttervägg med fönster och balkongdörrar)
+W f2 170 1690 1936 1690 40 0.9 södra fasadväggen mot gården (skrafferad yttervägg)
+W f3 0 1620 170 1620 40 0.7 fasadens indrag väster om x 170
+W p1 400 150 400 830 25 0.8 lägenhetsgräns D1506/D1507 (EI60-linje)
+W p2 400 830 1936 830 25 0.8 vägg mellan lägenheterna i norr och korridoren/D1506
+W p3 960 830 960 1050 25 0.8 trapphusets västra vägg
+W p4 960 1050 1936 1050 25 0.8 trapphusets södra vägg / D1505 norra vägg
+W p5 1110 1050 1110 1690 25 0.8 lägenhetsgräns D1506/D1505
+W p6 1230 150 1230 830 25 0.8 lägenhetsgräns D1507/D1508
+W p7 1810 520 1810 1050 25 0.8 hisschaktets/TH E:s västra vägg
+W p8 1810 520 1936 520 25 0.8 hisschaktets norra vägg
+W b1 640 600 970 600 12 0.7 badrumsvägg D1507
+W b2 640 600 640 830 12 0.7 badrumsvägg D1507
+W b3 970 600 970 830 12 0.7 badrumsvägg D1507
+W b4 1240 570 1560 570 12 0.7 badrumsvägg D1508
+W b5 1560 570 1560 830 12 0.7 badrumsvägg D1508
+W b6 170 650 390 650 12 0.7 badrumsvägg D1506
+W b7 390 650 390 1090 12 0.7 badrumsvägg D1506
+W b8 170 1090 390 1090 12 0.7 badrumsvägg D1506
+W b9 170 650 170 1090 12 0.7 badrumsvägg D1506
+W b10 1340 1050 1340 1370 12 0.7 badrumsvägg D1505
+W b11 1120 1370 1340 1370 12 0.7 badrumsvägg D1505
+W b12 860 1230 1110 1230 12 0.7 vägg WC D1506
+W b13 860 1230 860 1370 12 0.7 vägg WC D1506
+W b14 860 1370 1110 1370 12 0.7 vägg WC D1506
+O window f1 60 150 215 150 conf=0.8 fönster norra fasaden
+O window f1 540 150 700 150 conf=0.8 fönster norra fasaden
+O door f1 940 150 1095 150 conf=0.7 balkongdörr norra fasaden
+O door f1 1370 150 1610 150 conf=0.7 balkongdörr med sidofönster norra fasaden
+O window f1 1760 150 1936 150 conf=0.7 fönster norra fasaden
+O window f2 270 1690 510 1690 conf=0.8 fönster södra fasaden (balkong)
+O window f2 610 1690 780 1690 conf=0.8 fönster södra fasaden
+O window f2 870 1690 1050 1690 conf=0.8 fönster södra fasaden
+O window f2 1350 1690 1510 1690 conf=0.8 fönster södra fasaden
+O window f2 1660 1690 1930 1690 conf=0.8 fönster/balkongdörr södra fasaden
+R 2_RoK_D1507 living 1050 400 apt=D1507 conf=0.9 lägenhetstext "2 RoK D1507 32,6 m²"
+R 1_RoK_D1508 living 1650 350 apt=D1508 conf=0.9 lägenhetstext "1 RoK D1508 27,2 m²"
+R 4_RoK_D1506 living 500 1300 apt=D1506 conf=0.9 lägenhetstext "4 RoK D1506 77,3 m²" (L-formad lägenhet)
+R TH stairwell 1400 940 conf=0.9 text "TH 9,8 m²"
+R 2_RoK_D1505 living 1600 1400 apt=D1505 conf=0.9 lägenhetstext "2 RoK D1505 33,5 m²"
+R - bathroom 800 720 apt=D1507 conf=0.8 KM + klinker
+R - bathroom 1400 700 apt=D1508 conf=0.8 KM + klinker
+R - bathroom 280 880 apt=D1506 conf=0.8 TM/TT + klinker
+R - bathroom 1230 1200 apt=D1505 conf=0.8 KM + klinker
+R - wc 980 1300 apt=D1506 conf=0.7 WC med klinker
+N EI60-linjer (röda) och balkonger utanför fasaden ignorerade som väggar; balkonger är utomhus.

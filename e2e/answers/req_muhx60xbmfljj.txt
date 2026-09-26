@@ -1,0 +1,25 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_nedre_vänstra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gårdsfasad_för_fönsterräkning Nedre delen av gårdsfasaden vid sektionen: BV-fönster, entréportal med marknivå +24,60, runt fönster, källarfönster i sockeln; sektionens bjälklagslinjer syns till vänster.
+FLOOR 2_TR 3 Bjälklagslinje i sektionsdelen
+FLOOR 1_TR 2 Bjälklagslinje i sektionsdelen
+FLOOR BV 1 Bjälklagslinje i sektionsdelen (+26,35)
+FLOOR KÄLLARE 0 Källargolv i sektionsdelen (+23,35)
+REGION 0 0 1936 1936
+L 2_TR 3 330 - Bjälklagslinje i sektionsdelen till vänster (x<740)
+L 1_TR 2 810 - Bjälklagslinje i sektionsdelen
+L BV 1 1290 text=+26,35 Bjälklagslinje i sektionsdelen, samma som +26,35 i sektionen
+L KÄLLARE 0 1780 text=+23,35 Källargolv i sektionsdelen
+F 1_TR 2_TR 480 - Avstånd mellan bjälklagslinjerna
+F BV 1_TR 480 - Avstånd mellan bjälklagslinjerna
+F KÄLLARE BV 490 - Avstånd mellan bjälklagslinjerna
+V window 1000 420 220 270 sill=690 floor=BV conf=0.8 Fönster i BV på gårdsfasaden
+V window 1400 430 220 270 sill=700 floor=BV conf=0.8 Fönster i BV
+V window 1000 0 220 200 sill=200 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret av rutans överkant
+V window 1400 0 220 210 sill=210 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+V door 1000 1160 180 370 floor=BV conf=0.7 Entréportal med välvt överljus, tröskel vid +24,60
+V window 800 960 120 120 floor=BV conf=0.6 Runt fönster vid entrén
+V window 800 1330 100 70 sill=1400 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 1400 1340 210 170 sill=1510 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+GND 1550 Marklinje vid entrén med skriven plushöjd +24,60
+ROOF - Taket ligger utanför rutan
+REF level_difference 1100 1550 1100 1780 +24,60_till_+23,35 mm=1250 Marknivå +24,60 vid entrén och källargolv +23,35 (streckad linje längst ned)
+N Källargolvet +23,35 markeras av den streckade linjen vid y≈1780.

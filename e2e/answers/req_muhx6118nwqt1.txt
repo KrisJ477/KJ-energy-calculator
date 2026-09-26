@@ -1,0 +1,22 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_nedre_mitten stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=gårdsfasad_för_fönsterräkning Nedre mittdelen av gårdsfasaden: 1 TR- och BV-fönster, trapphusentré med portal (+24,70), sockel +25,55, källarfönster, burspråkets nedre fönster.
+FLOOR 1_TR 2 Mellersta fönsterraden i rutan
+FLOOR BV 1 Nedersta fönsterraden ovanför sockeln
+FLOOR KÄLLARE 0 Källarfönster i sockeln
+REGION 0 0 1936 1936
+L 1_TR 2 850 - Golvlinje härledd från fönstrens underkant 720 + bröstning 0,80
+L BV 1 1271 text=+26,35 Golvlinje härledd: entréns marknivå +24,70 vid y 1560 plus 1,65 m (165 px/m)
+L KÄLLARE 0 1766 text=+23,35 Källargolv 3,00 m under BV (streckad linje längst ned)
+F BV 1_TR 421 - Härledd; skalan i denna ruta är osäker, använd sektionens 3,00
+V window 620 460 250 260 sill=720 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1290 450 240 300 sill=750 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 630 960 210 260 sill=1220 floor=BV conf=0.8 Fönster i BV
+V window 1290 970 220 250 sill=1220 floor=BV conf=0.8 Fönster i BV
+V door 150 1080 190 450 floor=BV conf=0.7 Trapphusentré med portal och välvt överljus, tröskel +24,70
+V window 150 720 180 180 floor=1_TR conf=0.5 Burspråkets nedre fönster (halvplan)
+V window 650 1370 150 80 sill=1450 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 1310 1390 150 80 sill=1470 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V window 1820 1000 116 260 sill=1260 floor=BV conf=0.4 Fönster i BV, avskuret i högerkanten
+GND 1560 Marklinje vid entrén, skriven plushöjd +24,70; sockelns överkant +25,55
+ROOF - Taket ligger utanför rutan
+REF level_difference 1000 1560 1000 1766 +24,70_till_+23,35 mm=1350 Marknivå +24,70 och källargolv +23,35 (streckad linje längst ned)
+N Fönsterrader: 2 TR-fönstrens underkanter syns längst upp (avskurna).
