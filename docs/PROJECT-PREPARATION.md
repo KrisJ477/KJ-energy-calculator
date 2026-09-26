@@ -101,8 +101,9 @@ guess for a fact.
 
 ## 4. What we learned from the test projects
 
-Two projects were used for test reads (drafts of their briefs were produced
-with the user and are kept outside this repository):
+Two projects were used for test reads (their briefs were produced with the user
+and are stored as `projektbrief.md` in each project's Google Drive folder, not in
+this repository):
 
 - **Forsåker Kv 39**: a new-build CAD project (ArchiCAD PDFs, 1:50, very large
   sheets, text layer and named layers).
