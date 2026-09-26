@@ -1,6 +1,6 @@
 // Derivation pipeline: project → per-level geometry → floor/ceiling pieces → calculation model → results.
 // Pure with respect to the project (never mutates it). Views and the calculation read from here.
-import { cleanupWalls, buildRooms, snapToleranceMm, floorPieces, slabZones, roomSlabSplit, polygonArea, shapeArea, unionShapes, offsetPolygonInward, applyTransform, transformShape, dist, sub, cross, projectOnSegment, multiArea, bbox } from '../engine/geometry.js';
+import { cleanupWalls, buildRooms, snapToleranceMm, floorPieces, slabZones, roomSlabSplit, polygonArea, shapeArea, unionShapes, offsetPolygonInward, applyTransform, transformShape, dist, sub, cross, projectOnSegment, multiArea, bbox, minWidth } from '../engine/geometry.js';
 import { typeU, constructionU } from '../engine/uvalue.js';
 import { calculate } from '../engine/calc.js';
 import { sortedLevels } from './model.js';
@@ -89,21 +89,26 @@ export function levelGeometry(project, level) {
   const { walls: cleaned, log } = cleanupWalls(walls, tolMm, { bandMm });
   const separators = levelSeparators(project, level);
   const built = buildRooms(cleaned, separators, { tol: tolMm });
+  // a face narrower than the sliver width or smaller than the sliver area is a gap between double-drawn walls, not a room (SPEC 3.4)
+  const sliverWidthMm = project.config.sliverWidthMm ?? 150;
+  const sliverAreaM2 = project.config.sliverAreaM2 ?? 0.1;
+  const faceRooms = built.rooms.map((face) => ({ face, record: null, sliver: scaled && (face.areaM2 < sliverAreaM2 || minWidth(face.centerline) < sliverWidthMm) }));
+  // building outline from the overview read, in the level frame: tells exterior walls from walls facing an unread interior region
+  const outlineMm = baseSheet && baseSheet.buildingOutline && baseSheet.buildingOutline.length >= 3 ? baseSheet.buildingOutline.map((p) => sheetToLevel(baseSheet).apply(p)) : null;
   // match faces to room records by anchor
   const records = project.rooms.filter((r) => r.level === level);
-  const faceRooms = built.rooms.map((face) => ({ face, record: null }));
   const usedRecords = new Set();
   for (const rec of records) {
     const anchor = roomAnchor(project, rec);
     if (!anchor) continue;
-    const hit = faceRooms.find((fr) => !fr.record && pointIn(anchor, fr.face.centerline));
+    const hit = faceRooms.find((fr) => !fr.record && !fr.sliver && pointIn(anchor, fr.face.centerline));
     if (hit) {
       hit.record = rec;
       usedRecords.add(rec.id);
     }
   }
   const orphanRecords = records.filter((r) => !usedRecords.has(r.id));
-  return { level, lvlRec, walls: cleaned, rawWalls: walls, separators, tolMm, cleanupLog: log, faces: built.rooms, edges: built.edges, dangling: built.dangling, faceRooms, orphanRecords, scaled, mmPerPx, baseSheet };
+  return { level, lvlRec, walls: cleaned, rawWalls: walls, separators, tolMm, cleanupLog: log, faces: built.rooms, edges: built.edges, dangling: built.dangling, faceRooms, orphanRecords, scaled, mmPerPx, baseSheet, outlineMm };
 }
 function pointIn(p, poly) {
   let inside = false;
@@ -121,7 +126,7 @@ export function syncRooms(project, level, newRoomFactory, geometry = null) {
   const records = project.rooms.filter((r) => r.level === level);
   let maxIndex = records.reduce((m, r) => Math.max(m, r.index), 0);
   for (const fr of g.faceRooms) {
-    if (fr.record) continue;
+    if (fr.record || fr.sliver) continue;
     // anchor at a point that is inside the face even when it is concave, so the record matches on the next derive
     const c = fr.face.interiorPoint || fr.face.centroid;
     if (!pointIn(c, fr.face.centerline)) continue; // degenerate face (sliver): no record rather than one that never matches
@@ -220,7 +225,7 @@ export function derive(project, libraryMaterials) {
       const shape = { outer: face.inside, holes: face.holes.map((h) => h.inside) };
       const shapeB = transformShape(toB.T, shape);
       const areaM2 = shapeArea(shape) / 1e6;
-      roomList.push({ id: rec ? rec.id : `?${l.level}-${face.faceIndex}`, record: rec, face, shape, shapeB, areaM2, level: l.level, exteriorWalls: new Set(), exteriorWallsWithOpenings: new Set() });
+      roomList.push({ id: rec ? rec.id : `?${l.level}-${face.faceIndex}`, record: rec, face, shape, shapeB, areaM2, level: l.level, sliver: !!fr.sliver, exteriorWalls: new Set(), exteriorWallsWithOpenings: new Set() });
     }
     perLevel[l.level] = { ...g, roomList, heightMm, elevationMm: elevations[l.level] };
   }
@@ -237,8 +242,22 @@ export function derive(project, libraryMaterials) {
   }
 
   // wall surfaces
-  const interiorFacingOutside = new Map(); // walls the read called interior that border the unbounded face (unread interior?)
+  const unreadByLevel = new Map(); // wall metres per level whose far side is an unread interior region (assumed heated, SPEC 3.2)
   const openingsWithoutSize = new Set();
+  // An edge on the unbounded face is an exterior wall when the read says so, or (no opinion) when it lies on the building
+  // outline or is thick; otherwise the unbounded face is an unread part of the interior, not outdoors.
+  const looksExterior = (wrec, wall, e, pl) => {
+    if (!wrec) return true;
+    if (wrec.exteriorGuess === true) return true;
+    if (wrec.exteriorGuess === false) return false;
+    if (pl.outlineMm) {
+      const mid = { x: (e.a.x + e.b.x) / 2, y: (e.a.y + e.b.y) / 2 };
+      let dmin = Infinity;
+      for (let i = 0; i < pl.outlineMm.length; i++) dmin = Math.min(dmin, projectOnSegment(mid, { a: pl.outlineMm[i], b: pl.outlineMm[(i + 1) % pl.outlineMm.length] }).distance);
+      return dmin < 1500;
+    }
+    return (wall.thicknessMm || 0) >= 250;
+  };
   for (const l of levels) {
     const pl = perLevel[l.level];
     const H = pl.heightMm / 1000;
@@ -265,11 +284,17 @@ export function derive(project, libraryMaterials) {
       const wall = wallById.get(e.wallId) || (e.separator ? null : null);
       if (e.separator) continue;
       const wrec = wall ? wall.raw : null;
-      const roomL = typeof e.left === 'number' ? pl.roomList[e.left] : null;
-      const roomR = typeof e.right === 'number' ? pl.roomList[e.right] : null;
+      const faceL = typeof e.left === 'number' ? pl.roomList[e.left] : null;
+      const faceR = typeof e.right === 'number' ? pl.roomList[e.right] : null;
+      const roomL = faceL && !faceL.sliver ? faceL : null;
+      const roomR = faceR && !faceR.sliver ? faceR : null;
       const rooms2 = [roomL, roomR].filter(Boolean);
       if (!rooms2.length) continue;
-      const exterior = e.left === 'outside' || e.right === 'outside';
+      const outsideSide = e.left === 'outside' || e.right === 'outside';
+      const sliverSide = (faceL && faceL.sliver) || (faceR && faceR.sliver);
+      const exterior = outsideSide && looksExterior(wrec, wall, e, pl);
+      const unread = rooms2.length === 1 && !exterior && (outsideSide || sliverSide);
+      if (unread) unreadByLevel.set(l.level, (unreadByLevel.get(l.level) || 0) + dist(e.a, e.b));
       let lengthMm = dist(e.a, e.b);
       if (exterior && rooms2.length === 1) {
         const face = rooms2[0].face;
@@ -278,7 +303,6 @@ export function derive(project, libraryMaterials) {
       }
       const wallU = wall && wall.wallTypeId && types.walls[wall.wallTypeId] ? types.walls[wall.wallTypeId] : { U: null, chain: null };
       if (wall && !wall.wallTypeId) warnings.push({ level: l.level, type: 'wall-no-type', id: wall.id });
-      if (exterior && rooms2.length === 1 && wrec && wrec.exteriorGuess === false) { const k = `${l.level}:${wall.id}`; interiorFacingOutside.set(k, { level: l.level, id: wall.id, mm: (interiorFacingOutside.get(k)?.mm || 0) + lengthMm }); }
       // openings on this edge
       const ops = (openingsByWall.get(e.wallId) || []).map((o) => ({ o, ...openingMm(o) })).filter((x) => {
         if (!x.mid) return true;
@@ -297,7 +321,7 @@ export function derive(project, libraryMaterials) {
         openingAreaM2 += a;
         const otype = x.o.openingTypeId ? lib.openingTypes.find((t) => t.id === x.o.openingTypeId) : x.o.kind === 'door' ? (exterior ? extDoor : intDoor) : defWindow;
         const ou = otype && types.openings[otype.id] ? types.openings[otype.id] : { U: null, chain: null };
-        const other = exterior ? (wall && wall.outsideSpace ? { type: 'outside_space', temp: wall.outsideSpace.temp } : { type: 'outside' }) : null;
+        const other = exterior ? (wall && wall.outsideSpace ? { type: 'outside_space', temp: wall.outsideSpace.temp } : { type: 'outside' }) : unread ? { type: 'unread' } : null;
         surfaces.push({ id: `op:${x.o.id}`, kind: x.o.kind, ...surfaceBase, openingId: x.o.id, roomA: rooms2[0].id, roomB: rooms2[1] ? rooms2[1].id : undefined, other: rooms2[1] ? undefined : other, areaM2: a, U: ou.U, envelope: exterior, label: `${x.o.kind} ${x.widthMm}×${x.heightMm}`, refs: { openingType: otype ? otype.id : null, chain: ou.chain } });
         if (exterior) for (const r of rooms2) r.exteriorWallsWithOpenings.add(e.wallId);
       }
@@ -306,6 +330,8 @@ export function derive(project, libraryMaterials) {
       const netM2 = Math.max(0, grossM2 - openingAreaM2);
       if (rooms2.length === 2) {
         surfaces.push({ id: `wall:${e.id}`, kind: 'wall', ...surfaceBase, roomA: rooms2[0].id, roomB: rooms2[1].id, areaM2: netM2, U: wallU.U, envelope: false, label: 'wall', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
+      } else if (unread) {
+        surfaces.push({ id: `wall:${e.id}`, kind: 'wall', ...surfaceBase, roomA: rooms2[0].id, other: { type: 'unread' }, areaM2: netM2, U: wallU.U, envelope: false, label: 'wall to unread space', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
       } else if (exterior) {
         const room = rooms2[0];
         if (wall && wall.outsideSpace) {
@@ -325,7 +351,7 @@ export function derive(project, libraryMaterials) {
     }
   }
 
-  for (const w of interiorFacingOutside.values()) warnings.push({ level: w.level, type: 'outside-edge-read-as-interior', id: w.id, message: `${(w.mm / 1000).toFixed(1)} m` });
+  for (const [level, mm] of unreadByLevel) warnings.push({ level, type: 'walls-to-unread-space', message: `${(mm / 1000).toFixed(0)} m of wall face an unread part of the floor, assumed heated (SPEC 3.2)` });
   // openings that sit on a wall outside the room graph never become a surface: say so (SPEC 4.7 gap list)
   const openingIdsWithSurface = new Set(surfaces.filter((s) => s.openingId).map((s) => s.openingId));
   for (const l of levels) {
@@ -339,8 +365,8 @@ export function derive(project, libraryMaterials) {
   for (let i = 0; i < levels.length; i++) {
     const lower = levels[i];
     const upper = levels[i + 1] || null;
-    const lowerRooms = perLevel[lower.level].roomList.map((r) => ({ id: r.id, shape: r.shapeB, room: r }));
-    const upperRooms = upper ? perLevel[upper.level].roomList.map((r) => ({ id: r.id, shape: r.shapeB, room: r })) : [];
+    const lowerRooms = perLevel[lower.level].roomList.filter((r) => !r.sliver).map((r) => ({ id: r.id, shape: r.shapeB, room: r }));
+    const upperRooms = upper ? perLevel[upper.level].roomList.filter((r) => !r.sliver).map((r) => ({ id: r.id, shape: r.shapeB, room: r })) : [];
     const res = floorPieces(lowerRooms, upperRooms, { sliverWidthMm: project.config.sliverWidthMm, sliverAreaM2: project.config.sliverAreaM2 });
     sliverInfo[lower.level] = { absorbed: res.absorbed, absorbedList: res.absorbedList };
     const lowerById = new Map(lowerRooms.map((r) => [r.id, r.room]));
@@ -378,20 +404,23 @@ export function derive(project, libraryMaterials) {
       const pid = `${u.roomId}|above${nAbove > 1 ? `#${nAbove}` : ''}`;
       const ov = project.pieceOverrides[pid] || {};
       const cold = lower.coldAttic === true;
+      // a level above exists but has no room here: the ceiling faces an unread part of that level, assumed heated (SPEC 3.2), unless the user overrides it
+      const unreadAbove = !cold && !!upper && !ov.outsideSpace && !ov.floorTypeId;
       let type = null;
       let U = null;
       let chain = null;
       if (ov.floorTypeId) type = lib.floorTypes.find((f) => f.id === ov.floorTypeId) || lib.roofTypes.find((f) => f.id === ov.floorTypeId);
-      else if (cold) type = topColdType || defaultFloorType;
+      else if (cold || unreadAbove) type = (unreadAbove ? defaultFloorType : topColdType) || defaultFloorType;
       else type = defaultRoof;
       if (type) {
         const tu = types.floors[type.id] ? types.floors[type.id].up : types.roofs[type.id];
         U = tu ? tu.U : null;
         chain = tu ? tu.chain : null;
       } else warnings.push({ level: lower.level, type: cold ? 'top-ceiling-no-type' : 'roof-no-type', id: pid });
-      const other = ov.outsideSpace ? { type: 'outside_space', temp: ov.outsideSpace.temp } : { type: 'outside' };
-      pieces.push({ id: pid, lowerRoomId: u.roomId, upperRoomId: null, lowerLevel: lower.level, upperLevel: null, shape: u.shape, areaM2: u.areaM2, kind: cold ? 'ceiling_cold_attic' : 'roof', U, override: ov });
-      surfaces.push({ id: `piece:${pid}`, kind: cold ? 'ceiling_cold_attic' : 'roof', level: lower.level, pieceId: pid, roomA: u.roomId, other, areaM2: u.areaM2, U, envelope: true, label: cold ? 'ceiling to cold attic' : 'roof', refs: { type: type ? type.id : null, chain } });
+      const other = ov.outsideSpace ? { type: 'outside_space', temp: ov.outsideSpace.temp } : unreadAbove ? { type: 'unread' } : { type: 'outside' };
+      const kind = cold ? 'ceiling_cold_attic' : unreadAbove ? 'ceiling_to_unread' : 'roof';
+      pieces.push({ id: pid, lowerRoomId: u.roomId, upperRoomId: null, lowerLevel: lower.level, upperLevel: null, shape: u.shape, areaM2: u.areaM2, kind, U, override: ov });
+      surfaces.push({ id: `piece:${pid}`, kind, level: lower.level, pieceId: pid, roomA: u.roomId, other, areaM2: u.areaM2, U, envelope: !unreadAbove, label: cold ? 'ceiling to cold attic' : unreadAbove ? 'ceiling to unread space' : 'roof', refs: { type: type ? type.id : null, chain } });
     }
     // floor with nothing below (upper rooms of this pair whose area is not over a lower room)
     if (upper) {
@@ -402,9 +431,11 @@ export function derive(project, libraryMaterials) {
         const ov = project.pieceOverrides[pid] || {};
         const ft = ov.floorTypeId ? lib.floorTypes.find((f) => f.id === ov.floorTypeId) : defaultFloorType;
         const tu = ft && types.floors[ft.id] ? types.floors[ft.id].down : null;
-        const other = ov.outsideSpace ? { type: 'outside_space', temp: ov.outsideSpace.temp } : { type: 'outside' };
-        pieces.push({ id: pid, lowerRoomId: null, upperRoomId: u.roomId, lowerLevel: null, upperLevel: upper.level, shape: u.shape, areaM2: u.areaM2, kind: 'floor_to_outside', U: tu ? tu.U : null, override: ov });
-        surfaces.push({ id: `piece:${pid}`, kind: 'floor', level: upper.level, pieceId: pid, roomA: u.roomId, other, areaM2: u.areaM2, U: tu ? tu.U : null, envelope: true, label: 'floor to outside', refs: { floorType: ft ? ft.id : null, chain: tu ? tu.chain : null } });
+        // the level below exists but has no room here: an unread part of it, assumed heated (SPEC 3.2); the user marks a real overhang as outside space
+        const unreadBelow = !ov.outsideSpace;
+        const other = ov.outsideSpace ? { type: 'outside_space', temp: ov.outsideSpace.temp } : { type: 'unread' };
+        pieces.push({ id: pid, lowerRoomId: null, upperRoomId: u.roomId, lowerLevel: null, upperLevel: upper.level, shape: u.shape, areaM2: u.areaM2, kind: unreadBelow ? 'floor_to_unread' : 'floor_to_outside', U: tu ? tu.U : null, override: ov });
+        surfaces.push({ id: `piece:${pid}`, kind: 'floor', level: upper.level, pieceId: pid, roomA: u.roomId, other, areaM2: u.areaM2, U: tu ? tu.U : null, envelope: !unreadBelow, label: unreadBelow ? 'floor to unread space' : 'floor to outside space', refs: { floorType: ft ? ft.id : null, chain: tu ? tu.chain : null } });
       }
     }
   }
@@ -412,17 +443,17 @@ export function derive(project, libraryMaterials) {
   // coverage: floor area with nothing below (upper level) or nothing above (a level with a level above it) is unread area, not envelope
   for (let i = 0; i < levels.length; i++) {
     const l = levels[i];
-    const noBelow = i > 0 ? pieces.filter((pc) => pc.kind === 'floor_to_outside' && pc.upperLevel === l.level).reduce((s, pc) => s + pc.areaM2, 0) : 0;
-    const noAbove = i < levels.length - 1 ? pieces.filter((pc) => (pc.kind === 'roof' || pc.kind === 'ceiling_cold_attic') && pc.lowerLevel === l.level).reduce((s, pc) => s + pc.areaM2, 0) : 0;
-    if (noBelow > 1) warnings.push({ level: l.level, type: 'floor-with-nothing-below', message: `${Math.round(noBelow)} m² counted as floor to outside air` });
-    if (noAbove > 1) warnings.push({ level: l.level, type: 'ceiling-with-nothing-above', message: `${Math.round(noAbove)} m² counted as roof / ceiling to cold attic` });
+    const noBelow = i > 0 ? pieces.filter((pc) => (pc.kind === 'floor_to_unread' || pc.kind === 'floor_to_outside') && pc.upperLevel === l.level).reduce((s, pc) => s + pc.areaM2, 0) : 0;
+    const noAbove = i < levels.length - 1 ? pieces.filter((pc) => (pc.kind === 'roof' || pc.kind === 'ceiling_cold_attic' || pc.kind === 'ceiling_to_unread') && pc.lowerLevel === l.level).reduce((s, pc) => s + pc.areaM2, 0) : 0;
+    if (noBelow > 1) warnings.push({ level: l.level, type: 'floor-with-nothing-below', message: `${Math.round(noBelow)} m² has no room below on the level below: assumed heated unless marked as outside space` });
+    if (noAbove > 1) warnings.push({ level: l.level, type: 'ceiling-with-nothing-above', message: `${Math.round(noAbove)} m² has no room above: ${l.coldAttic === true ? 'ceiling to cold attic' : 'assumed heated unless marked as outside space'}` });
   }
 
   // ground slab for the bottom level (SPEC 3.5)
   let slab = null;
-  if (bottom && perLevel[bottom.level].roomList.length) {
+  if (bottom && perLevel[bottom.level].roomList.some((r) => !r.sliver)) {
     const pl = perLevel[bottom.level];
-    const shapes = pl.roomList.map((r) => ({ outer: r.face.centerline.map((p) => levelToBuilding(bottom).apply(p)), holes: [] }));
+    const shapes = pl.roomList.filter((r) => !r.sliver).map((r) => ({ outer: r.face.centerline.map((p) => levelToBuilding(bottom).apply(p)), holes: [] }));
     const union = unionShapes(shapes);
     const ext = pl.walls.filter((w) => pl.edges.some((e) => e.wallId === w.id && (e.left === 'outside' || e.right === 'outside')));
     const avgT = ext.length ? ext.reduce((s, w) => s + w.thicknessMm, 0) / ext.length : 0;
@@ -433,6 +464,7 @@ export function derive(project, libraryMaterials) {
       const slabU = types.slab ? types.slab.U : null;
       if (!types.slab) warnings.push({ level: bottom.level, type: 'slab-no-type' });
       for (const r of pl.roomList) {
+        if (r.sliver) continue;
         const pid = `${r.id}|below`;
         const ov = project.pieceOverrides[pid] || {};
         if (ov.outsideSpace) {
@@ -456,6 +488,7 @@ export function derive(project, libraryMaterials) {
   for (const l of levels) {
     const pl = perLevel[l.level];
     for (const r of pl.roomList) {
+      if (r.sliver) continue;
       const rec = r.record || {};
       const H = pl.heightMm / 1000;
       rooms.push({

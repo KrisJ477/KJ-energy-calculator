@@ -8,7 +8,7 @@ export function otherSideLabel(row, ctx) {
   const s = row.otherSide;
   if (!s) return '';
   if (s.room != null) return `${t('audit.room')} ${s.room}`;
-  const map = { outside: 'audit.outside', soil: 'audit.soil', slab_band: 'audit.slabBand', slab_inner: 'audit.slabInner', outside_space: 'audit.outsideSpace' };
+  const map = { outside: 'audit.outside', soil: 'audit.soil', slab_band: 'audit.slabBand', slab_inner: 'audit.slabInner', outside_space: 'audit.outsideSpace', unread: 'audit.unread' };
   return t(map[s.type] || 'audit.outside') + (s.type === 'outside_space' ? ` (${s.temp ?? ctx.store.project.config.indoorSetpoint} °C)` : '');
 }
 

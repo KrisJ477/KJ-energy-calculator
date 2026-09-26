@@ -45,3 +45,29 @@ test('derive: stacked floors give floor pieces between rooms and no floor-to-out
   assert.ok(d.results.building > 0);
   assert.ok(!d.warnings.some((w) => w.type === 'floor-with-nothing-below'));
 });
+
+test('derive: a wall facing an unread part of the floor is not an exterior wall, and a sliver face is not a room', () => {
+  const p = newProject('t');
+  p.levels = [newLevel(0, 'BV')];
+  p.levels[0].heightMm = 3000;
+  const sh = newSheet('d', 0, { level: 0, type: 'plan', role: 'base', widthPx: 20000, heightPx: 20000, scale: { mmPerPx: 1, pxPerM: 1000, method: 'typed', label: 't' } });
+  sh.buildingOutline = [{ x: 0, y: 0 }, { x: 10000, y: 0 }, { x: 10000, y: 6000 }, { x: 0, y: 6000 }];
+  p.sheets.push(sh);
+  const W = (ax, ay, bx, by, t, ext) => p.walls.push(newWall(sh.id, 0, { x: ax, y: ay }, { x: bx, y: by }, null, { thicknessPx: t, exteriorGuess: ext }));
+  // room A (0–4 m) closed; its east wall (x = 4 m) is a thin interior wall; the rest of the floor (4–10 m) is unread (open)
+  W(0, 0, 4000, 0, 300, true); W(0, 6000, 0, 0, 300, true); W(0, 6000, 4000, 6000, 300, true); W(4000, 0, 4000, 6000, 120, false);
+  W(4000, 6000, 10000, 6000, 300, true); // south wall continues, north and east walls missing
+  // a 60 mm sliver between two parallel readings of the west wall
+  W(-60, 0, -60, 6000, 300, true); W(-60, 0, 0, 0, 300, true); W(-60, 6000, 0, 6000, 300, true);
+  p.rooms.push(newRoom(0, 1, { name: 'A', anchorPx: { x: 2000, y: 3000 }, sheetId: sh.id }));
+  const d = derive(p, []);
+  const pl = d.perLevel[0];
+  assert.ok(pl.roomList.some((r) => r.sliver), 'the 60 mm gap is a sliver');
+  assert.equal(d.calcModel.rooms.length, 1, 'the sliver is not a calculated room');
+  const east = d.calcModel.surfaces.find((s) => s.kind === 'wall' && s.other && s.other.type === 'unread');
+  assert.ok(east, 'the thin wall facing the open region faces an unread space');
+  assert.ok(Math.abs(east.areaM2 - 18) < 0.2);
+  assert.ok(!d.calcModel.surfaces.some((s) => s.kind === 'wall' && s.other && s.other.type === 'outside' && s.wallId === p.walls[3].id));
+  const w = d.results.rooms['0-1'].rows.find((r) => r.surfaceId === east.id);
+  assert.equal(w.watts, 0, 'no loss to a space assumed heated');
+});

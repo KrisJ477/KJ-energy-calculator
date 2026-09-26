@@ -109,6 +109,7 @@ async function build(host, ctx) {
     }
     // rooms: translucent box + orb
     for (const rm of pl.roomList) {
+      if (rm.sliver) continue;
       const poly = rm.shapeB.outer;
       if (poly.length < 3) continue;
       const shape = new T.Shape(poly.map((q) => new T.Vector2(mm(q.x), mm(q.y))));
@@ -138,6 +139,7 @@ async function build(host, ctx) {
     // ceiling/roof for the top level
     if (l === levels[levels.length - 1]) {
       for (const rm of pl.roomList) {
+        if (rm.sliver) continue;
         const shape = new T.Shape(rm.shapeB.outer.map((q) => new T.Vector2(mm(q.x), mm(q.y))));
         const pieceColor = selectedRoom ? (Object.entries(rowColors).find(([k]) => k.startsWith(`piece:${rm.id}|above`)) || [])[1] : null;
         const roofMesh = new T.Mesh(new T.ExtrudeGeometry(shape, { depth: slabT, bevelEnabled: false }), new T.MeshLambertMaterial({ color: pieceColor || 0x7a6a5a, transparent: true, opacity: selectedRoom ? (pieceColor ? 1 : 0.1) : 0.85 }));

@@ -101,6 +101,8 @@ function otherTemp(side, temps, config) {
       return config.slabInnerTemp;
     case 'outside_space':
       return side.temp ?? config.indoorSetpoint;
+    case 'unread':
+      return config.indoorSetpoint; // unread part of the floor: assumed heated (SPEC 3.2)
     default:
       return side.temp ?? config.outdoorTemp;
   }
