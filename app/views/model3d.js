@@ -1,6 +1,6 @@
 // 3D model (SPEC 4.9, 4.10): generated from the approved 2D data plus stacking; walls extruded with
 // openings cut, slabs with display thickness, translucent room boxes with an orb as click handle.
-import { h, clear, section, button, numberInput, fmt } from '../ui/dom.js';
+import { h, clear, section, button, numberInput, select, fmt } from '../ui/dom.js';
 import { t } from '../i18n/strings.js';
 import { levelToBuilding } from '../state/derive.js';
 import { applyTransform, dist, sub, projectOnSegment, polygonArea } from '../engine/geometry.js';
@@ -22,8 +22,11 @@ export function render(root, ctx) {
   clear(root);
   const host = h('div', { class: 'canvas-host', style: { height: '70vh' } });
   const side = h('div', { class: 'audit-side' });
-  const st = ctx.threeState || (ctx.threeState = { slabMm: 200 });
-  root.append(h('div', { class: 'editor-layout' }, h('div', { class: 'editor-main' }, h('div', { class: 'row' }, button(t('model3d.regenerate'), () => ctx.rerender()), h('label', {}, t('model3d.slabThickness')), numberInput(st.slabMm, (v) => { st.slabMm = v; ctx.rerender(); }), h('span', { class: 'muted' }, t('model3d.legend'))), host), side));
+  const st = ctx.threeState || (ctx.threeState = { slabMm: 200, levelFilter: null, camera: null, applyFilter: null });
+  const levelOptions = [[null, t('model3d.allFloors')], ...[...p.levels].sort((a, b) => a.level - b.level).map((l) => [l.level, `${l.level}: ${l.name}`])];
+  // the floor filter only toggles visibility in the existing scene: the camera keeps its position and zoom
+  const filter = select(levelOptions, st.levelFilter, (v) => { st.levelFilter = v == null || v === '' ? null : Number(v); if (st.applyFilter) st.applyFilter(); else ctx.rerender(); });
+  root.append(h('div', { class: 'editor-layout' }, h('div', { class: 'editor-main' }, h('div', { class: 'row' }, button(t('model3d.regenerate'), () => { st.camera = null; ctx.rerender(); }), h('label', {}, t('model3d.floorFilter')), filter, h('label', {}, t('model3d.slabThickness')), numberInput(st.slabMm, (v) => { st.slabMm = v; ctx.rerender(); }), h('span', { class: 'muted' }, t('model3d.legend'))), host), side));
   const sel = store.state.selection;
   if (sel.ids && sel.ids.length === 1 && p.rooms.some((r) => r.id === sel.ids[0])) side.append(roomPanel(sel.ids[0], ctx, { colorRows: true }));
   build(host, ctx).catch((e) => { console.error(e); host.append(h('p', { class: 'warn' }, String(e.message || e))); });
@@ -57,6 +60,8 @@ async function build(host, ctx) {
   const levels = [...p.levels].sort((a, b) => a.level - b.level);
   const allPts = [];
   const mm = (v) => v / 1000;
+  const levelObjects = []; // [{ level, object }] for the floor filter
+  const addToLevel = (level, obj) => { obj.userData.level = level; levelObjects.push({ level, object: obj }); scene.add(obj); };
   for (const l of levels) {
     const pl = d.perLevel[l.level];
     if (!pl) continue;
@@ -96,7 +101,7 @@ async function build(host, ctx) {
         const box = new T.Mesh(new T.BoxGeometry(w, hgt, th * 1.2), new T.MeshLambertMaterial({ color: rowColors[`op:${o.id}`] || (o.kind === 'window' ? 0x60a0ff : 0xa06030), transparent: true, opacity: rowColors[`op:${o.id}`] ? 1 : selectedRoom && !rowColors[`op:${o.id}`] ? 0.1 : 0.85 }));
         box.userData = { openingId: o.id };
         placeWallObject(box, a, b, z0, x0 + w / 2, sill + hgt / 2, T);
-        scene.add(box);
+        addToLevel(l.level, box);
       }
       const geom = new T.ExtrudeGeometry(shape, { depth: th, bevelEnabled: false });
       geom.translate(0, 0, -th / 2);
@@ -104,7 +109,7 @@ async function build(host, ctx) {
       const mesh = new T.Mesh(geom, new T.MeshLambertMaterial({ color, transparent: true, opacity: selectedRoom ? (rowColors[`wall:${l.level}:${e.id}`] || rowColors[`wall:${l.level}:${e.id}:air`] ? 1 : 0.1) : 0.95 }));
       mesh.userData = { wallId: e.wallId };
       placeWallObject(mesh, a, b, z0, 0, 0, T, true);
-      scene.add(mesh);
+      addToLevel(l.level, mesh);
       allPts.push(a, b);
     }
     // walls that bound no room (loose ends, unclosed regions): drawn too, in red, so the gaps in the read are visible in 3D
@@ -121,7 +126,7 @@ async function build(host, ctx) {
       const mesh = new T.Mesh(geom, new T.MeshLambertMaterial({ color: 0xd06060, transparent: true, opacity: selectedRoom ? 0.08 : 0.45 }));
       mesh.userData = { wallId: e.wallId, dangling: true };
       placeWallObject(mesh, a, b, z0, 0, 0, T, true);
-      scene.add(mesh);
+      addToLevel(l.level, mesh);
       allPts.push(a, b);
     }
     // rooms: translucent box + orb
@@ -137,20 +142,20 @@ async function build(host, ctx) {
       roomMesh.rotation.x = -Math.PI / 2;
       roomMesh.position.y = z0 + slabT;
       roomMesh.userData = { roomId: rm.id, isRoom: true };
-      scene.add(roomMesh);
+      addToLevel(l.level, roomMesh);
       // floor slab with display thickness
       const pieceColor = selectedRoom ? colorForRoomFloor(rm.id, rowColors) : null;
       const slabGeom = new T.ExtrudeGeometry(shape, { depth: slabT, bevelEnabled: false });
       const slab = new T.Mesh(slabGeom, new T.MeshLambertMaterial({ color: pieceColor || 0x9aa3ad, transparent: true, opacity: selectedRoom ? (pieceColor ? 1 : 0.1) : 0.9 }));
       slab.rotation.x = -Math.PI / 2;
       slab.position.y = z0;
-      scene.add(slab);
+      addToLevel(l.level, slab);
       const c = rm.face.interiorPoint || rm.face.centroid;
       const cb = toB.apply(c);
       const orb = new T.Mesh(new T.SphereGeometry(0.25, 16, 12), new T.MeshLambertMaterial({ color: isSel ? 0xff8000 : 0x2060d0 }));
       orb.position.set(mm(cb.x), z0 + H / 2, -mm(cb.y));
       orb.userData = { roomId: rm.id };
-      scene.add(orb);
+      addToLevel(l.level, orb);
       orbs.push(orb);
     }
     // ceiling/roof for the top level
@@ -162,12 +167,22 @@ async function build(host, ctx) {
         const roofMesh = new T.Mesh(new T.ExtrudeGeometry(shape, { depth: slabT, bevelEnabled: false }), new T.MeshLambertMaterial({ color: pieceColor || 0x7a6a5a, transparent: true, opacity: selectedRoom ? (pieceColor ? 1 : 0.1) : 0.85 }));
         roofMesh.rotation.x = -Math.PI / 2;
         roofMesh.position.y = z0 + H;
-        scene.add(roofMesh);
+        addToLevel(l.level, roofMesh);
       }
     }
   }
-  // camera framing
-  if (allPts.length) {
+  // floor filter: visibility only, never a rebuild
+  ctx.threeState.applyFilter = () => {
+    const f = ctx.threeState.levelFilter;
+    for (const { level, object } of levelObjects) object.visible = f == null || level === f;
+  };
+  ctx.threeState.applyFilter();
+  // camera framing: a saved view (from the previous build or the last frame) wins over the default framing
+  const saved = ctx.threeState.camera;
+  if (saved) {
+    camera.position.set(saved.px, saved.py, saved.pz);
+    controls.target.set(saved.tx, saved.ty, saved.tz);
+  } else if (allPts.length) {
     const xs = allPts.map((q) => mm(q.x));
     const ys = allPts.map((q) => -mm(q.y));
     const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
@@ -192,7 +207,7 @@ async function build(host, ctx) {
     if (lasso) {
       const x1 = e.offsetX; const y1 = e.offsetY;
       const ids = [];
-      for (const o of orbs) { const v = o.position.clone().project(camera); const sx = ((v.x + 1) / 2) * rect.width; const sy = ((1 - v.y) / 2) * rect.height; if (sx >= Math.min(lasso.x0, x1) && sx <= Math.max(lasso.x0, x1) && sy >= Math.min(lasso.y0, y1) && sy <= Math.max(lasso.y0, y1)) ids.push(o.userData.roomId); }
+      for (const o of orbs) { if (!o.visible) continue; const v = o.position.clone().project(camera); const sx = ((v.x + 1) / 2) * rect.width; const sy = ((1 - v.y) / 2) * rect.height; if (sx >= Math.min(lasso.x0, x1) && sx <= Math.max(lasso.x0, x1) && sy >= Math.min(lasso.y0, y1) && sy <= Math.max(lasso.y0, y1)) ids.push(o.userData.roomId); }
       lasso = null;
       controls.enabled = true;
       if (ids.length) store.setSelection({ ids });
@@ -201,10 +216,12 @@ async function build(host, ctx) {
     mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     ray.setFromCamera(mouse, camera);
-    const hits = ray.intersectObjects(orbs);
+    const hits = ray.intersectObjects(orbs.filter((o) => o.visible));
     if (hits.length) store.setSelection({ ids: [hits[0].object.userData.roomId] });
   });
   let alive = true;
+  const saveView = () => { ctx.threeState.camera = { px: camera.position.x, py: camera.position.y, pz: camera.position.z, tx: controls.target.x, ty: controls.target.y, tz: controls.target.z }; };
+  controls.addEventListener('change', saveView);
   const animate = () => { if (!alive || !renderer.domElement.isConnected) { alive = false; renderer.dispose(); return; } controls.update(); renderer.render(scene, camera); requestAnimationFrame(animate); };
   animate();
   const ro = new ResizeObserver(() => { const rr = host.getBoundingClientRect(); renderer.setSize(rr.width, rr.height); camera.aspect = rr.width / rr.height; camera.updateProjectionMatrix(); });
