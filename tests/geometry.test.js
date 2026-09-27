@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { snapToleranceMm, cleanupWalls, buildRooms, floorPieces, slabZones, roomSlabSplit, minWidth, polygonArea, shapeArea, multiArea, sharedEdgeLength } from '../app/engine/geometry.js';
+import { snapToleranceMm, cleanupWalls, buildRooms, floorPieces, slabZones, roomSlabSplit, roomSlabShapes, minWidth, polygonArea, shapeArea, multiArea, sharedEdgeLength } from '../app/engine/geometry.js';
 
 const W = (id, ax, ay, bx, by, t = 300) => ({ id, a: { x: ax, y: ay }, b: { x: bx, y: by }, thicknessMm: t });
 const rect = (x0, y0, x1, y1) => ({ outer: [{ x: x0, y: y0 }, { x: x1, y: y0 }, { x: x1, y: y1 }, { x: x0, y: y1 }], holes: [] });
@@ -163,4 +163,16 @@ test('floorPieces survives near-degenerate input (clipping fallback)', () => {
   const b = { outer: [{ x: 18309.613222215146, y: 28698.85477253357 }, { x: 18318.488700078145, y: 28698.85477253357 }, { x: 18318.4887, y: 28700.0000001 }, { x: 18309.6132, y: 28700.0000001 }], holes: [] };
   const res = floorPieces([{ id: 'a', shape: a }, { id: 'b', shape: b }], [{ id: 'c', shape: a }, { id: 'd', shape: b }], { sliverWidthMm: 150, sliverAreaM2: 0.1 });
   assert.ok(res.pieces.length >= 1);
+});
+
+test('slab zones as shapes: the band and inner shapes of a room cover the same areas as the split', () => {
+  const fp = rect(0, 0, 12000, 8000);
+  const zones = slabZones(fp, 1000);
+  const room = rect(0, 0, 5000, 8000);
+  const split = roomSlabSplit(room, zones);
+  const shapes = roomSlabShapes(room, zones);
+  const area = (list) => list.reduce((a, s) => a + shapeArea(s), 0) / 1e6;
+  assert.ok(Math.abs(area(shapes.band) - split.bandM2) < 1e-6);
+  assert.ok(Math.abs(area(shapes.inner) - split.innerM2) < 1e-6);
+  assert.ok(split.bandM2 > 0 && split.innerM2 > 0);
 });

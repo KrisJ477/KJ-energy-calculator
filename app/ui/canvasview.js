@@ -57,11 +57,18 @@ export class CanvasView {
   async setLayers(layers) {
     this.layers = [];
     for (const l of layers) {
-      const bitmap = l.bitmap || (l.imageKey ? await loadBitmap(l.imageKey) : null);
+      // only visible layers are decoded now: a hidden sheet is decoded when it is switched on (memory on tablets)
+      const bitmap = l.bitmap || (l.imageKey && l.visible !== false ? await loadBitmap(l.imageKey) : null);
       this.layers.push({ paper: 0.6, line: 1, tint: null, visible: true, ...l, bitmap });
     }
     this.regionCache.clear();
     this.draw();
+  }
+  // Decode a layer's bitmap on demand (first time shown, or after the bitmap cache dropped it).
+  ensureBitmap(l) {
+    if (l.loading || !l.imageKey) return;
+    l.loading = true;
+    loadBitmap(l.imageKey).then((bmp) => { l.bitmap = bmp; l.loading = false; this.draw(); }).catch((e) => { l.loading = false; console.warn('layer bitmap failed', e); });
   }
   bind() {
     const c = this.canvas;
@@ -143,7 +150,8 @@ export class CanvasView {
     ctx.fillRect(0, 0, W, H);
     const dpr = this.dpr;
     for (const l of this.layers) {
-      if (!l.visible || !l.bitmap) continue;
+      if (!l.visible) continue;
+      if (!l.bitmap || l.bitmap.width === 0) { l.bitmap = null; this.ensureBitmap(l); continue; } // width 0: a closed (evicted) ImageBitmap
       this.paintLayer(l, dpr);
     }
     ctx.setTransform(dpr * this.view.scale, 0, 0, dpr * this.view.scale, dpr * this.view.tx, dpr * this.view.ty);

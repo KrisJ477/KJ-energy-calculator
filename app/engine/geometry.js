@@ -774,6 +774,11 @@ export function roomSlabSplit(shape, zones) {
   const inner = multiArea(polygonClipping.intersection(s, zones.inner));
   return { bandM2: band / 1e6, innerM2: inner / 1e6 };
 }
+// The same split as shapes (for drawing the two slab zones of a room as the two surfaces they are calculated as).
+export function roomSlabShapes(shape, zones) {
+  const s = shapeToClip(shape);
+  return { band: fromClip(polygonClipping.intersection(s, zones.band)), inner: fromClip(polygonClipping.intersection(s, zones.inner)) };
+}
 
 // Union of a set of shapes (building footprint from the rooms of a floor, grown by wall thickness).
 export function unionShapes(shapes) {

@@ -63,6 +63,11 @@ input, select, textarea { font: inherit; padding: 3px 5px; border: 1px solid var
 .cmd-q, .cmd-p { background: #f1f3f6; padding: 6px 8px; border-radius: 4px; margin: 4px 0; }
 .cmd-err { color: var(--warn); }
 .cb { display: inline-flex; align-items: center; gap: 4px; margin-right: 8px; }
+.dropdown { position: relative; display: inline-block; }
+.dropdown > summary { list-style: none; cursor: pointer; border: 1px solid var(--line); background: #fff; padding: 4px 10px; border-radius: 4px; white-space: nowrap; }
+.dropdown > summary::-webkit-details-marker { display: none; }
+.dropdown > .menu { position: absolute; left: 0; top: 100%; z-index: 20; background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 6px 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.15); min-width: 14em; }
+.dropdown > .menu .cb { display: flex; margin: 3px 0; }
 .construction { border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; margin: 6px 0; }
 .room-panel h3 { margin-top: 0; }
 .wrap { flex-wrap: wrap; }

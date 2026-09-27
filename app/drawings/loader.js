@@ -182,14 +182,27 @@ export function downscale(canvas, maxLong) {
 }
 
 // Load a sheet raster (display or source) as an ImageBitmap.
+// Decoded display bitmaps are large (a 6000 px sheet is ~100 MB), so only the most recently used few are kept;
+// an evicted bitmap is closed and reports width 0, and CanvasView decodes it again if it is still shown.
 const bitmapCache = new Map();
+export const BITMAP_CACHE_SIZE = 4;
 export async function loadBitmap(key) {
   if (!key) return null;
-  if (bitmapCache.has(key)) return bitmapCache.get(key);
+  if (bitmapCache.has(key)) {
+    const b = bitmapCache.get(key);
+    if (b && b.width > 0) { bitmapCache.delete(key); bitmapCache.set(key, b); return b; } // most recently used last
+    bitmapCache.delete(key);
+  }
   const blob = await getBlob(key);
   if (!blob) return null;
   const bmp = await createImageBitmap(blob);
   bitmapCache.set(key, bmp);
+  while (bitmapCache.size > BITMAP_CACHE_SIZE) {
+    const oldest = bitmapCache.keys().next().value;
+    const old = bitmapCache.get(oldest);
+    bitmapCache.delete(oldest);
+    try { old.close(); } catch {}
+  }
   return bmp;
 }
 export function dropBitmap(key) {
