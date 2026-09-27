@@ -89,3 +89,11 @@ test('derive: a window at a wall junction is counted on one edge only', () => {
   assert.equal(win.length, 1);
   assert.ok(Math.abs(win[0].areaM2 - 1.68) < 0.01);
 });
+
+test('derive: surface ids are unique across floors', () => {
+  const p = project();
+  for (const lvl of [0, 1]) syncRooms(p, lvl, (l, i, extra) => newRoom(l, i, { ...extra }));
+  const d = derive(p, []);
+  const ids = d.calcModel.surfaces.map((s) => s.id);
+  assert.equal(new Set(ids).size, ids.length);
+});

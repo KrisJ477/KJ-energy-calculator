@@ -343,22 +343,22 @@ export function derive(project, libraryMaterials) {
       const grossM2 = (lengthMm / 1000) * H;
       const netM2 = Math.max(0, grossM2 - openingAreaM2);
       if (rooms2.length === 2) {
-        surfaces.push({ id: `wall:${e.id}`, kind: 'wall', ...surfaceBase, roomA: rooms2[0].id, roomB: rooms2[1].id, areaM2: netM2, U: wallU.U, envelope: false, label: 'wall', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
+        surfaces.push({ id: `wall:${l.level}:${e.id}`, kind: 'wall', ...surfaceBase, roomA: rooms2[0].id, roomB: rooms2[1].id, areaM2: netM2, U: wallU.U, envelope: false, label: 'wall', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
       } else if (unread) {
-        surfaces.push({ id: `wall:${e.id}`, kind: 'wall', ...surfaceBase, roomA: rooms2[0].id, other: { type: 'unread' }, areaM2: netM2, U: wallU.U, envelope: false, label: 'wall to unread space', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
+        surfaces.push({ id: `wall:${l.level}:${e.id}`, kind: 'wall', ...surfaceBase, roomA: rooms2[0].id, other: { type: 'unread' }, areaM2: netM2, U: wallU.U, envelope: false, label: 'wall to unread space', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
       } else if (exterior) {
         const room = rooms2[0];
         if (wall && wall.outsideSpace) {
-          surfaces.push({ id: `wall:${e.id}`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'outside_space', temp: wall.outsideSpace.temp }, areaM2: netM2, U: wallU.U, envelope: true, label: 'wall to space outside project', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
+          surfaces.push({ id: `wall:${l.level}:${e.id}`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'outside_space', temp: wall.outsideSpace.temp }, areaM2: netM2, U: wallU.U, envelope: true, label: 'wall to space outside project', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
         } else {
           const pct = wall ? wall.percentUnderground : 0;
           if (pct > 0) {
             const soilM2 = grossM2 * (pct / 100);
             const airM2 = Math.max(0, grossM2 - soilM2 - openingAreaM2);
-            surfaces.push({ id: `wall:${e.id}:soil`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'soil' }, areaM2: Math.min(soilM2, netM2), U: wallU.U, envelope: true, label: 'wall to soil', refs: { wallType: wall.wallTypeId, chain: wallU.chain, lengthMm, percentUnderground: pct } });
-            surfaces.push({ id: `wall:${e.id}:air`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'outside' }, areaM2: airM2, U: wallU.U, envelope: true, label: 'exterior wall', refs: { wallType: wall.wallTypeId, chain: wallU.chain, lengthMm, percentUnderground: pct } });
+            surfaces.push({ id: `wall:${l.level}:${e.id}:soil`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'soil' }, areaM2: Math.min(soilM2, netM2), U: wallU.U, envelope: true, label: 'wall to soil', refs: { wallType: wall.wallTypeId, chain: wallU.chain, lengthMm, percentUnderground: pct } });
+            surfaces.push({ id: `wall:${l.level}:${e.id}:air`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'outside' }, areaM2: airM2, U: wallU.U, envelope: true, label: 'exterior wall', refs: { wallType: wall.wallTypeId, chain: wallU.chain, lengthMm, percentUnderground: pct } });
           } else {
-            surfaces.push({ id: `wall:${e.id}`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'outside' }, areaM2: netM2, U: wallU.U, envelope: true, label: 'exterior wall', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
+            surfaces.push({ id: `wall:${l.level}:${e.id}`, kind: 'wall', ...surfaceBase, roomA: room.id, other: { type: 'outside' }, areaM2: netM2, U: wallU.U, envelope: true, label: 'exterior wall', refs: { wallType: wall ? wall.wallTypeId : null, chain: wallU.chain, lengthMm, heightMm: pl.heightMm } });
           }
         }
       }

@@ -100,8 +100,8 @@ async function build(host, ctx) {
       }
       const geom = new T.ExtrudeGeometry(shape, { depth: th, bevelEnabled: false });
       geom.translate(0, 0, -th / 2);
-      const color = rowColors[`wall:${e.id}`] || rowColors[`wall:${e.id}:air`] || (e.left === 'outside' || e.right === 'outside' ? 0xd9c9a3 : 0xbfc6cf);
-      const mesh = new T.Mesh(geom, new T.MeshLambertMaterial({ color, transparent: true, opacity: selectedRoom ? (rowColors[`wall:${e.id}`] || rowColors[`wall:${e.id}:air`] ? 1 : 0.1) : 0.95 }));
+      const color = rowColors[`wall:${l.level}:${e.id}`] || rowColors[`wall:${l.level}:${e.id}:air`] || (e.left === 'outside' || e.right === 'outside' ? 0xd9c9a3 : 0xbfc6cf);
+      const mesh = new T.Mesh(geom, new T.MeshLambertMaterial({ color, transparent: true, opacity: selectedRoom ? (rowColors[`wall:${l.level}:${e.id}`] || rowColors[`wall:${l.level}:${e.id}:air`] ? 1 : 0.1) : 0.95 }));
       mesh.userData = { wallId: e.wallId };
       placeWallObject(mesh, a, b, z0, 0, 0, T, true);
       scene.add(mesh);
