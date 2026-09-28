@@ -1,0 +1,44 @@
+W f1 0 1330 1936 1330 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 180 0 180 1330 40 0.8 lägenhetsskiljande vägg mellan lgh 9 och lgh 6 (dubbellinje med B60-streckning)
+W t1 180 265 1310 265 25 0.7 vägg mellan trapphus TB:1 och G. 6:3 / TAMB 6:1 / BAD 6:2, delvis skrafferad (B15)
+W s1 920 0 920 265 20 0.7 skrafferad vägg mellan TB:1 och TAMB 5:1 (B15)
+W s2 1310 0 1310 560 25 0.6 vägg (dubbellinje med streckning) mellan TAMB 5:1 / BAD 6:2 och 5:3 / G. 5:5
+W w1 515 265 515 530 15 0.6 vägg mellan G. 6:3 och TAMB 6:1
+W w2 990 265 990 530 20 0.6 skrafferad vägg mellan TAMB 6:1 och BAD 6:2
+W m1 350 545 1936 545 25 0.7 vägg mellan norra rumsraden och KÖK 6:4 / RUM 6:5 / RUM 6:6, med dörröppningar
+W w3 720 545 720 1330 20 0.7 vägg mellan KÖK 6:4 och RUM 6:5 (delvis skrafferad)
+W w4 1435 545 1435 1330 15 0.7 vägg mellan RUM 6:5 och RUM 6:6
+W w5 1420 150 1540 470 20 0.5 snedställd vägg vid G. 5:5 / 5:4
+W w6 1540 470 1936 560 15 0.4 vägg under 5:4 mot garderoberna
+O window f1 450 1330 660 1330 conf=0.8 fönstersymbol i gårdsfasaden, KÖK 6:4
+O window f1 1000 1330 1210 1330 conf=0.8 fönstersymbol i gårdsfasaden, RUM 6:5
+O window f1 1540 1330 1750 1330 conf=0.8 fönstersymbol i gårdsfasaden, RUM 6:6
+O door t1 660 265 790 265 conf=0.5 dörr TB:1 – TAMB 6:1 (B15)
+O door m1 560 545 680 545 conf=0.5 dörröppning mot KÖK 6:4
+O door m1 780 545 900 545 conf=0.5 dörröppning TAMB 6:1 – RUM 6:5
+R TB:1 stairwell 400 100 conf=0.7 trapphus TB:1 med halvcirkelformad trappa, fortsätter från rutan ovanför
+R TAMB hall 1100 100 apt=5 conf=0.8 texten TAMB. 5:1
+R 5:3 hall 1570 150 apt=5 conf=0.4 lägenhetsnumret 5:3
+R G. storage 360 400 apt=6 conf=0.5 texten G. 6:3 (garderob/klädkammare)
+R TAMB hall 740 400 apt=6 conf=0.8 texten TAMB. 6:1
+R BAD bathroom 1080 400 apt=6 conf=0.85 texten BAD 6:2
+R G. storage 1390 380 apt=5 conf=0.5 texten 5:5 G.
+R 5:4 hall 1770 480 apt=5 conf=0.4 lägenhetsnumret 5:4 vid dörr S9ch
+R KÖK kitchen 430 900 apt=6 conf=0.85 texten KÖK 6:4 med ugn, k/s
+R RUM living 980 900 apt=6 conf=0.85 texten RUM 6:5
+R RUM living 1660 900 apt=6 conf=0.85 texten RUM 6:6
+T room_name 1100 100 TAMB. 5:1
+T room_name 740 400 TAMB. 6:1
+T room_name 1080 400 BAD 6:2
+T room_name 430 900 KÖK 6:4
+T room_name 980 900 RUM 6:5
+T room_name 1660 900 RUM 6:6
+T other 720 220 B15
+T other 880 90 B15
+T other 1120 20 S7bv
+T other 1700 460 S9ch
+T fixture 430 600 ugn
+T fixture 650 790 st.
+T fixture 650 890 f.
+T fixture 280 1260 k/s
+N Rutor märkta G., L., st., f. är skåp. Streckad linje vid x≈195 är brandklassmarkering. Nedre delen av rutan är tomt papper.

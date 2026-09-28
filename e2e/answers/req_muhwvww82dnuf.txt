@@ -1,0 +1,10 @@
+W e2 240 180 1080 1936 30 0.7 hörnflygelns nordöstra långsida på vinden (dubbellinje, knävägg under snedtaket)
+W w1 165 1400 695 1120 25 0.7 skrafferad ny vägg mellan BEF. FÖRRÅD och VINDSRUM 4:8
+W w2 695 1120 885 1500 25 0.7 skrafferad ny vägg (VINDSRUM 4:8 mot takkupan)
+W w4 5 1500 185 1780 25 0.6 skrafferad ny vägg med dörr YD2h (B30)
+R VINDSRUM living 575 1720 apt=4 conf=0.8 texten VINDSRUM 4:8
+R BEF._FÖRRÅD storage 100 800 heated=0 conf=0.5 texten (BEF.) FÖRRÅD avskuren, förrådet fortsätter i rutan till vänster
+T room_name 575 1720 VINDSRUM 4:8
+T other 1500 1300 BETR. TAKKUPA SE RITN. NR. A30:19 BERÖRD DEL
+T other 960 1560 F4
+N Symbolerna i högerkanten tillhör teckenförklaringen och är inte väggar. Den tunna linjen utanför nordöstra väggen är takfoten.

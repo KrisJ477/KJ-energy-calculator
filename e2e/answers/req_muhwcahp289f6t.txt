@@ -1,0 +1,10 @@
+W f1 0 445 1936 445 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W w6 500 0 500 445 20 0.7 vägg mellan RUM 12:4 och RUM 12:3
+W a3 1185 0 1185 445 40 0.8 lägenhetsskiljande vägg mellan lgh 12 och lgh 11
+O window f1 210 445 420 445 conf=0.8 fönstersymbol i gårdsfasaden, RUM 12:4
+O window f1 790 445 1000 445 conf=0.8 fönstersymbol i gårdsfasaden, RUM 12:3
+O window f1 1420 445 1630 445 conf=0.8 fönstersymbol i gårdsfasaden, RUM 11:2
+R RUM living 250 60 apt=12 conf=0.5 RUM 12:4, rummet fortsätter i rutan ovanför
+R RUM living 720 60 apt=12 conf=0.5 RUM 12:3, rummet fortsätter i rutan ovanför
+R RUM living 1560 60 apt=11 conf=0.5 RUM 11:2, rummet fortsätter i rutan ovanför
+N Linjen längst ned (y≈1898) är ritningens ram/ritningshuvud. Resten av rutan är tomt papper.

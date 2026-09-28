@@ -1,0 +1,46 @@
+CLASS type=plan sub=- disc=architectural part= stamp=1:100 bar=1 dims=0 clarity=0.7 compl=0.95 Arkitektplan A-30:12 "PLAN 1 VÅN, BLIVANDE UTSEENDE" med rumsbeteckningar; hela våningen på ett blad; skalstock 0–10 m nederst; inga måttkedjor.
+FLOOR PLAN_1_VÅN 1 Ritningshuvudet anger PLAN 1 VÅN; enligt briefens alias-tabell = BV = nivå 1.
+REGION 357 119 1428 1363
+OUTLINE 494,833 1142,833 1142,512 1458,363 1779,1077 1553,1196 494,1196
+RR KÖK_14:1 559 904
+RR TD:1 654 916
+RR KÖK_13:4 785 904
+RR RUM_9:7 904 904
+RR TC:1 1017 928
+RR KÖK_9:2 1113 904
+RR TB:1 1333 881
+RR TAMB_13:1 702 988
+RR WC_14:3 631 988
+RR WC_13:3 791 982
+RR TAMB_9:1 1017 982
+RR TAMB_L2:1 1273 988
+RR G_L2:2 1226 970
+RR TAMB_L2:8 1446 958
+RR TAMB_L1:1 1458 881
+RR RUM_14:2 559 1083
+RR RUM_13:5 702 1083
+RR RUM_13:6 791 1083
+RR RUM_9:4 946 1083
+RR RUM_9:3 1083 1083
+RR PENTRY_L2:4 1250 1083
+RR LAGER_L2:5 1357 1077
+RR LAGER_L2:6 1529 1077
+RR PORT 1297 494
+RR WC_1:2 1321 559
+RR TA:1 1291 613
+RR RUM_1:4 1428 583
+RR KÖK_1:5 1345 726
+RR LAGER_L1:3 1482 738
+RR BUTIK_L1:2 1547 821
+RR BUTIK_L2:7 1601 952
+RR WC_9:6 916 1047
+RR 9:5 976 1041
+REF scale_bar 1201.5 1458.9 1533.4 1458.9 0–10_M mm=10000 Skalstock "SKALOR 1:100" nederst: 0-markering till 10 M-markering.
+TITLE BRF BLODNÄVAN KUNGSLADUGÅRD 28:1 MARIAGATAN 16 STRANDRIDAREGATAN 9
+TITLE PLAN 1 VÅN BLIVANDE UTSEENDE
+TITLE ARBETSRITNING A-30:12 REV F 1988.04.20
+TITLE kvarnström arkitektkontor ab 1986.04.10 SKALA 1:100
+N Ritningstyp: 1988 års arbetsritning (Kvarnström arkitektkontor), skala 1:100, svartvit filmkopia. Väggar ritade som fyllda svarta band; brandklassade befintliga väggar B60 markeras med streckad linje bredvid.
+N Lägenhetsbeteckningar av typen 13:5 = lägenhet 13, rum 5 (behåll som rums-ID enligt briefen). L1:x/L2:x = lokaler (BUTIK, LAGER, PENTRY).
+N Skalstockens 0- och 10 m-markeringar mätta på fullupplöst rasterbild.
+N PORT = portgång (genomfart) i hörnflygeln, sannolikt ouppvärmd/utomhus.

@@ -1,0 +1,11 @@
+{
+  "name": "kj-energy-calculator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Heat loss calculation app for existing buildings (SPEC.md v1)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,5 @@
+W e1 0 1290 265 1140 45 0.85 yttervägg (dubbellinje), fortsättning från rutan till vänster
+W e2 265 1140 620 1936 45 0.85 yttervägg, hörn och nordöstra fasaden, fortsätter nedåt utanför rutan
+O window e2 375 1410 470 1600 conf=0.7 fönstersymbol (tunna linjer mellan tvärstreck) i fasaden
+T other 30 1600 UM 2:3
+N Texten i vänsterkanten är slutet av RUM 2:3 från rutan till vänster. Symbolerna i högerkanten (ramar, skraffering, cirkel A) tillhör teckenförklaringen. Garderoben G. nere till vänster hör till rutan nedanför.

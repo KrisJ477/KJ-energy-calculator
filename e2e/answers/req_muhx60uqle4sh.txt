@@ -1,0 +1,22 @@
+CLASS type=vertical sub=section disc=architectural part=SEKTION_A-A_nedre_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.7 role=base rolewhy=sektion_med_våningshöjder_enligt_briefen Nedre delen av SEKTION A-A: bjälklag för 2 TR, 1 TR, BV (+26,35) och källare (+23,35), butiksgolv +25,00 (0,50 under BV-kedjan visar 1,35 m skillnad), terrass +24,85 utanför, fönster 1,60 med bröstning 0,80 på varje plan.
+FLOOR 2_TR 3 Bjälklagslinje överst i rutan (3,00 över 1 TR)
+FLOOR 1_TR 2 Bjälklagslinje 3,00 över BV
+FLOOR BV 1 Plushöjd +26,35 skriven vid bjälklaget
+FLOOR KÄLLARE 0 Plushöjd +23,35 skriven vid källargolvet
+REGION 0 0 1936 1936
+L 2_TR 3 299 text=+32,35 Bjälklagslinje (överkant) 3,00 m över 1 TR; plushöjd beräknad
+L 1_TR 2 789 text=+29,35 Bjälklagslinje 3,00 m över BV; plushöjd beräknad
+L BV 1 1280 text=+26,35 Bjälklagslinje med skriven plushöjd +26,35 och nivåpil
+L KÄLLARE 0 1770 text=+23,35 Källargolv med skriven plushöjd +23,35
+F 1_TR 2_TR 490 text=3,00 Skrivet mått 3,00 i den lodräta kedjan
+F BV 1_TR 491 text=3,00 Skrivet mått 3,00
+F KÄLLARE BV 490 text=3,00 Skrivet mått 3,00 (källare till BV)
+V window 985 0 30 140 sill=140 floor=2_TR conf=0.5 Fönster i 2 TR, avskuret av rutans överkant (bröstning 0,80 under)
+V window 985 380 30 265 sill=640 floor=1_TR conf=0.7 Fönster i 1 TR, höjd 1,60 (skrivet), bröstning 0,80
+V window 985 870 30 250 sill=1120 floor=BV conf=0.7 Fönster i BV, höjd 1,60, bröstning 0,80
+GND 1500 Terrass +24,85 utanför ytterväggen (skriven plushöjd), butiksgolvet +25,00 ligger strax ovanför
+ROOF - Taket ligger utanför rutan
+REF level_difference 1290 1280 1290 1770 +26,35_till_+23,35 mm=3000 Skrivna plushöjder vid BV-bjälklaget och källargolvet
+REF dimension 1220 299 1220 789 3,00 mm=3000 Skriven våningshöjd 3,00 mellan bjälklagslinjerna (2 TR och 1 TR)
+REF dimension 905 380 905 640 1,60 mm=1600 Skriven fönsterhöjd 1,60
+N Butiksgolvet +25,00 (streckad linje) ligger 1,35 m under BV-golvet, som briefen anger. Kedjans 0,50 avser sockelhöjd över terrassen.

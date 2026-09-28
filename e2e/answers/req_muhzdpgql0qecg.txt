@@ -1,0 +1,8 @@
+CLASS type=plan sub=- disc=architectural part=norra_flygeln_(testdelmängd) stamp=1:50 dims=1 bar=1 clarity=0.95 compl=0.4 role=base rolewhy=KFU-plan_14_enligt_briefen;_endast_norra_flygeln_läses_i_detta_test ArchiCAD-plan KV39-A2-40-1-140 "PLAN 14", skala 1:50, hela bostadskvarteret som sluten ring kring en innergård; textlager med lägenhetsbeteckningar (t.ex. "2 RoK … m²"), inredningssymboler (DM, K/F, KM, TM) och skalstock 0–5 METER nederst. Rummen saknar namn.
+FLOOR Plan_14 14 Ritningshuvudet och texten anger PLAN 14; nivånumret följer ritningens plannummer.
+REGION 707 310 926 1064
+OUTLINE 707,310 1426,310 1426,506 707,506
+REF scale_bar 1116 1615 1185 1615 0–5_METER mm=5000 Skalstock "SKALA 1:50 0 1 5 METER" nederst på arket; lägesangivelse från textlagret (0 vid x 10190, 5 vid x 10815 i arkpixlar)
+TITLE KV39-A2-40-1-140 PLAN 14, SKALA 1:50, Forsåker Kv 39 (Papyr)
+N Testdelmängd: byggnadskonturen är satt till norra flygeln (x 707–1426, y 310–506 i översiktsbilden) så att bara den flygelns rutor läses. Röda streckprickade linjer är EI60-brandcellsgränser och gröna moln är revideringar, inte väggar.
+N Innergården ligger ovanpå garagets bjälklag; garaget (plan 09–12) ingår inte.

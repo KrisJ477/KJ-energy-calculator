@@ -1,0 +1,20 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_mitten_höger stamp=- bar=0 dims=0 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Del av gatufasaden: takfot, tre fönster per våning, valmat tak och hörnflygelns början till höger.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 940 text=+35,35 Takfotslinje
+L 2_TR 3 1432 - Golvlinje härledd från fönstrens underkant 1300 + bröstning 0,80
+L 1_TR 2 1912 - Golvlinje härledd från fönstrens underkant 1780 + bröstning 0,80
+F 2_TR +35,35_vindsbjälklag 492 - Härledd våningshöjd
+F 1_TR 2_TR 480 - Härledd våningshöjd
+V window 220 1030 260 260 sill=1290 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 760 1040 270 260 sill=1300 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1310 1050 270 260 sill=1310 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 220 1490 250 270 sill=1760 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 770 1500 260 270 sill=1770 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1310 1510 270 270 sill=1780 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 780 640 230 120 floor=vind conf=0.6 Lunettfönster i taket (kallvind)
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Oinredd vind; valmat tak vid hörnflygeln till höger
+N Linjen vid x≈1780 är övergången till hörnflygeln (valmat tak). Skorstenar är inte öppningar.

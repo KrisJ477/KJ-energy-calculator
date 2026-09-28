@@ -1,0 +1,11 @@
+W g1 720 0 720 470 60 0.85 gavelvägg väster (dubbellinje ca 60 px), nedre delen
+W f1 720 440 1936 440 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W s5 1485 0 1485 440 20 0.7 lägenhetsskiljande vägg mellan RUM 14:2 och RUM 13:5 (dubbellinje med streckning)
+O window f1 980 440 1190 440 conf=0.8 fönstersymbol i gårdsfasaden, RUM 14:2
+O window f1 1560 440 1780 440 conf=0.6 fönstersymbol i gårdsfasaden, RUM 13:5
+R RUM living 900 60 apt=14 conf=0.5 texten RUM 14:2, rummet fortsätter i rutan ovanför
+R RUM living 1650 60 apt=13 conf=0.5 texten RUM 13:5, rummet fortsätter i rutan ovanför
+T room_name 900 60 RUM 14:2
+T room_name 1650 60 RUM 13:5
+T fixture 1440 340 G.
+N Linjen längst ned (y≈1928) är ritningens ram, inte en vägg. Resten av rutan är tomt papper.

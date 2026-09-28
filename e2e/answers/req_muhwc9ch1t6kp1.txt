@@ -1,0 +1,29 @@
+W e1 1420 0 1760 760 45 0.8 hörnflygelns sydöstra yttervägg (dubbellinje) med glaspartier GP3/GP2
+W e2 1760 760 1850 880 45 0.6 ytterväggens hörn
+W e3 1850 880 1210 1180 45 0.8 hörnflygelns sydvästra yttervägg mot gården med glasparti GP1
+W e4 1210 1180 870 1350 45 0.7 ytterväggen viker av mot huvudlängans södra fasad
+W f1 0 1340 870 1340 50 0.85 huvudlängans södra fasadvägg (dubbellinje) med fönster
+W g1 560 0 1130 1190 40 0.7 tjock dubbellinje mellan TAMB L2:8 / LAGER L2:6 och BUTIK L2:7 (huvudlängans f.d. östra gavel)
+W t1 220 70 560 70 25 0.6 vägg (dubbellinje med streckning) ovanför TAMB L2:8
+W s1 235 0 235 560 20 0.7 vägg mellan L1:4 och TAMB L2:8 (B15)
+W m1 0 560 780 560 25 0.7 vägg mellan TAMB L2:8 och LAGER L2:6, med dörröppning
+W w1 370 620 370 1340 25 0.6 vägg mellan LAGER L2:5 och LAGER L2:6 med pardörr
+O window e1 1450 90 1540 240 conf=0.6 glasparti GP3 (butiksfönster)
+O window e1 1640 440 1730 730 conf=0.7 glasparti GP2 (butiksfönster)
+O window e3 1230 1170 1500 1010 conf=0.7 glasparti GP1 (butiksfönster)
+O window f1 130 1340 450 1340 conf=0.6 fönstersymbol i gårdsfasaden
+O window f1 650 1340 760 1340 conf=0.5 fönstersymbol i gårdsfasaden
+O door m1 520 560 680 560 conf=0.5 dörröppning TAMB L2:8 – LAGER L2:6
+O door w1 370 870 370 1040 conf=0.5 pardörr mellan LAGER L2:5 och L2:6
+R TAMB hall 400 340 apt=L2 conf=0.8 texten TAMB. L2:8
+R BUTIK shop 1080 320 apt=L2 conf=0.85 texten BUTIK L2:7
+R LAGER storage 720 930 apt=L2 conf=0.85 texten LAGER L2:6
+R L1:4 wc 160 400 apt=L1 conf=0.4 texten L1:4, fortsätter från rutan till vänster
+T room_name 400 340 TAMB. L2:8
+T room_name 1080 320 BUTIK L2:7
+T room_name 720 930 LAGER L2:6
+T other 1540 130 GP3
+T other 1720 540 GP2
+T other 1320 1190 GP1
+T other 190 160 B15
+N Hörnflygeln är vriden ca 27 grader. Nedre högra delen av rutan är tomt papper.

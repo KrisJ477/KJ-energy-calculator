@@ -1,0 +1,21 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_högra_delen_och_GÅRDSFASAD_vänstra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.5 role=base rolewhy=1924_fasad_för_fönsterräkning Rutan innehåller slutet av FASAD MOT MARIAGATAN (x<820, med lunettfönster i taket) och början av hörnflygelns GÅRDSFASAD (x>1400, plushöjd +35,35 vid takfoten).
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen med skriven plushöjd +35,35
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 910 text=+35,35 Takfotslinje (gårdsfasaden till höger har texten +35,35)
+L 2_TR 3 1400 - Golvlinje härledd från fönstrens underkant + bröstning 0,80
+L 1_TR 2 1890 - Golvlinje härledd
+F 2_TR +35,35_vindsbjälklag 490 - Härledd våningshöjd
+V window 0 1010 200 260 sill=1270 floor=2_TR conf=0.6 Fönster i 2 TR (Mariagatan), avskuret i vänsterkanten
+V window 670 1020 150 260 sill=1280 floor=2_TR conf=0.5 Fönster i 2 TR vid fasadens slut, avskuret
+V window 0 1490 200 260 sill=1750 floor=1_TR conf=0.6 Fönster i 1 TR (Mariagatan), avskuret
+V window 670 1500 150 260 sill=1760 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+V window 1400 1040 140 260 sill=1300 floor=2_TR conf=0.6 Fönster i 2 TR (gårdsfasaden)
+V window 1780 1050 156 260 sill=1310 floor=2_TR conf=0.5 Fönster i 2 TR (gårdsfasaden), avskuret
+V window 1400 1520 140 260 sill=1780 floor=1_TR conf=0.6 Fönster i 1 TR (gårdsfasaden)
+V window 1780 1520 156 260 sill=1780 floor=1_TR conf=0.5 Fönster i 1 TR (gårdsfasaden), avskuret
+V window 700 650 120 110 floor=vind conf=0.5 Lunettfönster i taket, avskuret
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Plåttak, oinredd vind 1924
+N Två olika fasader i samma ruta: Mariagatan (vänster) och gården (höger); mellanrummet är tomt papper.

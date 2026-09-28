@@ -1,0 +1,12 @@
+W n1 120 585 1936 585 25 0.8 norra knäväggen i GEMENSAMHETSLOKAL (skrafferad = ny isolerad vägg); linjen vid y≈445 är takfoten
+W g1 92 585 92 1936 60 0.7 västra gavelväggen på vinden (murad, två linjer ca 60 px isär)
+W s1 130 1890 1936 1890 25 0.8 södra knäväggen i GEMENSAMHETSLOKAL (skrafferad)
+W w1 600 610 600 810 12 0.4 vägg vid trapphusets ankomst (TD) med dörr
+W w2 1060 610 1060 790 12 0.4 vägg vid trapphusets ankomst
+W w3 830 790 1060 790 12 0.4 vägg vid trapphusets ankomst
+R GEMENSAMHETSLOKAL other 1750 1500 conf=0.8 texten GEMENSAMHETSLOKAL (uppvärmd enligt briefen), vindslokal i långa flygelns västra del
+R - stairwell 830 700 conf=0.4 trapphusets ankomst på vinden med dörr (svängbåge)
+T room_name 1750 1500 GEMENSAMHETSLOKAL
+T fixture 350 760 Pentry typ trinett
+T other 1410 720 TF
+N T- och L-formade symboler i lokalen är murstockar (skorstenar), inte väggar. TF = takfönster. Ytterlinjerna vid y≈445 och x≈60 är takfot respektive gavelns utsida.

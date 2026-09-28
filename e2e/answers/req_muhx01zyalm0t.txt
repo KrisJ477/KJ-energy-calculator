@@ -1,0 +1,16 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_mitten stamp=- bar=0 dims=0 clarity=0.6 compl=0.6 role=base rolewhy=gårdsfasad_för_fönsterräkning Mittdelen av GÅRDSFASADEN: två takkupor med lanterniner, fönster i 2 TR och 1 TR samt fönster/balkongdörr i trapphusets burspråk.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 870 text=+35,35 Takfotslinje
+V window 625 985 250 265 sill=1250 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1290 995 240 265 sill=1260 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 620 1440 250 260 sill=1700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1280 1450 240 260 sill=1710 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 110 1210 270 220 sill=1430 floor=2_TR conf=0.6 Trapphusfönster över balkongen i trapphusets burspråk (vänster kant)
+V door 140 1620 200 316 floor=1_TR conf=0.5 Balkongdörr/trapphusdörr under burspråket, fortsätter nedanför rutan
+V window 1850 1130 86 500 floor=2_TR conf=0.4 Fönster i nästa burspråk, avskuret i högerkanten
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Oinredd vind med takkupor (lanterniner)
+N Takkupornas lanterniner och skorstenarna är inte öppningar. Trapphusens burspråk har fönster/dörrar mellan våningsplanen (halvplan).

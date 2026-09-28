@@ -1,0 +1,19 @@
+CLASS type=plan sub=- disc=architectural part= stamp=1:100 bar=1 dims=0 clarity=0.65 compl=0.9 Arkitektplan A-30:15 "VINDSPLAN (DELVIS UPPMÄTT), BLIVANDE UTSEENDE": gemensamhetslokal i långa flygelns västra del, förråd och torkvind i östra delen, hörnflygeln med VINDSRUM 4:8, WC 4:10, FÖRRÅD 4:9 och BEF. FÖRRÅD.
+FLOOR VINDSPLAN 4 Ritningshuvudet anger VINDSPLAN; vinden är nivå 4 (över 2 TR).
+REGION 476 345 1297 833
+OUTLINE 494,821 1148,821 1148,482 1440,357 1761,1047 1535,1160 494,1148
+RR GEMENSAMHETSLOKAL 893 1038
+RR Pentry 559 887
+RR FÖRRÅD 1291 1038
+RR TORKVIND 1374 1038
+RR BEF._FÖRRÅD 1363 515
+RR VINDSRUM_4:8 1488 720
+RR WC_4:10 1428 762
+RR FÖRRÅD_4:9 1547 821
+REF scale_bar 1196 1443 1529 1443 0–10_M mm=10000 Skalstock nederst (SKALOR 1:100), 0 till 10 M; lågupplöst avläsning, kontrollera på fullupplöst bild.
+TITLE BRF BLODNÄVAN KUNGSLADUGÅRD 28:1 MARIAGATAN 16 STRANDRIDAREGATAN 9
+TITLE VINDSPLAN (DELVIS UPPMÄTT) BLIVANDE UTSEENDE
+TITLE ARBETSRITNING A-30:15 REV C 1986.04.10 (rev C 87.10.09 Gemensamhetslokal tillk.)
+N Teckenförklaringen till höger anger yttervägg/takkonstruktion: takpannor, 4 mm minerit, 170 min.ull, 0,2 plastfolie, 28x95 glespanel, 2x13 gips; knävägg: 2x13 gips, 45x145 reglar c/c 600, 145 min.ull, 2x13 gips. Användbart för konstruktioner mot kallvind.
+N Långa flygelns östra del (FÖRRÅD, TORKVIND) och BEF. FÖRRÅD i hörnflygeln är kallvind enligt briefen; GEMENSAMHETSLOKAL och hörnflygelns vindsrum är uppvärmda. Takkupa enligt ritn. A30:19.
+N Vindsplanet är bara delvis uppmätt (enligt rubriken); ytterväggarna på vinden är knäväggar/snedtak, vilket planen inte visar.

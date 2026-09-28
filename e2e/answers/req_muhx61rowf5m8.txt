@@ -1,0 +1,22 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_vänstra_delen stamp=- bar=0 dims=1 clarity=0.65 compl=0.6 role=base rolewhy=1924_fasad_för_fönsterräkning Vänstra delen av FASAD MOT MARIAGATAN: takfot +35,35, lodrät måttkedja (1,60 / 0,80 / 3,00 och totalhöjd 10,50) och fönster i 2 TR och 1 TR.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen med skriven plushöjd +35,35
+FLOOR 2_TR 3 Bjälklagslinje i måttkedjan
+FLOOR 1_TR 2 Bjälklagslinje i måttkedjan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 860 text=+35,35 Takfotslinje med nivåpil och texten +35,35
+L 2_TR 3 1345 text=+32,35 Bjälklagslinje (dubbellinje) i måttkedjan 3,00 under takfoten; plushöjd beräknad
+L 1_TR 2 1830 text=+29,35 Bjälklagslinje 3,00 under 2 TR; plushöjd beräknad
+F 2_TR +35,35_vindsbjälklag 485 text=3,00 Skrivet mått 3,00 i kedjan
+F 1_TR 2_TR 485 text=3,00 Skrivet mått 3,00 i kedjan
+V window 670 980 250 260 sill=1240 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1210 990 250 260 sill=1250 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1760 1000 176 260 sill=1260 floor=2_TR conf=0.5 Fönster i 2 TR, avskuret i högerkanten
+V window 670 1440 250 260 sill=1700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1210 1450 250 260 sill=1710 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1760 1460 176 260 sill=1720 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Valmat plåttak, oinredd vind 1924
+REF dimension 160 970 160 1220 1,60 mm=1600 Skriven fönsterhöjd 1,60 i den lodräta kedjan
+REF dimension 160 1220 160 1345 0,80 mm=800 Skriven bröstningshöjd 0,80
+REF dimension 70 860 70 1345 3,00 mm=3000 Skriven våningshöjd 3,00 mellan takfot och 2 TR-bjälklaget
+N Totalhöjden 10,50 (x≈395) fortsätter nedanför rutan. Hörnflygelns fasad mot Mariagatan.

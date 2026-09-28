@@ -1,0 +1,49 @@
+CLASS type=plan sub=- disc=architectural part= stamp=1:100 bar=1 dims=0 clarity=0.6 compl=0.95 Arkitektplan A-30:13 "PLAN 2 VÅN, BLIVANDE UTSEENDE" med lägenheter 2,3,5,6,10,15; skalstock nederst.
+FLOOR PLAN_2_VÅN 2 Ritningshuvudet anger PLAN 2 VÅN = 1 TR = nivå 2 enligt briefen.
+REGION 357 119 1428 1363
+OUTLINE 488,821 1142,821 1142,512 1446,357 1749,1041 1535,1172 488,1172
+RR RUM_15:8 536 898
+RR WC_15:9 512 940
+RR KÖK_15:4 762 910
+RR RUM_10:7 904 904
+RR KÖK_10:2 1107 916
+RR TAMB_15:1 643 976
+RR TAMB_15:2 714 988
+RR BAD_15:3 809 1006
+RR TAMB_10:1 1006 988
+RR WC_10:6 916 1041
+RR 10:5 964 1041
+RR RUM_15:7 541 1077
+RR RUM_15:5 690 1083
+RR RUM_15:6 797 1083
+RR RUM_10:4 916 1083
+RR RUM_10:3 1095 1071
+RR KÖK_6:4 1190 1077
+RR RUM_6:5 1321 1071
+RR RUM_6:6 1470 1077
+RR TAMB_6:1 1267 982
+RR BAD_6:2 1357 988
+RR G_6:3 1196 982
+RR WC_5:2 1357 869
+RR TAMB_5:1 1368 922
+RR 5:3 1458 928
+RR KÖK_5:6 1535 833
+RR RUM_5:7 1642 940
+RR RUM_5:8 1648 1053
+RR WC_3:5 1392 785
+RR KÖK_3:2 1309 750
+RR TAMB_3:1 1315 678
+RR RUM_3:4 1488 714
+RR RUM_3:6 1446 589
+RR KÖK_2:4 1238 512
+RR RUM_2:3 1380 470
+RR WC_2:2 1321 583
+RR 2:1 1333 553
+RR F30_TB 1190 833
+REF scale_bar 1172.6 1451.2 1503.8 1451.2 0–10_M mm=10000 Skalstock nederst, 0 till 10 M (avläst i fullupplösning, något osäker ±5 px).
+TITLE BRF BLODNÄVAN KUNGSLADUGÅRD 28:1
+TITLE PLAN 2 VÅN BLIVANDE UTSEENDE
+TITLE ARBETSRITNING A-30:13 REV F 1988.04.20
+N Ritningstyp: 1988 års arbetsritning (Kvarnström arkitektkontor), skala 1:100, svartvit filmkopia. Väggar ritade som fyllda svarta band; brandklassade befintliga väggar B60 markeras med streckad linje bredvid.
+N Lägenhetsbeteckningar av typen 13:5 = lägenhet 13, rum 5 (behåll som rums-ID enligt briefen). L1:x/L2:x = lokaler (BUTIK, LAGER, PENTRY).
+N Skalstockens 0- och 10 m-markeringar mätta på fullupplöst rasterbild.

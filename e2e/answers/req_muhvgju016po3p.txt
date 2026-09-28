@@ -1,0 +1,14 @@
+W g1 670 1540 670 1936 60 0.85 gavelvägg väster (dubbellinje ca 60 px)
+W f1 670 1678 1936 1678 45 0.85 källarfasad mot gatan (dubbellinje) med källarfönster och entré
+W p1 1260 1700 1130 1830 20 0.6 trapphusets snedställda vägg vänster
+W p2 1130 1830 1130 1936 20 0.6 trapphusvägg vänster
+W p3 1600 1700 1680 1800 20 0.6 trapphusets snedställda vägg höger
+W p4 1680 1800 1680 1936 20 0.6 trapphusvägg höger
+O window f1 790 1678 940 1678 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O door f1 1300 1678 1480 1678 conf=0.6 ytterdörr YD1 bv, entré till trapphuset
+O window f1 1870 1678 1936 1678 conf=0.5 källarfönster, fortsätter utanför rutan
+R - stairwell 1400 1880 conf=0.6 trapphus innanför entrén, branddörrar BD1h/B60 markerade
+T other 1390 1735 YD1 bv
+T other 1440 1800 B60
+T other 1480 1870 BD1h
+N Övre delen av rutan är tomt papper. Inga rumstexter i den synliga delen.

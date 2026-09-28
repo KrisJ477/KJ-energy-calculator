@@ -1,0 +1,6 @@
+W e1 0 1360 325 1200 52 0.85 yttervägg (dubbellinje), fortsättning från rutan till vänster
+W e2 325 1200 445 1440 52 0.85 yttervägg, hörn
+W e3 575 1690 700 1936 52 0.8 yttervägg efter öppningen, fortsätter nedåt utanför rutan
+W i1 0 1895 560 1680 30 0.7 innervägg PORT/lägenhet, dubbellinje med B60-streckning
+O door e2 445 1440 575 1690 conf=0.6 öppning mot gatan (tunna dubbla linjer), sannolikt fönster eller port
+N Symbolerna i högerkanten (skraffering, cirkel A) tillhör ritningens teckenförklaring och är inte väggar.

@@ -1,0 +1,4 @@
+W e1 1420 700 1936 440 30 0.6 hörnflygelns nordvästra yttervägg/knävägg på vinden (dubbellinje); den tunnare linjen utanför är takfoten
+W e2 1450 710 1936 1620 30 0.6 hörnflygelns sydvästra yttervägg/knävägg på vinden (dubbellinje)
+W t1 1700 1140 1930 1080 15 0.4 vägg vid trapptornet (halvcirkelformad trappa) mot vinden
+N Rutan visar bara hörnflygelns västra hörn på vindsplanet; den yttre tunna linjen parallellt med väggarna är takfoten, inte en vägg. Inga rumstexter i rutan.

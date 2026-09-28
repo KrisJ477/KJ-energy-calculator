@@ -1,0 +1,15 @@
+CLASS type=vertical sub=section disc=architectural part=SEKTION_A-A_och_GÅRDSFASAD stamp=- bar=1 dims=1 clarity=0.55 compl=0.9 role=base rolewhy=1924_sektion_A-A_(296422)_som_briefen_anger_som_källa_för_våningshöjder_och_plushöjder 1924 års blad 296422 med SEKTION A-A (vänster, genom hörnflygeln) och GÅRDSFASAD (höger). Sektionen har skrivna våningshöjder 3,00 på alla plan, fönsterhöjd 1,60, bröstning 0,80, plushöjder +23,35 (källargolv), +26,35 (BV), +35,35 (vindsbjälklag), butiksgolv +25,00, takhöjd 3,85 till nock; gårdsfasaden visar fönster per våning och entréer med marknivåer +24,60, +24,70, +24,85.
+FLOOR +23,35_källare 0 Plushöjd +23,35 i sektionen = källargolv (briefen)
+FLOOR +26,35_BV 1 Plushöjd +26,35 = BV-golv (briefen)
+FLOOR 1_TR 2 Nästa golvlinje 3,00 m upp (+29,35)
+FLOOR 2_TR 3 Nästa golvlinje 3,00 m upp (+32,35)
+FLOOR +35,35_vindsbjälklag 4 Plushöjd +35,35 = vindsbjälklag (briefen)
+REGION 422 684 1379 604
+REF level_difference 701 1254 701 832 +23,35_till_+35,35 mm=12000 Skrivna plushöjder vid sektionens vänstra kant: källargolv +23,35 (y nederst) och vindsbjälklag +35,35 (y överst); 4 x 3,00 m; lågupplöst avläsning.
+REF dimension 686 1155 686 1058 3,00 mm=3000 Våningshöjd 3,00 skriven i måttkedjan vid sektionen (BV, mellan +26,35 och +29,35); lågupplöst avläsning.
+REF scale_bar 724 1419 1699 1419 0–30_M mm=30000 Skalstock nederst, 0 till 30 M; lågupplöst avläsning.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE SEKTION A-A, GÅRDSFASAD
+TITLE 296422, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Sektionen är tagen genom hörnflygeln (butiksgolv +25,00, terrass +24,85). Gårdsfasaden visar tre bostadsvåningar med tre trapphusentréer, källarfönster i sockeln och två takkupor med lanterniner.
+N Vertikal ritning: läs våningshöjder och fönsterhöjder i den detaljerade vertikalläsningen; arkivlinjal och bildnummer nederst ska ignoreras.

@@ -1,0 +1,16 @@
+CLASS type=plan sub=- disc=architectural part= stamp=- bar=1 dims=0 clarity=0.5 compl=0.9 1924 års bygglovsritning "PLAN AV KÄLLAREN" (296423) med situationsplan 1:400 uppe till vänster; källarplan med tvättstugor, källarförråd och trapphus. Skala ej tryckt, skalstock 0–30 M nederst. Endast plushöjder (+23,35, +25,125) skrivna, inga måttkedjor.
+FLOOR KÄLLAREN 0 Rubriken PLAN AV KÄLLAREN; källare = nivå 0 enligt briefen (296423 = källare).
+REGION 547 456 1231 832
+OUTLINE 559,912 1300,912 1300,638 1482,490 1778,1174 1573,1265 559,1265
+RR TVÄTTSTUGA 1379 855
+RR TVÄTTSTUGA 1163 1026
+RR trapphus 706 970
+RR trapphus 1055 970
+RR trapphus 1272 970
+RR trapphus 1300 720
+REF scale_bar 678 1414 1653 1414 0–30_M mm=30000 Skalstock nederst, 0 till 30 M (delstreck var 5 m); lågupplöst avläsning, kontrollera på fullupplöst bild.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE PLAN AV KÄLLAREN
+TITLE 296423, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Situationsplanen uppe till vänster (SKALA 1:400) är en annan skala och ska inte användas för byggnadens mått; dess måttkedjor (31,45, 10,00, 19,60, 12,00) avser tomtgränser/fasadlängder i 1:400.
+N Ritningen används enligt briefen bara som skalreferens för stommen (1924); innerväggarna ändrades 1988. Arkivlinjal och bildnummer nederst ska ignoreras.

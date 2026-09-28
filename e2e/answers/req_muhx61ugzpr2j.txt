@@ -1,0 +1,18 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_hörnflygeln stamp=- bar=0 dims=1 clarity=0.6 compl=0.6 role=base rolewhy=1924_fasad_för_fönsterräkning Hörnflygelns GÅRDSFASAD: takkupa med lanternin, takfot +35,35, fönster i 2 TR och 1 TR samt burspråk med halvplansfönster och balkong; hörnflygelns gräns vid x≈1710 med lägre tak till höger.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 940 text=+35,35 Takfotslinje
+L 2_TR 3 1442 - Golvlinje härledd från fönstrens underkant 1310 + bröstning 0,80
+L 1_TR 2 1922 - Golvlinje härledd från fönstrens underkant 1790 + bröstning 0,80
+F 2_TR +35,35_vindsbjälklag 502 - Härledd våningshöjd
+V window 235 1050 260 260 sill=1310 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1225 1060 265 260 sill=1320 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 235 1520 260 260 sill=1780 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1225 1530 265 260 sill=1790 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 720 1290 240 210 floor=2_TR conf=0.5 Trapphusfönster på halvplan ovanför balkongen
+V door 750 1760 190 176 floor=1_TR conf=0.4 Balkongdörr på halvplan, fortsätter nedanför rutan
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Plåttak med takkupa/lanternin, oinredd vind 1924
+N Lanterninen och skorstenarna är inte öppningar. Till höger om x≈1710 syns ett lägre tak (utbyggnad på gården).

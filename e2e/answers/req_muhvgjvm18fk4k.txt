@@ -1,0 +1,14 @@
+W e1 40 1900 1470 1150 45 0.85 yttervägg ritad som dubbellinje, hörnflygelns nordvästra fasad
+W e2 1470 1150 1800 1936 45 0.85 yttervägg, hörnet och nordöstra fasaden, fortsätter utanför rutan
+W i1 900 1640 1010 1936 20 0.6 innervägg mellan KÖK/garderob och RUM, tunn dubbellinje med dörröppning
+W c1 880 1500 920 1640 40 0.5 murstock ritad som svart block
+O window e2 1575 1425 1680 1640 conf=0.7 fönstersymbol (tunna linjer mellan tvärstreck) i nordöstra fasaden
+O door i1 905 1665 955 1790 conf=0.5 dörröppning i innerväggen (tunna dubbla linjer)
+R KÖK kitchen 570 1880 apt=2 conf=0.85 texten KÖK 2:4 med köksinredning
+R RUM living 1230 1690 apt=2 conf=0.75 texten RUM 2:3 i hörnrummet
+R G. storage 910 1900 apt=2 conf=0.5 texten G. (garderob)
+T room_name 570 1880 KÖK
+T room_name 1230 1690 RUM
+T fixture 910 1900 G.
+T fixture 1690 1880 G.
+N Övre delen av rutan är tomt papper. Streckade linjer intill väggarna är brandklassmarkeringar, inte väggar.

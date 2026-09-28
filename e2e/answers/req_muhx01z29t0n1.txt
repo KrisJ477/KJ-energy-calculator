@@ -1,0 +1,18 @@
+CLASS type=vertical sub=elevation disc=architectural part=GÅRDSFASAD_vänstra_delen stamp=- bar=0 dims=0 clarity=0.6 compl=0.6 role=base rolewhy=gårdsfasad_för_fönsterräkning Vänstra delen av GÅRDSFASADEN (höger om sektionen): tak med lunettfönster, takfot, två fönsterrader (2 TR och 1 TR) och sektionens högra del längst till vänster med bjälklagslinjer.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen motsvarar vindsbjälklaget +35,35
+FLOOR 2_TR 3 Övre fönsterraden
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 850 text=+35,35 Takfots-/bjälklagslinje som i sektionen till vänster
+L 2_TR 3 1310 - Bjälklagslinje i sektionsdelen till vänster (x<740)
+L 1_TR 2 1800 - Bjälklagslinje i sektionsdelen till vänster
+F 2_TR +35,35_vindsbjälklag 460 - Avstånd mellan bjälklagslinjerna i sektionsdelen
+F 1_TR 2_TR 490 - Avstånd mellan bjälklagslinjerna i sektionsdelen
+V window 1000 940 240 280 sill=1220 floor=2_TR conf=0.8 Fönster i 2 TR på gårdsfasaden
+V window 1400 960 240 260 sill=1220 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 980 1400 260 300 sill=1700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1400 1410 240 290 sill=1700 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1010 560 230 120 floor=vind conf=0.6 Lunettfönster (halvcirkel) i taket, kallvind
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Takstol ritad som oinredd vind
+N Fönstren är ritade med omfattning; måtten avser dagöppningen ungefär. Skorstenar och lanterniner är inte öppningar.

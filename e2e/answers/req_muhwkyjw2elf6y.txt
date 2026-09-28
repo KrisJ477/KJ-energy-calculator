@@ -1,0 +1,14 @@
+W c1 323 0 323 500 55 0.6 tjock vägg (dubbellinje) mellan förråden, nedre delen
+W f1 0 545 780 545 50 0.85 huvudlängans södra källarfasad (dubbellinje) med källarfönster
+W e4 780 545 1070 330 45 0.7 ytterväggen viker av mot hörnflygeln
+W k3 1070 330 1790 40 45 0.8 hörnflygelns sydvästra yttervägg vid hörnet med källarfönster
+W k5 920 0 1070 325 40 0.6 KRYP-UTR.:s sydvästra vägg, fortsätter från rutan ovanför
+W w5 778 0 785 495 20 0.4 vägg mellan förråden och hörnpartiet, osäker
+O window f1 450 545 600 545 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window k3 1230 275 1380 215 conf=0.6 källarfönster i sydvästra hörnväggen
+R KRYP-UTR. other 1400 100 heated=0 conf=0.4 KRYP-UTR., utrymmet fortsätter i rutan ovanför
+R - storage 150 250 heated=0 conf=0.4 omärkt förrådscell
+R - storage 530 250 heated=0 conf=0.4 omärkt förrådscell
+T dimension 400 1880 skalstock 6–10 M
+T other 1400 1350 kvarnström arkitektkontor ab
+N Nedre delen av rutan är ritningshuvudet med skalstock och stämpel; inga väggar där.

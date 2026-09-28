@@ -1,0 +1,29 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_nedre_mitten stamp=- bar=0 dims=1 clarity=0.65 compl=0.6 role=base rolewhy=1924_fasad_för_fönsterräkning Nedre mittdelen av FASAD MOT MARIAGATAN: fyra fönster per våning i 2 TR (avskurna) och 1 TR, butiksfönster med dörr i BV till vänster, ett bostadsfönster och ett källarfönster i mitten, entréportalen med valv till höger, terrassräcke, marklinje +24,09/+24,40, måttet 22,60 och streckad linje +23,35.
+FLOOR 2_TR 3 Övre fönsterraden (avskuren)
+FLOOR 1_TR 2 Fönsterraden ovanför gesimsen
+FLOOR BV 1 Butiks- och bostadsfönster under gesimsen
+FLOOR KÄLLARE 0 Källarfönster och streckad linje +23,35
+REGION 0 0 1936 1936
+L 2_TR 3 255 - Golvlinje härledd från måttkedjan i rutan till vänster (fönstrens underkant ≈150 + bröstning)
+L 1_TR 2 740 - Golvlinje härledd från måttkedjan i rutan till vänster
+L BV 1 1225 text=+26,35 Golvlinje enligt plushöjden +26,35 i rutan till vänster
+L KÄLLARE 0 1745 text=+23,35 Streckad linje med skriven plushöjd +23,35 (x≈1220)
+F 2_TR 1_TR 485 - Enligt kedjan 3,00
+F 1_TR BV 485 - Enligt kedjan 3,00
+V window 0 0 250 170 sill=150 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret
+V window 560 0 270 170 sill=150 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret
+V window 1140 0 270 170 sill=150 floor=2_TR conf=0.6 Fönster i 2 TR, avskuret
+V window 1710 0 226 170 sill=150 floor=2_TR conf=0.5 Fönster i 2 TR, avskuret
+V window 10 360 250 290 sill=650 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 560 360 270 290 sill=650 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1140 360 270 290 sill=650 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1710 360 226 290 sill=650 floor=1_TR conf=0.6 Fönster i 1 TR, avskuret i högerkanten
+V window 0 860 280 480 sill=1340 floor=BV conf=0.5 Butiksfönster i BV, avskuret i vänsterkanten
+V door 0 1040 120 390 sill=1430 floor=BV conf=0.4 Butiksdörr i BV, avskuren i vänsterkanten
+V window 520 860 350 480 sill=1340 floor=BV conf=0.6 Butiksfönster (glasparti med överljus) i BV
+V window 1160 880 230 250 sill=1130 floor=BV conf=0.8 Bostadsfönster i BV (två lufter)
+V window 1200 1300 140 60 sill=1360 floor=KÄLLARE conf=0.6 Källarfönster i sockeln
+V door 1590 960 346 640 sill=1600 floor=BV conf=0.6 Entréportal med rundbågigt överljus och smidesgrind, avskuren i högerkanten; mark +24,40
+GND 1590 Marklinje (svagt lutande); +24,40 vid portalen (x≈1800)
+ROOF - Taket ligger utanför rutan
+N Måttlinjen 22,60 (y≈1700) löper genom hela rutan; ändpunkterna ligger i rutorna till vänster och höger. Terrassräcket (x 870–1580, y 1350–1470) är inte en öppning.

@@ -1,0 +1,9 @@
+W e1 175 1845 1530 1205 52 0.85 yttervägg ritad som dubbellinje (ca 52 px), hörnflygelns nordvästra fasad
+W e2 1530 1205 1640 1400 52 0.85 yttervägg, hörnet vid porten
+W e3 1745 1730 1900 1936 52 0.8 yttervägg efter portöppningen, fortsätter utanför rutan
+W e4 145 1800 235 1936 52 0.8 gavelvägg, västra änden av hörnflygeln (dubbellinje)
+W i1 760 1936 1780 1835 30 0.7 innervägg mellan PORT och lägenhet 1, dubbellinje med B60-streckning
+O door e2 1640 1400 1745 1730 conf=0.6 portöppning mot gatan, tunna dubbla linjer (ingen svängbåge)
+R PORT other 880 1750 heated=0 conf=0.6 texten PORT, genomfart/portgång, sannolikt ouppvärmd
+T room_name 880 1750 PORT
+N Rutan innehåller mest tomt papper; endast hörnflygelns norra del med porten.

@@ -1,0 +1,12 @@
+CLASS type=vertical sub=section disc=architectural part=Sektion_01_vänstra_trapphustornet_(testdelmängd) stamp=1:50 dims=1 bar=1 clarity=0.9 compl=0.3 role=base rolewhy=FFU-sektion_40-2-001_(sektion_01_och_02)_enligt_briefen_som_källa_för_våningshöjder ArchiCAD-sektion KV39-A2-40-2-001 med SEKTION 01 (överst) och SEKTION 02 (nederst): garage plan 09–12 (skrafferade betongbjälklag) och bostadsplan 13–19 ovanpå; plushöjder och våningshöjder i textlagret; skalstock 0–5 METER nederst.
+FLOOR Plan_13 13 Första bostadsplanet ovanpå garagets bjälklag
+FLOOR Plan_14 14 Bostadsplan
+FLOOR Plan_15 15 Bostadsplan
+FLOOR Plan_16 16 Bostadsplan
+FLOOR Plan_17 17 Bostadsplan
+FLOOR Plan_18 18 Bostadsplan
+FLOOR Plan_19 19 Översta bostadsplanet under taket
+REGION 495 138 195 403
+REF scale_bar 1116 1615 1185 1615 0–5_METER mm=5000 Skalstock nederst på arket (0 vid x 10190, 5 vid x 10815 i arkpixlar)
+TITLE KV39-A2-40-2-001 SEKTION 01, SEKTION 02, SKALA 1:50
+N Testdelmängd: läsområdet är begränsat till sektion 01:s vänstra trapphustorn (x 495–690, y 138–541 i översiktsbilden) där alla bostadsplan och bjälklagen syns.

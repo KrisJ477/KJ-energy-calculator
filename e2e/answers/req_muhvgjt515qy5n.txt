@@ -1,0 +1,5 @@
+W e1 0 1390 270 1240 45 0.8 yttervägg (dubbellinje), fortsättning från rutan till vänster
+W e2 270 1240 600 1936 45 0.8 yttervägg, hörn och nordöstra källarfasaden, fortsätter nedåt
+W i1 0 1936 500 1800 25 0.5 skrafferad innervägg (murad), delvis synlig i nedre vänstra hörnet
+O window e2 380 1450 470 1640 conf=0.5 källarfönster (tunna linjer mellan tvärstreck)
+N Den vågräta linjen upptill är ritningsramen. Symbolerna i högerkanten tillhör teckenförklaringen och är inte väggar.

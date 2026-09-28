@@ -1,0 +1,14 @@
+W n1 120 390 1936 390 25 0.8 norra knäväggen i GEMENSAMHETSLOKAL (skrafferad = ny isolerad vägg); linjen vid y≈250 är takfoten
+W g1 92 390 92 1740 60 0.7 västra gavelväggen på vinden (murad, två linjer ca 60 px isär)
+W s1 130 1700 1936 1700 25 0.8 södra knäväggen i GEMENSAMHETSLOKAL (skrafferad), med öppning
+W w1 600 420 600 620 12 0.4 vägg vid trapphusets ankomst (TD) med dörr
+W w2 1060 420 1060 600 12 0.4 vägg vid trapphusets ankomst
+W w3 830 600 1060 600 12 0.4 vägg vid trapphusets ankomst
+O window s1 1550 1700 1680 1700 conf=0.4 öppning i södra knäväggen (takkupa/fönster?)
+O door n1 700 390 810 390 conf=0.5 dörr med svängbåge från trapphuset
+R GEMENSAMHETSLOKAL other 1750 1300 conf=0.8 texten GEMENSAMHETSLOKAL (uppvärmd enligt briefen)
+R - stairwell 830 510 conf=0.4 trapphusets ankomst på vinden
+T room_name 1750 1300 GEMENSAMHETSLOKAL
+T fixture 350 590 Pentry typ trinett
+T other 1410 520 TF
+N T- och L-formade symboler är murstockar. Linjerna vid y≈250 och x≈60 är takfot respektive gavelns utsida. Nedre delen av rutan är tomt papper.

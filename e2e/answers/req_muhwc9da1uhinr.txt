@@ -1,0 +1,36 @@
+W f1 0 1340 1936 1340 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 330 0 330 1340 40 0.8 lägenhetsskiljande vägg mellan lgh 9 och lokal 2 (dubbellinje med B60-streckning)
+W t1 330 285 1430 285 25 0.7 vägg mellan trapphus TB:1 och TAMB L2:1 / L2:3, delvis skrafferad (nytt räcke 1100 öfg ovanför)
+W s1 1430 0 1430 560 20 0.7 skrafferad vägg mellan TB:1 / L1:4 och TAMB L2:8 (B15)
+W w1 615 340 615 560 15 0.5 vägg mellan garderob L2:2 och TAMB L2:1
+W w2 345 340 615 340 12 0.5 garderob L2:2:s övre vägg
+W w3 345 500 480 500 12 0.4 garderob L2:2:s nedre vägg
+W w4 1100 285 1100 560 15 0.6 vägg mellan TAMB L2:1 och L2:3
+W w5 1265 285 1265 560 25 0.6 vägg mellan L2:3 och L1:4 (dubbellinje med streckning)
+W m1 480 560 1936 560 25 0.7 vägg mellan tamburerna/wc och PENTRY / LAGER, med dörröppningar
+W w6 830 620 830 1340 15 0.6 vägg mellan PENTRY L2:4 och LAGER L2:5
+W w7 1560 620 1560 1340 20 0.6 vägg mellan LAGER L2:5 och LAGER L2:6 med pardörr
+O window f1 560 1340 780 1340 conf=0.8 fönstersymbol i gårdsfasaden, PENTRY
+O window f1 1120 1340 1330 1340 conf=0.8 fönstersymbol i gårdsfasaden, LAGER L2:5
+O window f1 1660 1340 1870 1340 conf=0.8 fönstersymbol i gårdsfasaden, LAGER L2:6
+O door t1 1290 285 1400 285 conf=0.5 dörröppning TB:1 – TAMB L2:8
+O door m1 640 560 800 560 conf=0.5 dörröppning TAMB L2:1 – PENTRY
+O door m1 870 560 1030 560 conf=0.5 dörröppning TAMB L2:1 – LAGER L2:5
+O door m1 1730 560 1880 560 conf=0.5 dörröppning TAMB L2:8 – LAGER L2:6
+O door w7 1560 870 1560 1040 conf=0.5 pardörr mellan LAGER L2:5 och L2:6
+R TAMB hall 820 450 apt=L2 conf=0.8 texten TAMB. L2:1
+R G. storage 460 400 apt=L2 conf=0.5 texten L2:2 G. (garderob)
+R L2:3 wc 1160 400 apt=L2 conf=0.5 texten L2:3 med wc-stol och tvättställ
+R L1:4 wc 1360 400 apt=L1 conf=0.5 texten L1:4 med wc-stol
+R TAMB hall 1600 340 apt=L2 conf=0.8 texten TAMB. L2:8
+R PENTRY kitchen 600 930 apt=L2 conf=0.8 texten PENTRY L2:4 med skåp
+R LAGER storage 1130 930 apt=L2 conf=0.85 texten LAGER L2:5
+R LAGER storage 1880 930 apt=L2 conf=0.5 texten LAGER L2:6, fortsätter i rutan till höger
+T room_name 820 450 TAMB. L2:1
+T room_name 1600 340 TAMB. L2:8
+T room_name 600 930 PENTRY L2:4
+T room_name 1130 930 LAGER L2:5
+T other 1000 170 Nytt räcke 1100 öfg.
+T other 1380 150 B15
+T room_name 1050 20 TB:1
+N Texten "Nytt räcke 1100 öfg." avser ett räcke i trapphuset, inte en vägg. Streckad linje vid x≈310 är brandklassmarkering. KÖK 9:2 uppe till vänster tillhör rutan till vänster.

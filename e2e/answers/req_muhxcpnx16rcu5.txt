@@ -1,0 +1,26 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_nedre_högra_delen_och_GÅRDSFASAD_nedre_vänstra_delen stamp=- bar=0 dims=1 clarity=0.6 compl=0.5 role=base rolewhy=1924_fasad_för_fönsterräkning Rutan innehåller slutet av FASAD MOT MARIAGATAN (x<820: fönster i 2 TR och 1 TR, entréportalen och portvalvet i BV, mark +24,40/+24,24, måttlinjen 22,60:s högra ände) och början av hörnflygelns GÅRDSFASAD (x>1400: fönster i 2 TR och 1 TR samt valvöppningar i BV, mark y≈1560).
+FLOOR 2_TR 3 Övre fönsterraden (avskuren)
+FLOOR 1_TR 2 Fönsterraden ovanför gesimsen
+FLOOR BV 1 Portalen och valven under gesimsen
+REGION 0 0 1936 1936
+L 2_TR 3 305 - Golvlinje härledd från fönstrens underkant ≈190 + bröstning 0,80 (som i rutan ovanför)
+L 1_TR 2 795 - Golvlinje härledd från fönstrens underkant ≈670 + bröstning 0,80
+L BV 1 1270 text=+26,35 Golvlinje härledd: mark +24,24 (y 1600) plus 2,11 m; 3,00 under 1 TR ger 1285
+F 2_TR 1_TR 490 - Härledd (3,00 enligt kedjan)
+F 1_TR BV 480 - Härledd
+V window 0 0 210 190 sill=190 floor=2_TR conf=0.6 Fönster i 2 TR (Mariagatan), avskuret i vänsterkanten och överkanten
+V window 660 0 150 200 sill=200 floor=2_TR conf=0.5 Fönster i 2 TR vid fasadens slut (smalt, avskuret)
+V window 0 380 210 290 sill=670 floor=1_TR conf=0.6 Fönster i 1 TR (Mariagatan), avskuret i vänsterkanten
+V window 660 390 150 290 sill=680 floor=1_TR conf=0.5 Fönster i 1 TR vid fasadens slut (smalt)
+V door 0 960 330 640 sill=1600 floor=BV conf=0.5 Entréportalen med rundbågigt överljus och smidesgrind, avskuren i vänsterkanten (mark +24,40)
+V door 530 1000 270 600 sill=1600 floor=BV conf=0.5 Rundbågig portöppning (portgång) med grind, mark +24,24
+V window 1410 0 120 200 sill=200 floor=2_TR conf=0.5 Fönster i 2 TR (gårdsfasaden), delvis avskuret
+V window 1790 0 146 200 sill=200 floor=2_TR conf=0.5 Fönster i 2 TR (gårdsfasaden), avskuret i högerkanten
+V window 1410 400 120 280 sill=680 floor=1_TR conf=0.5 Fönster i 1 TR (gårdsfasaden)
+V window 1790 400 146 290 sill=690 floor=1_TR conf=0.5 Fönster i 1 TR (gårdsfasaden), avskuret
+V door 1400 960 240 600 sill=1560 floor=BV conf=0.3 Rundbågig valvöppning (arkad/portgång) i BV på gårdsfasaden, avskuren i vänsterkanten
+V door 1760 960 176 600 sill=1560 floor=BV conf=0.3 Rundbågig valvöppning i BV på gårdsfasaden, avskuren i högerkanten
+GND 1600 Marklinje för Mariagatan-fasaden; skrivna plushöjder +24,40 (x≈50) och +24,24 (x≈435); gårdsfasadens marklinje ligger vid y≈1560
+ROOF - Taket ligger utanför rutan
+REF level_difference 435 1600 435 1700 +24,24_mark_till_måttlinje - Ingen mätbar skillnad; se not
+N Måttlinjen 22,60 slutar vid x≈435 (tvärstreck vid y≈1700, nivåpil +24,24); vänstra änden ligger i rutorna till vänster. Två olika fasader i rutan: Mariagatan (x<820) och gården (x>1400); mellanrummet är tomt papper. Den streckprickade lodräta linjen vid x≈440 och x≈1650 är sektionslinjer, inte väggar.

@@ -1,0 +1,43 @@
+W f1 0 150 1936 150 40 0.9 norra fasadväggen
+W f2 0 1690 1936 1690 40 0.9 södra fasadväggen mot gården
+W p1 355 150 355 520 25 0.8 lägenhetsgräns D1408/D1401 (EI60-linje)
+W p2 120 520 630 520 25 0.8 trapphus D norra vägg (hiss och trappa)
+W p3 120 520 120 1050 25 0.8 trapphus D västra vägg (hisschakt)
+W p4 630 520 630 1050 25 0.8 trapphus D östra vägg
+W p5 0 1050 1936 1050 25 0.8 trapphusets/korridorens södra vägg
+W p6 630 830 1936 830 25 0.8 korridorens norra vägg (EI60-linje)
+W p7 1130 150 1130 830 25 0.8 lägenhetsgräns D1401/D1402
+W p8 1400 830 1400 1050 25 0.8 korridorens östra vägg mot D1403
+W p9 1280 1050 1280 1690 25 0.8 lägenhetsgräns D1404/D1403
+W p10 350 1050 350 1690 25 0.8 lägenhetsgräns D1406/D1404
+W b1 640 500 860 500 12 0.7 badrumsvägg D1401
+W b2 860 500 860 830 12 0.7 badrumsvägg D1401
+W b3 1380 590 1710 590 12 0.7 badrumsvägg D1402
+W b4 1380 590 1380 830 12 0.7 badrumsvägg D1402
+W b5 1710 590 1710 830 12 0.7 badrumsvägg D1402
+W b6 1050 1050 1050 1370 12 0.7 badrumsvägg D1404
+W b7 1050 1370 1280 1370 12 0.7 badrumsvägg D1404
+W b8 1290 1230 1530 1230 12 0.7 badrumsvägg D1403
+W b9 1530 1230 1530 1370 12 0.7 badrumsvägg D1403
+W b10 1290 1370 1530 1370 12 0.7 badrumsvägg D1403
+O window f1 85 150 240 150 conf=0.8 fönster norra fasaden
+O window f1 470 150 630 150 conf=0.8 fönster norra fasaden
+O door f1 790 150 1010 150 conf=0.7 balkongdörr norra fasaden
+O door f1 1300 150 1530 150 conf=0.7 balkongdörr norra fasaden
+O window f1 1690 150 1840 150 conf=0.8 fönster norra fasaden
+O window f2 0 1690 220 1690 conf=0.7 fönster södra fasaden
+O window f2 490 1690 730 1690 conf=0.8 fönster södra fasaden
+O window f2 880 1690 1040 1690 conf=0.8 fönster södra fasaden
+O window f2 1330 1690 1500 1690 conf=0.8 fönster södra fasaden
+O window f2 1600 1690 1770 1690 conf=0.8 fönster södra fasaden
+R TH_D stairwell 380 950 conf=0.9 text "TH D D1400 6,6 m²" med hiss och trappa; plushöjd +22,99
+R 1_RoK_D1401 living 900 300 apt=D1401 conf=0.9 lägenhetstext "1 RoK D1401 24,9 m²"
+R 2_RoK_D1402 living 1650 350 apt=D1402 conf=0.9 lägenhetstext "2 RoK D1402 33,9 m²"
+R TH stairwell 1100 940 conf=0.9 text "TH 8,9 m²" – trapphuskorridor
+R 4_RoK_D1403 living 1650 1400 apt=D1403 conf=0.9 lägenhetstext "4 RoK D1403 78,1 m²"
+R 2_RoK_D1404 living 700 1400 apt=D1404 conf=0.9 lägenhetstext "2 RoK D1404 33,5 m²"
+R - bathroom 750 700 apt=D1401 conf=0.8 KM + klinker
+R - bathroom 1540 700 apt=D1402 conf=0.8 KM + klinker
+R - bathroom 1160 1200 apt=D1404 conf=0.8 KM + klinker
+R - bathroom 1400 1300 apt=D1403 conf=0.8 klinker, WC
+N Hisschaktets kryss och trappan är inte väggar; röda EI60-linjer ignorerade.

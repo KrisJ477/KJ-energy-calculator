@@ -1,0 +1,21 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN_vänstra_delen stamp=- bar=0 dims=0 clarity=0.6 compl=0.6 role=base rolewhy=gatufasad_för_fönsterräkning Vänstra delen av gatufasaden: takfot, fönster i 2 TR och 1 TR, gavelfönster till vänster och burspråk till höger.
+FLOOR +35,35_vindsbjälklag 4 Takfotslinjen
+FLOOR 2_TR 3 Övre fönsterraden (golv ≈ bröstning 0,80 under fönstret)
+FLOOR 1_TR 2 Nedre fönsterraden i rutan
+REGION 0 0 1936 1936
+L +35,35_vindsbjälklag 4 880 text=+35,35 Takfotslinje (vindsbjälklag +35,35 enligt sektionen)
+L 2_TR 3 1372 - Golvlinje härledd: fönstrets underkant 1240 + bröstning 0,80 m (132 px vid 165 px/m)
+L 1_TR 2 1862 - Golvlinje härledd: fönstrets underkant 1730 + bröstning 0,80 m
+F 2_TR +35,35_vindsbjälklag 492 - Härledd våningshöjd mellan golvlinjerna (3,00 m enligt sektionen)
+F 1_TR 2_TR 490 - Härledd våningshöjd
+V window 620 980 250 260 sill=1240 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 1210 990 250 260 sill=1250 floor=2_TR conf=0.8 Fönster i 2 TR
+V window 60 980 120 260 sill=1240 floor=2_TR conf=0.5 Fönster i 2 TR nära gaveln, avskuret i vänsterkanten
+V window 620 1450 250 260 sill=1710 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 1210 1470 250 260 sill=1730 floor=1_TR conf=0.8 Fönster i 1 TR
+V window 60 1470 120 260 sill=1730 floor=1_TR conf=0.5 Fönster i 1 TR, avskuret
+V window 1700 1450 236 300 sill=1750 floor=1_TR conf=0.5 Burspråksfönster i 1 TR, avskuret i högerkanten
+V window 1780 1030 156 120 floor=vind conf=0.5 Lunettfönster i taket (kallvind), avskuret
+GND - Marklinjen ligger nedanför rutan
+ROOF cold Oinredd vind med lunettfönster
+N Golvlinjerna är härledda från fönstrens underkant och bröstningen 0,80 i sektionen (296422).

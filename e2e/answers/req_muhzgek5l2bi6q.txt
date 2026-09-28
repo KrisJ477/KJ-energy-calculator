@@ -1,0 +1,24 @@
+CLASS type=vertical sub=section disc=architectural part=Sektion_01_trapphustornet_plan_13–17_(nedersta_rutan) stamp=1:50 bar=0 dims=1 clarity=0.95 compl=0.6 role=base rolewhy=sektion_för_våningshöjder Sektion 01 vid trapphustornet: PLAN 17 till PLAN 13 med skrivna plushöjder på bjälklagen (+32,215, +29,055, +26,020, +22,985, +19,950); plan 13 ligger på garagets bjälklag.
+FLOOR Plan_17 17 Text PLAN 17, golv +32,215
+FLOOR Plan_16 16 Text PLAN 16, golv +29,055
+FLOOR Plan_15 15 Text PLAN 15, golv +26,020
+FLOOR Plan_14 14 Text PLAN 14, golv +22,985
+FLOOR Plan_13 13 Text PLAN 13, golv +19,950 (på garagets bjälklag)
+REGION 0 0 1780 1936
+L Plan_17 17 224 text=+32,215 Bjälklagets överkant med skriven plushöjd
+L Plan_16 16 619 text=+29,055 Bjälklagets överkant med skriven plushöjd
+L Plan_15 15 994 text=+26,020 Bjälklagets överkant med skriven plushöjd
+L Plan_14 14 1379 text=+22,985 Bjälklagets överkant med skriven plushöjd
+L Plan_13 13 1759 text=+19,950 Bjälklagets överkant med skriven plushöjd
+F Plan_16 Plan_17 395 text=3,16 32,215 − 29,055
+F Plan_15 Plan_16 375 text=3,035 29,055 − 26,020
+F Plan_14 Plan_15 385 text=3,035 26,020 − 22,985
+F Plan_13 Plan_14 380 text=3,035 22,985 − 19,950
+V door 780 -26 100 250 sill=224 floor=Plan_17 conf=0.6 innerdörr i sektionen
+V door 780 364 100 255 sill=619 floor=Plan_16 conf=0.6 innerdörr i sektionen
+V door 780 739 100 255 sill=994 floor=Plan_15 conf=0.6 innerdörr i sektionen
+V door 780 1124 100 255 sill=1379 floor=Plan_14 conf=0.6 innerdörr i sektionen
+GND - Marken syns inte; plan 13 vilar på garagets bjälklag (garaget ingår inte)
+ROOF - Taket ligger utanför rutan
+REF level_difference 520 224 520 1759 +32,215_till_+19,950 mm=12265 Skrivna plushöjder på bjälklagens överkant
+N Betongbjälklag skrafferade; trappan till vänster är inte en vägg.

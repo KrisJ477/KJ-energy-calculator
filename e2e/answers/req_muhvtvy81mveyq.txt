@@ -1,0 +1,23 @@
+W g1 675 0 675 1470 60 0.85 gavelvägg väster (dubbellinje ca 60 px, med streckprickad sektionslinje)
+W f1 675 1445 1936 1445 50 0.85 södra källarfasaden (gårdsfasad, dubbellinje) med källarfönster
+W s1 1152 300 1152 660 15 0.6 vägg mellan förrådet till vänster och trapphus TD:0
+W s2 1665 250 1665 480 15 0.5 TD:0:s högra vägg
+W s3 1665 470 1936 470 15 0.5 vägg till höger om TD:0
+W m1 750 690 1936 690 60 0.7 tjock murad vägg (två linjer ca 60 px isär) mellan trapphuset och gången
+W m3 1040 900 1936 900 20 0.6 gångens nedre vägg mot förråden
+W c1 1042 900 1042 1420 15 0.6 förrådsvägg
+W c2 1330 900 1330 1420 15 0.6 förrådsvägg
+W c3 1625 900 1625 1420 15 0.6 förrådsvägg
+W c4 1850 720 1850 900 15 0.5 kort vägg vid gången
+O window f1 960 1445 1130 1445 conf=0.7 källarfönster (tunna linjer mellan tvärstreck)
+O window f1 1560 1445 1700 1445 conf=0.7 källarfönster
+R TD:0 stairwell 1380 460 conf=0.8 trapphus TD:0 med trappa
+R - corridor 1400 800 conf=0.4 omärkt gång mellan trapphuset och förråden
+R - storage 1180 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1480 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 1780 1150 heated=0 conf=0.4 omärkt förrådscell
+R - storage 850 1100 heated=0 conf=0.3 omärkt utrymme vid gaveln
+T room_name 1380 460 TD:0
+T other 1440 60 B60
+T other 1480 110 BD1h
+N Källarförråden saknar rumstexter. Enligt projektbriefen är förråden kalla eller halvvarma. Nedre delen av rutan är tomt papper.

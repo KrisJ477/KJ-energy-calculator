@@ -1,0 +1,32 @@
+W g1 570 0 570 1330 60 0.85 gavelvägg väster (dubbellinje ca 60 px)
+W f1 570 1330 1936 1330 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W s1 1022 0 1022 500 20 0.7 vägg mellan RUM 16:7 och trapphus TD:3 (dubbellinje)
+W t1 1020 325 1580 325 20 0.7 skrafferad vägg mellan TD:3 och TAMB 16:1 (B30)
+W s2 1580 0 1580 500 20 0.7 TD:3:s högra vägg mot KÖK 16:4 / 16:2
+W s3 1745 300 1745 530 15 0.6 skrafferad vägg mellan 16:2 och WC 16:3
+W t2 1740 300 1936 300 15 0.6 skrafferad vägg mellan KÖK 16:4 och WC 16:3
+W m1 600 530 1936 530 20 0.7 vägg mellan norra rumsraden (TAMB, 16:2, WC) och RUM 16:6 / 16:5, med dörröppningar
+W s4 1335 530 1335 1330 20 0.7 vägg mellan RUM 16:6 och RUM 16:5
+W a1 1785 530 1785 1330 40 0.8 lägenhetsskiljande vägg mellan lgh 16 (RUM 16:5) och lgh 12 (dubbellinje med B60-streckning)
+O window f1 830 1330 1040 1330 conf=0.8 fönstersymbol i gårdsfasaden, RUM 16:6
+O window f1 1420 1330 1630 1330 conf=0.8 fönstersymbol i gårdsfasaden, RUM 16:5
+O door m1 1030 530 1200 530 conf=0.5 dörröppning TAMB 16:1 – RUM 16:6
+O door m1 1400 530 1550 530 conf=0.5 dörröppning TAMB 16:1 – RUM 16:5
+R RUM living 790 100 apt=16 conf=0.85 texten RUM 16:7
+R TD:3 stairwell 1260 220 conf=0.85 trapphus TD:3 med trappa
+R KÖK kitchen 1850 110 apt=16 conf=0.8 texten KÖK 16:4
+R TAMB hall 1470 420 apt=16 conf=0.8 texten TAMB. 16:1
+R 16:2 hall 1660 430 apt=16 conf=0.4 lägenhetsnumret 16:2, passage
+R WC wc 1890 440 apt=16 conf=0.6 texten WC 16:3, delvis avskuren
+R RUM living 790 900 apt=16 conf=0.85 texten RUM 16:6 med öppen spis (ÖS)
+R RUM living 1500 980 apt=16 conf=0.85 texten RUM 16:5
+T room_name 790 100 RUM 16:7
+T room_name 1260 220 TD:3
+T room_name 1470 420 TAMB. 16:1
+T room_name 790 900 RUM 16:6
+T room_name 1500 980 RUM 16:5
+T fixture 640 640 ÖS
+T other 1400 130 B30
+T other 1680 350 S8bh
+T other 1790 420 S7bh
+N Rutor märkta G. och L. är skåp. Den skrafferade klacken vid gaveln (x≈600–650, y≈230–300) är murstock vid den öppna spisen. Nedre delen av rutan är tomt papper.

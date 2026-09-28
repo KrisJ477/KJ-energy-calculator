@@ -1,0 +1,30 @@
+CLASS type=plan sub=- disc=architectural part= stamp=- bar=1 dims=0 clarity=0.55 compl=0.95 1924 års bygglovsritning "PLAN AV ANDRA VÅNINGEN" (296425) = 1 TR enligt briefens alias-tabell. Inga måttkedjor; skalstock 0–30 M nederst. Två balkonger mot gården (BALK.) och en mot gatan i hörnflygeln.
+FLOOR ANDRA_VÅNINGEN 2 Rubriken PLAN AV ANDRA VÅNINGEN = Plan 2 vån = 1 TR (nivå 2) enligt briefen.
+REGION 479 445 1243 798
+OUTLINE 490,895 1148,895 1148,590 1420,450 1710,1140 1520,1230 490,1230
+RR KÖK 547 983
+RR RUM 781 983
+RR KÖK 1094 983
+RR TAMB 1345 975
+RR HALL 1425 983
+RR KÖK 1220 593
+RR RUM 1368 564
+RR RUM 1425 684
+RR RUM 1482 787
+RR KÖK 1300 815
+RR KÖK 1533 906
+RR RUM 1573 1009
+RR RUM 1619 1123
+RR RUM 570 1151
+RR KÖK 690 1151
+RR RUM 798 1151
+RR RUM 929 1151
+RR RUM 1066 1151
+RR KÖK 1208 1151
+RR RUM 1322 1151
+RR RUM 1471 1151
+REF scale_bar 621 1397 1596 1397 0–30_M mm=30000 Skalstock nederst, 0 till 30 M; lågupplöst avläsning, kontrollera på fullupplöst bild.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE PLAN AV ANDRA VÅNINGEN
+TITLE 296425, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Inga måttkedjor på detta blad; för skalan används skalstocken eller BV-bladet 296424. Balkongerna (BALK.) är inte rum. Innerväggarna ändrades 1988.

@@ -1,0 +1,16 @@
+W sw1 31 0 335 804 30 0.6 hörnflygelns sydvästra knävägg (dubbellinje), fortsätter från rutan till vänster
+W e2 1069 0 1850 1404 30 0.7 hörnflygelns nordöstra knävägg (dubbellinje)
+W e3 1850 1404 820 1720 30 0.6 hörnflygelns sydöstra gavel/knävägg ned till huvudlängans södra fasad
+W f1 525 144 855 0 25 0.7 skrafferad ny vägg, FÖRRÅD 4:9:s nordvästra sida
+W f2 1031 0 1185 324 25 0.7 skrafferad ny vägg, FÖRRÅD 4:9:s nordöstra sida
+W f3 1185 324 525 654 25 0.7 skrafferad ny vägg, FÖRRÅD 4:9:s sydöstra sida
+W f4 405 404 525 654 25 0.6 skrafferad ny vägg, FÖRRÅD 4:9:s sydvästra sida
+W wc1 165 0 305 204 20 0.6 skrafferad vägg runt D./WC 4:10
+W s1 0 1720 820 1720 25 0.7 huvudlängans södra knävägg/fasad på vinden (dubbellinje)
+R FÖRRÅD storage 845 274 apt=4 conf=0.8 texten FÖRRÅD 4:9
+R WC wc 305 30 apt=4 conf=0.4 texten WC 4:10, avskuret upptill
+R TORKVIND other 60 1294 heated=0 conf=0.4 texten TORKVIND avskuren, fortsätter från rutan till vänster
+R - storage 1300 1100 heated=0 conf=0.3 omärkt del av hörnflygelns vind sydost om FÖRRÅD 4:9 (oinredd)
+T room_name 845 274 FÖRRÅD 4:9
+T other 610 124 S8bh
+N Symbolen till höger (skraffering) tillhör teckenförklaringen. Tunna dubbellinjer utanför knäväggarna är takfoten; L-symbolen är en murstock.

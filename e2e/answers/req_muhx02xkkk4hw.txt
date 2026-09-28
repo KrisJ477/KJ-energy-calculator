@@ -1,0 +1,13 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_MARIAGATAN_och_GÅRDSFASAD stamp=- bar=1 dims=1 clarity=0.55 compl=0.95 role=base rolewhy=1924_fasad_(296421)_som_briefen_anger_för_fönsterräkning_per_rum 1924 års blad 296421 med FASAD MOT MARIAGATAN (vänster: hörnflygelns gatufasad med butiker i BV, entréportal och tre bostadsvåningar) och GÅRDSFASAD (höger: hörnflygelns gårdssida med balkonger). Skrivna höjder: 10,50 (takfot över butiksgolv), 3,00 per våning, fönster 1,60, bröstning 0,80; längd 22,60; plushöjder +35,35, +25,30 (butiksgolv), +24,85, +24,35, +24,09, +24,40, +24,24, +24,60, +23,35, +25,55.
+FLOOR BV 1 Nedersta våningen med butiker (butiksgolv +25,30 enligt måttkedjan)
+FLOOR 1_TR 2 Mellersta bostadsvåningen
+FLOOR 2_TR 3 Översta bostadsvåningen under takfoten +35,35
+REGION 388 616 1459 627
+REF dimension 490 1197 1151 1197 22,60 mm=22600 Skriven längd 22,60 längs Mariagatan-fasadens nederkant; lågupplöst avläsning.
+REF dimension 462 798 462 1151 10,50 mm=10500 Skriven total höjd 10,50 i den lodräta måttkedjan till vänster (från +24,85 till takfot +35,35); lågupplöst avläsning.
+REF scale_bar 678 1391 1653 1391 0–30_M mm=30000 Skalstock nederst, 0 till 30 M; lågupplöst avläsning.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE FASAD MOT MARIAGATAN, GÅRDSFASAD
+TITLE 296421, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Mariagatan-fasaden visar 5 fönster per bostadsvåning i hörnflygeln samt butiksfönster och entré i BV; gårdsfasaden visar balkonger på 1 och 2 TR. Räkna fönster per rum i den detaljerade vertikalläsningen.
+N Arkivlinjal och bildnummer nederst ska ignoreras.

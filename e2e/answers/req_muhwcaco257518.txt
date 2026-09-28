@@ -1,0 +1,31 @@
+W s1 100 0 100 560 25 0.6 vägg (dubbellinje med streckning) mellan TAMB 5:1 och 5:3, fortsätter från rutan till vänster
+W e1 1320 0 1700 900 45 0.85 hörnflygelns sydöstra yttervägg (dubbellinje) med fönster
+W e2 1700 900 1320 1080 45 0.8 ytterväggens sydvästra sida vid hörnet, med balkongdörr till balkongen nedanför
+W e3 730 1350 1320 1080 45 0.7 ytterväggen viker av mot huvudlängans södra fasad
+W f1 0 1350 730 1350 50 0.85 huvudlängans södra fasadvägg (dubbellinje) med fönster
+W a1 760 560 1010 1240 35 0.7 lägenhetsskiljande vägg mellan RUM 6:6 (lgh 6) och RUM 5:8 (lgh 5), dubbellinje med streckning
+W w1 820 660 1470 350 20 0.6 vägg mellan RUM 5:7 och RUM 5:8 med dörr
+W w2 600 310 760 560 20 0.6 vägg mellan 5:4 och RUM 5:7
+W w3 500 170 600 310 20 0.5 vägg mellan 5:3 och RUM 5:7
+W w4 100 190 220 160 15 0.5 G. 5:5:s övre vägg
+W w5 220 160 320 450 15 0.5 snedställd vägg vid G. 5:5
+W w6 100 450 320 450 15 0.4 G. 5:5:s nedre vägg
+W m1 0 545 730 545 25 0.7 vägg mellan 5:4 / garderoberna och RUM 6:6
+W w7 230 560 230 1350 15 0.7 vägg mellan rummet till vänster och RUM 6:6
+O window e1 1340 90 1410 200 conf=0.6 fönstersymbol i sydöstra fasaden, RUM 5:7
+O window e1 1540 500 1620 690 conf=0.7 fönstersymbol i sydöstra fasaden, RUM 5:8
+O door e2 1130 1170 1320 1080 conf=0.5 balkongdörr (tunna linjer) mot balkongen
+O window f1 300 1350 520 1350 conf=0.8 fönstersymbol i gårdsfasaden, RUM 6:6
+O door w1 1000 560 1130 500 conf=0.5 dörröppning RUM 5:7 – RUM 5:8
+R 5:3 hall 370 150 apt=5 conf=0.4 lägenhetsnumret 5:3
+R G. storage 190 380 apt=5 conf=0.5 texten 5:5 G.
+R 5:4 hall 560 490 apt=5 conf=0.4 lägenhetsnumret 5:4 vid dörr S2ch
+R RUM living 1000 230 apt=5 conf=0.85 texten RUM 5:7
+R RUM living 1240 780 apt=5 conf=0.85 texten RUM 5:8
+R RUM living 460 900 apt=6 conf=0.85 texten RUM 6:6
+T room_name 1000 230 RUM 5:7
+T room_name 1240 780 RUM 5:8
+T room_name 460 900 RUM 6:6
+T other 500 460 S2ch
+T other 1400 1830 ARBETSRITNING
+N Rektangeln under sydvästra hörnväggen (x≈1100–1420, y≈1100–1300) är en balkong, inte ett rum. Texten ARBETSRITNING längst ned tillhör ritningshuvudet. Rutor G., L. är skåp.

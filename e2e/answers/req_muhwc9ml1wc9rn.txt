@@ -1,0 +1,15 @@
+W f1 0 440 1936 440 50 0.85 södra fasadväggen (gårdsfasad, dubbellinje) med fönster
+W a1 655 0 655 440 60 0.8 lägenhetsskiljande vägg mellan lgh 13 och lgh 9 (dubbellinje med B60-streckning)
+W s4 1327 0 1327 440 20 0.7 vägg mellan RUM 9:4 och RUM 9:3
+W w6 160 0 160 440 15 0.5 vägg mellan RUM 13:6 och rummet till vänster
+O window f1 350 440 560 440 conf=0.8 fönstersymbol i gårdsfasaden, RUM 13:6
+O window f1 950 440 1150 440 conf=0.8 fönstersymbol i gårdsfasaden, RUM 9:4
+O window f1 1560 440 1780 440 conf=0.8 fönstersymbol i gårdsfasaden, RUM 9:3
+R RUM living 370 60 apt=13 conf=0.5 texten RUM 13:6, rummet fortsätter i rutan ovanför
+R RUM living 930 60 apt=9 conf=0.5 texten RUM 9:4, rummet fortsätter i rutan ovanför
+R RUM living 1650 60 apt=9 conf=0.5 texten RUM 9:3, rummet fortsätter i rutan ovanför
+T room_name 370 60 RUM 13:6
+T room_name 930 60 RUM 9:4
+T room_name 1650 60 RUM 9:3
+T other 1850 1800 SKALOR 1:100
+N Rutan märkt SKALOR 1:100 nere till höger är ritningshuvudet; linjen längst ned är ritningens ram. Rutor L. och G. är skåp.

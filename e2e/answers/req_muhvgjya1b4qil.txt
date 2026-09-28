@@ -1,0 +1,24 @@
+W f1 0 1530 1936 1530 40 0.85 fasadvägg (dubbellinje) med fönster, fönsterdörr och trapptorn
+W i1 528 1540 528 1936 20 0.7 vägg mellan KÖK 15:4 och RUM 10:7 (tjock linje, garderober st och k/f intill)
+W s1 950 1540 950 1936 15 0.6 lägenhetsvägg mellan RUM 10:7 och trapphuset (tunn dubbellinje)
+W p1 1150 1540 1008 1690 20 0.7 trapphusets snedställda vägg vänster
+W p2 1008 1690 1008 1936 20 0.7 trapphusvägg vänster
+W p3 1330 1540 1478 1690 20 0.7 trapphusets snedställda vägg höger
+W p4 1478 1690 1478 1936 20 0.7 trapphusvägg höger
+W s2 1540 1540 1540 1936 15 0.6 lägenhetsvägg mellan trapphuset och köket till höger
+W c1 1830 20 1936 270 45 0.5 hörnflygelns fasad (dubbellinje) i övre högra hörnet
+O window f1 0 1530 215 1530 conf=0.6 fönster, fortsätter utanför rutan till vänster
+O window f1 630 1530 830 1530 conf=0.8 fönstersymbol i fasaden
+O door f1 1160 1530 1330 1530 conf=0.7 fönsterdörr FD1 till balkongen ovanför entrén
+O window f1 1640 1530 1850 1530 conf=0.8 fönstersymbol i fasaden
+R KÖK kitchen 100 1880 apt=15 conf=0.8 texten KÖK 15:4 med köksinredning
+R RUM living 730 1880 apt=10 conf=0.8 texten RUM 10:7
+R - stairwell 1240 1820 conf=0.8 trapphus med svängd trappa och pil
+R KÖK kitchen 1720 1880 conf=0.7 texten KÖK, lägenhetsnummer avskuret i rutans kant
+T room_name 100 1880 KÖK
+T room_name 730 1880 RUM
+T room_name 1720 1880 KÖK
+T other 1240 1460 FD1
+T fixture 460 1590 st
+T fixture 460 1670 k/f
+N Rektangeln ovanför fasaden (x≈1090–1400) är en balkong. Streckade lodräta linjer vid x≈520, 1120 och 1370 är brand-/sektionsmarkeringar.

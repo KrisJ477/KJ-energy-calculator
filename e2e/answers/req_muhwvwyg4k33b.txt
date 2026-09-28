@@ -1,0 +1,13 @@
+CLASS type=vertical sub=elevation disc=architectural part=FASAD_MOT_STRANDRIDAREGATAN stamp=- bar=1 dims=1 clarity=0.55 compl=0.95 role=base rolewhy=1924_gatufasad_(296420)_som_briefen_anger_för_fönsterräkning_per_rum 1924 års blad 296420 "FASAD MOT STRANDRIDAREGATAN": gatufasaden med tre bostadsvåningar, källarfönster i sockeln, burspråk och balkonger vid hörnflygeln till höger. Skrivna längder nederst: 31,45 (långa flygeln) och 7,00 (hörnpartiet); plushöjder +35,35 (takfot), +25,05, +24,46, +23,35 (marklinje/källargolv), +23,55.
+FLOOR BV 1 Nedersta bostadsvåningen ovanför sockeln
+FLOOR 1_TR 2 Mellersta bostadsvåningen
+FLOOR 2_TR 3 Översta bostadsvåningen under takfoten +35,35
+REGION 399 650 1539 616
+REF dimension 473 1231 1505 1231 31,45 mm=31450 Skriven längd 31,45 längs fasadens nederkant (långa flygeln mellan gaveln och hörnflygeln); lågupplöst avläsning.
+REF dimension 1505 1231 1710 1231 7,00 mm=7000 Skriven längd 7,00 för hörnpartiet till höger; lågupplöst avläsning.
+REF scale_bar 579 1414 1550 1414 0–30_M mm=30000 Skalstock nederst, 0 till 30 M; lågupplöst avläsning.
+TITLE RITNING TILL NYBYGGNAD Å TOMT NR 1 I 28DE KVARTERET KUNGSLADUGÅRD
+TITLE FASAD MOT STRANDRIDAREGATAN
+TITLE 296420, Göteborg d. 17.12.1923, godkänd 18/3 1924
+N Fasaden visar fönsterrader: BV 9 fönster + portal till vänster, 1 TR och 2 TR 9 fönster vardera plus burspråk/balkonger vid hörnflygeln; källarfönster i sockeln. Räkna fönster per rum i den detaljerade vertikalläsningen.
+N Arkivlinjal och bildnummer nederst ska ignoreras.
